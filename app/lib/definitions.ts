@@ -16,33 +16,39 @@ export type pelanggan = {
   nohp: string;
 };
 
+export type paket = {
+  id: string;
+  nama_paket: string;
+  durasi: string;
+  harga : number;
+  gambar_paket : string;
+};
+
 export type transaksi = {
   id: string;
   pelanggan_id: string;
+  paket_id : string;
   tanggal_transaksi: string;
-  total: number;
-  status: 'pending' | 'paid';
+  total_bayar: number;
+  metode_bayar: 'Tunai' | 'Qris' | 'Debit';
+  status: 'Berhasil' | 'Gagal';
 };
 
-export type reservasi = {
-  id: string;
-  pelanggan_id: string;
-  tanggal_reservasi: string;
-  waktu_reservasi: string;
-  jumlah_orang: number;
-};
+// export type reservasi = {
+//   id: string;
+//   pelanggan_id: string;
+//   tanggal_reservasi: string;
+//   waktu_reservasi: string;
+//   jumlah_orang: number;
+// };
 
-export type menu = {
-  id: string;
-  nama_menu: string;
-  harga : string;
-  gambar_menu : string;
-};
+
 
 export type detailPendapatan = {
   month: string;
-  revenue: number;
+  revenue: number;
 };
+
 // export type detailTransaksi = {
 //   id: string;
 //   transaksi_id: string;
