@@ -5,6 +5,7 @@ const {
   transaksi,
   menu,
   reservasi,
+  detailTransaksi,
   detailPendapatan,
 } = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
@@ -207,44 +208,45 @@ async function seedMenu(client) {
   }
 }
 
-// async function seedDetailTransaksi(client) {
-//   try {
-//     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+async function seedDetailTransaksi(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
-//     // Create the "customers" table if it doesn't exist
-//     const createTable = await client.sql`
-//       CREATE TABLE IF NOT EXISTS detailTransaksi (
-//         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-//         transaksi_id VARCHAR(255) NOT NULL,
-//         menu_id VARCHAR(255) NOT NULL,
-//         jumlah INT NOT NULL
-//       );
-//     `;
+    // Create the "customers" table if it doesn't exist
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS detailTransaksi (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        transaksi_id VARCHAR(255) NOT NULL,
+        menu_id VARCHAR(255) NOT NULL,
+        jumlah INT NOT NULL
+      );
+    `;
 
-//     console.log(`Created "detailTransaksi" table`);
+    console.log(`Created "detailTransaksi" table`);
 
-//     // Insert data into the "customers" table
-//     const inserteddetailTransaksi = await Promise.all(
-//       detailTransaksi.map(
-//         (detailTransaksis) => client.sql`
-//         INSERT INTO detailTransaksi ( jumlah)
-//         VALUES (${detailTransaksis.transaksi_id}, ${detailTransaksis.menu_id}, ${detailTransaksis.jumlah})
-//         ON CONFLICT (id) DO NOTHING;
-//       `,
-//       ),
-//     );
+    // Insert data into the "customers" table
+    const inserteddetailTransaksi = await Promise.all(
+      detailTransaksi.map(
+        (detailTransaksis) => client.sql`
+        INSERT INTO detailTransaksi ( transaksi_id, menu_id, jumlah )
+        VALUES (${detailTransaksis.transaksi_id}, ${detailTransaksis.menu_id}, ${detailTransaksis.jumlah})
+        ON CONFLICT (id) DO NOTHING;
+      `,
+      ),
+    );
 
-//     console.log(`Seeded ${inserteddetailTransaksi.length} detailTransaksi`);
 
-//     return {
-//       createTable,
-//       detailTRansaksi: inserteddetailTransaksi,
-//     };
-//   } catch (error) {
-//     console.error('Error seeding detailTransaksi:', error);
-//     throw error;
-//   }
-// }
+    console.log(`Seeded ${inserteddetailTransaksi.length} detailTransaksi`);
+
+    return {
+      createTable,
+      detailTRansaksi: inserteddetailTransaksi,
+    };
+  } catch (error) {
+    console.error('Error seeding detailTransaksi:', error);
+    throw error;
+  }
+}
 async function seedDetailPendapatan(client) {
   try {
     // Create the "revenue" table if it doesn't exist
@@ -288,6 +290,8 @@ async function main() {
   await seedPelanggan(client);
   await seedReservasi(client);
   await seedMenu(client);
+  await seedDetailTransaksi(client);
+  
   await seedDetailPendapatan(client);
 
   await client.end();

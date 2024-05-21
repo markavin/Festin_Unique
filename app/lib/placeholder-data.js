@@ -102,7 +102,7 @@ const reservasi = [
 // snbdvhjsw
 const menu = [
   {
-    // id: '1234',
+     id: '1234',
     nama_menu: 'Nasi Goreng',
     harga: 25000,
     gambar_menu: '/menu/nasigoreng.jpg',
@@ -127,29 +127,30 @@ const menu = [
   },
 ]
 
-// const detailTransaksi = [
-//   {
-//     transaksi_id: transaksi[0].id,
-//     menu_id: menu[0].id,
-//     jumlah: 2,
-//   },
-//   {
-//     transaksi_id: transaksi[2].id,
-//     menu_id: menu[3].id,
-//     jumlah: 1,
-//   },
-//   {
-//     transaksi_id: transaksi[3].id,
-//     menu_id: menu[2].id,
-//     jumlah: 3,
-//   },
-//   {
-//     transaksi_id: transaksi[1].id,
-//     menu_id: menu[3].id,
-//     jumlah: 4,
-//   },
-//   // Add more detail transactions as needed
-// ];
+const detailTransaksi = [
+  {
+    transaksi_id: "863bb514-f2db-45b8-beb4-aa9634c421ad",
+    menu_id: "c363e658-0294-423c-968b-02f7a5c7cbb2",
+    jumlah: 2,
+  },
+  {
+    transaksi_id: "863bb514-f2db-45b8-beb4-aa9634c421ad",
+    menu_id: "c363e658-0294-423c-968b-02f7a5c7cbb2",
+    jumlah: 1,
+  },
+  {
+    transaksi_id: "863bb514-f2db-45b8-beb4-aa9634c421ad",
+    menu_id: "c363e658-0294-423c-968b-02f7a5c7cbb2",
+    jumlah: 3,
+  },
+  {
+    transaksi_id: "863bb514-f2db-45b8-beb4-aa9634c421ad",
+    menu_id: "c363e658-0294-423c-968b-02f7a5c7cbb2",
+    jumlah: 4,
+  },
+  // Add more detail transactions as needed
+];
+
 
 const detailPendapatan = [
   { month: 'Jan', revenue: 2000 },
@@ -172,6 +173,6 @@ module.exports = {
   transaksi,
   menu,
   reservasi,
-  // detailTransaksi,
+  detailTransaksi,
   detailPendapatan,
 };
