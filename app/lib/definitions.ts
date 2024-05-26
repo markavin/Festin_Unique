@@ -49,6 +49,7 @@ export type detailPendapatan = {
   revenue: number;
 };
 
+
 // export type detailTransaksi = {
 //   id: string;
 //   transaksi_id: string;
@@ -56,58 +57,102 @@ export type detailPendapatan = {
 //   jumlah : number;
 // };
 
-// export type LatestInvoice = {
-//   id: string;
-//   name: string;
-//   image_url: string;
-//   email: string;
-//   amount: string;
-// };
+export type LatestTransaksi = {
+  id: string;
+  name: string;
+  gambar_paket: string;
+  email: string;
+  total_bayar: string;
+};
 
+export type LatestPaket= {
+  id: string;
+  nama_paket: string;
+  durasi: string;
+  harga : number;
+  gambar_paket : string;
+};
 // // The database returns a number for amount, but we later format it to a string with the formatCurrency function
-// export type LatestInvoiceRaw = Omit<LatestInvoice, 'amount'> & {
-//   amount: number;
-// };
+export type LatestTransaksiRaw = Omit<LatestTransaksi, 'Total bayar'> & {
+  total_bayar: number;
+};
 
-// export type InvoicesTable = {
-//   id: string;
-//   customer_id: string;
-//   name: string;
-//   email: string;
-//   image_url: string;
-//   date: string;
-//   amount: number;
-//   status: 'pending' | 'paid';
-// };
+export type LatestPaketRaw = Omit<LatestTransaksi, 'harga'> & {
+  harga: number;
+};
 
-// export type CustomersTableType = {
-//   id: string;
-//   name: string;
-//   email: string;
-//   image_url: string;
-//   total_invoices: number;
-//   total_pending: number;
-//   total_paid: number;
-// };
+export type TransaksiTable = {
+  id: string;
+  pelanggan_id: string;
+  name: string;
+  paket_id : string;
+  nama_paket: string;
+  gambar_paket: string;
+  tanggal_transaksi: string;
+  total_bayar: number;
+  metode_bayar: 'Tunai' | 'Qris' | 'Debit';
+  status: 'Berhasil' | 'Gagal';
+};
 
-// export type FormattedCustomersTable = {
-//   id: string;
-//   name: string;
-//   email: string;
-//   image_url: string;
-//   total_invoices: number;
-//   total_pending: string;
-//   total_paid: string;
-// };
+export type PelangganTable = {
+  id: string;
+  name: string;
+  email: string;
+  nohp: string;
+};
+export type PaketTable = {
+  id: string;
+  name: string;
+  email: string;
+  nohp: string;
+};
+export type PelangganTableType = {
+  id: string;
+  name: string;
+  email: string;
+  nohp: string;
+  total_transaksi: number;
+  total_Berhasil:number;
+  total_Gagal :number;
+};
 
-// export type CustomerField = {
-//   id: string;
-//   name: string;
-// };
+export type FormattedPelangganTable = {
+  id: string;
+  name: string;
+  email: string;
+  nohp: string;
+  total_transaksi: number;
+  total_Berhasil:number;
+  total_Gagal :number;
+};
 
-// export type InvoiceForm = {
-//   id: string;
-//   customer_id: string;
-//   amount: number;
-//   status: 'pending' | 'paid';
-// };
+export type PelangganField = {
+  id: string;
+  name: string;
+  email: string;
+  nohp: string;
+};
+
+export type TransaksiForm = {
+  id: string;
+  pelanggan_id: string;
+  paket_id : string;
+  total_bayar: number;
+  metode_bayar: 'Tunai' | 'Qris' | 'Debit';
+  status: 'Berhasil' | 'Gagal';
+};
+
+export type PelangganForm = {
+  id: string;
+  name: string;
+  email: string;
+  nohp: string;
+};
+
+export type PaketForm = {
+  id: string;
+  nama_paket: string;
+  durasi: string;
+  harga : number;
+  gambar_paket : string;
+};
