@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { PowerIcon, ArrowUturnLeftIcon, CurrencyDollarIcon, UserGroupIcon, DocumentIcon } from '@heroicons/react/24/outline';
 import { ArrowLongLeftIcon, ArrowRightOnRectangleIcon, HomeIcon } from '@heroicons/react/20/solid';
+import { signOut } from '@/auth';
 
 export default function SideNav() {
   return (
@@ -12,12 +13,12 @@ export default function SideNav() {
             src="/bbq3.png"
             alt="logo"
             width={300}
-            height={300} 
+            height={300}
           />
         </div>
       </div>
       <nav className="flex justify-between space-x-4 mt-6 items-center">
-        <Link href="/">
+        <Link href="/dashboard">
           <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-amber-600 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
             <ArrowLongLeftIcon className="w-6" />
           </button>
@@ -46,7 +47,12 @@ export default function SideNav() {
             Paket
           </button>
         </Link>
-        <form>
+        <form
+        action={async () => {
+            'use server';
+            await signOut();
+          }}>
+          
           <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-amber-600 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
             <ArrowRightOnRectangleIcon className="w-6" />
           </button>
