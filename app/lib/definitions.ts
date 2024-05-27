@@ -61,6 +61,7 @@ export type LatestTransaksi = {
   id: string;
   name: string;
   gambar_paket: string;
+  nama_paket : string;
   email: string;
   total_bayar: string;
 };
@@ -73,7 +74,7 @@ export type LatestPaket= {
   gambar_paket : string;
 };
 // // The database returns a number for amount, but we later format it to a string with the formatCurrency function
-export type LatestTransaksiRaw = Omit<LatestTransaksi, 'Total bayar'> & {
+export type LatestTransaksiRaw = Omit<LatestTransaksi, 'total_bayar'> & {
   total_bayar: number;
 };
 
