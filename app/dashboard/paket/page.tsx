@@ -1,3 +1,3 @@
 export default function Page() {
-    return <p>Pelanggan Page</p>;
+    return <p>Paket Page</p>;
   }

@@ -17,25 +17,24 @@ export default function Page() {
         </div>
         <div className="flex space-x-4">
           <Link href="/">
-            <button className="hidden md:block px-6 py-2 text-white text-sm transition duration-500 ease-out text-xs bg-transparent rounded-lg hover:text-red-900 hover:underline hover:decoration-red-900 hover:bg-white hover:bg-opacity-10 focus:bg-white focus:bg-opacity-10 focus:outline-none focus:text-red-900 active:bg-white active:bg-opacity-10">
+            <button className="px-6 py-2 text-white text-sm transition duration-500 ease-out text-xs bg-transparent rounded-lg hover:text-red-900 hover:underline hover:decoration-red-900 hover:bg-white hover:bg-opacity-10 focus:bg-white focus:bg-opacity-10 focus:outline-none focus:text-red-900 active:bg-white active:bg-opacity-10">
               <strong className={`${bebas_Neue.className} text-2xl md:text-2xl`}>HOME</strong>
             </button>
           </Link>
           <Link href="/menu">
-            <button className="hidden md:block px-6 py-2 text-white text-sm transition duration-500 ease-out text-xs bg-transparent rounded-lg hover:text-red-900 hover:underline hover:decoration-red-900 hover:bg-white hover:bg-opacity-10 focus:bg-white focus:bg-opacity-10 focus:outline-none focus:text-red-900 active:bg-white active:bg-opacity-10">
+            <button className="px-6 py-2 text-white text-sm transition duration-500 ease-out text-xs bg-transparent rounded-lg hover:text-red-900 hover:underline hover:decoration-red-900 hover:bg-white hover:bg-opacity-10 focus:bg-white focus:bg-opacity-10 focus:outline-none focus:text-red-900 active:bg-white active:bg-opacity-10">
               <strong className={`${bebas_Neue.className} text-2xl md:text-2xl`}>PACKAGE</strong>
             </button>
           </Link>
           <Link href="/about-us">
-            <button className="hidden md:block px-6 py-2 text-white text-sm transition duration-500 ease-out text-xs bg-transparent rounded-lg hover:text-red-900 hover:underline hover:decoration-red-900 hover:bg-white hover:bg-opacity-10 focus:bg-white focus:bg-opacity-10 focus:outline-none focus:text-red-900 active:bg-white active:bg-opacity-10">
+            <button className="px-6 py-2 text-white text-sm transition duration-500 ease-out text-xs bg-transparent rounded-lg hover:text-red-900 hover:underline hover:decoration-red-900 hover:bg-white hover:bg-opacity-10 focus:bg-white focus:bg-opacity-10 focus:outline-none focus:text-red-900 active:bg-white active:bg-opacity-10">
               <strong className={`${bebas_Neue.className} text-2xl md:text-2xl`}>ABOUT US</strong>
             </button>
           </Link>
-
         </div>
         <div className="flex items-center">
           <Link href="/login">
-            <button className="hidden md:block px-6 py-2 text-white text-sm transition duration-500 ease-out text-xs bg-transparent rounded-lg hover:text-red-900 hover:underline hover:decoration-red-900">
+            <button className="px-6 py-2 text-white text-sm transition duration-500 ease-out text-xs bg-transparent rounded-lg hover:text-red-900 hover:underline hover:decoration-red-900">
               <strong className={`${bebas_Neue.className} text-2xl md:text-2xl`}>LOGIN</strong>
             </button>
           </Link>

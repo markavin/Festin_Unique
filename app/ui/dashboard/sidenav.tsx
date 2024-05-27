@@ -1,49 +1,57 @@
 import Link from 'next/link';
-import NavLinks from '@/app/ui/dashboard/nav-links';
-import AcmeLogo from '@/app/ui/acme-logo';
-import { PowerIcon } from '@heroicons/react/24/outline';
-import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline';
-import { mansalva, bebas_Neue } from '@/app/ui/fontz';
 import Image from 'next/image';
-// import { signOut } from '@/auth';
+import { PowerIcon, ArrowUturnLeftIcon, CurrencyDollarIcon, UserGroupIcon, DocumentIcon } from '@heroicons/react/24/outline';
+import { ArrowLongLeftIcon, ArrowRightOnRectangleIcon, HomeIcon } from '@heroicons/react/20/solid';
 
 export default function SideNav() {
   return (
-    <div className="flex h-full flex-col px-3 py-4 md:px-2 bg-gradient-to-b from-red-900 to-gray-800 text-black">
-      <Link
-        className="mb-2 flex h-20 items-end justify-start rounded-md bg-amber-950 p-4 md:h-40 "
-        href="/"
-      >
-        <div className={`${bebas_Neue.className} "text-l md:text-3xl text-neutral-100 md:leading-normal"`}>
-        <Image
-            src="/logoo.png"
+    <div className="flex flex-col h-full px-5 py-4 bg-gradient-to-b from-gray-900 to-red-950 text-white">
+      <div className="mb-4 flex h-20 items-center justify-center p-4">
+        <div>
+          <Image
+            src="/bbq3.png"
             alt="logo"
-            width={120}
-            height={120} />
+            width={300}
+            height={300} 
+          />
         </div>
-      </Link>
-      <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
-        <NavLinks /> 
-        <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
-        
-        <Link 
-          href="/">
-            <button className="flex h-[50px] w-full grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-amber-200 hover:text-black-600 md:flex-none md:justify-start md:p-2 md:px-3 mr-2" > 
-              <ArrowUturnLeftIcon className="w-6" />
-              <div className="hidden md:block">Back </div>
-            </button>
-          </Link>
-        {/* <form
-            action={async () => {
-              'use server';
-              await signOut();
-            }}> */}
-          <button className="flex h-[50px] w-full grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-amber-200 hover:text-black-600 md:flex-none md:justify-start md:p-2 md:px-3">
-            <PowerIcon className="w-6" />
-            <div className="hidden md:block">Sign Out</div>
-          </button>
-        {/* </form> */}
       </div>
+      <nav className="flex justify-between space-x-4 mt-6 items-center">
+        <Link href="/">
+          <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-amber-600 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
+            <ArrowLongLeftIcon className="w-6" />
+          </button>
+        </Link>
+        <Link href="/dashboard">
+          <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-amber-600 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
+            <HomeIcon className="w-6" />
+            Home
+          </button>
+        </Link>
+        <Link href="/dashboard/transaksi">
+          <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-amber-600 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
+            <CurrencyDollarIcon className="w-6" />
+            Transaksi
+          </button>
+        </Link>
+        <Link href="/dashboard/pelanggan">
+          <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-amber-600 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
+            <UserGroupIcon className="w-6" />
+            Pelanggan
+          </button>
+        </Link>
+        <Link href="/dashboard/paket">
+          <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-red-900 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
+            <DocumentIcon className="w-6" />
+            Paket
+          </button>
+        </Link>
+        <form>
+          <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-amber-600 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
+            <ArrowRightOnRectangleIcon className="w-6" />
+          </button>
+        </form>
+      </nav>
     </div>
   );
 }

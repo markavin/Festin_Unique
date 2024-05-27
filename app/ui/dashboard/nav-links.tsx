@@ -3,15 +3,12 @@
 import {
   UserGroupIcon,
   HomeIcon,
-  DocumentDuplicateIcon,
-  WalletIcon,
   CurrencyDollarIcon,
   DocumentIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
@@ -37,11 +34,10 @@ const links = [
     icon: DocumentIcon
   },
 ];
-
 export default function NavLinks() {
   const pathname = usePathname();
   return (
-    <>
+    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 p-4 space-y-2 md:space-y-0 md:space-x-2 md:flex md:items-center">
       {links.map((link) => {
         const LinkIcon = link.icon;
         return (
@@ -49,9 +45,9 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-red-100 hover:text-red-600 md:flex-none md:justify-start md:p-2 md:px-3',
+              'flex h-[48px] items-center justify-center gap-2 rounded-md p-3 text-white font-medium hover:bg hover:text-orange-600 md:flex-none md:justify-start md:p-2 md:px-3',
               {
-                'bg-red-100 text-red-600': pathname === link.href,
+                ' text-orange-600': pathname === link.href,
               },
             )}
           >
@@ -60,6 +56,6 @@ export default function NavLinks() {
           </Link>
         );
       })}
-    </>
+    </div>
   );
 }
