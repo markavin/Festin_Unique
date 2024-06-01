@@ -3,6 +3,11 @@ import Link from 'next/link';
 import { kanit } from '@/app/ui/fonts';
 import { mansalva, bebas_Neue } from '@/app/ui/fontz';
 import Image from 'next/image';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Home | Festin unique HomePage',
+};
 
 export default function Page() {
   return (

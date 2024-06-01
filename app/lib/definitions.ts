@@ -60,9 +60,9 @@ export type detailPendapatan = {
 export type LatestTransaksi = {
   id: string;
   name: string;
-  gambar_paket: string;
+  email:string;
   nama_paket : string;
-  email: string;
+  gambar_paket: string;
   total_bayar: string;
 };
 
@@ -78,11 +78,18 @@ export type LatestTransaksiRaw = Omit<LatestTransaksi, 'total_bayar'> & {
   total_bayar: number;
 };
 
-export type LatestPaketRaw = Omit<LatestTransaksi, 'harga'> & {
+export type LatestPaketRaw = Omit<LatestPaket, 'harga'> & {
   harga: number;
 };
 
 export type TransaksiTable = {
+  id: string;
+  nama_paket: string;
+  durasi: string;
+  harga : number;
+  gambar_paket : string;
+};
+export type TransaksiTableType = {
   id: string;
   pelanggan_id: string;
   name: string;
@@ -94,19 +101,13 @@ export type TransaksiTable = {
   metode_bayar: 'Tunai' | 'Qris' | 'Debit';
   status: 'Berhasil' | 'Gagal';
 };
-
 export type PelangganTable = {
   id: string;
   name: string;
   email: string;
   nohp: string;
 };
-export type PaketTable = {
-  id: string;
-  name: string;
-  email: string;
-  nohp: string;
-};
+
 export type PelangganTableType = {
   id: string;
   name: string;
@@ -115,6 +116,21 @@ export type PelangganTableType = {
   total_transaksi: number;
   total_Berhasil:number;
   total_Gagal :number;
+};
+export type PaketTable = {
+  id: string;
+  nama_paket: string;
+  durasi: string;
+  harga : number;
+  gambar_paket : string;
+};
+
+export type PaketTableType = {
+  id: string;
+  nama_paket: string;
+  durasi: string;
+  harga : number;
+  gambar_paket : string;
 };
 
 export type FormattedPelangganTable = {

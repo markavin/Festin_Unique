@@ -5,6 +5,11 @@ import Image from 'next/image';
 import { bebas_Neue, mansalva, teko } from '@/app/ui/fontz';
 import { alegreya, oswald } from '@/app/ui/fonts';
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About us | Festin unique About us',
+};
 
 export default function AboutusPage() {
     return (
