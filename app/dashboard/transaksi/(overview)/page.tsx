@@ -4,7 +4,7 @@ import Table from '@/app/ui/transaksi/table';
 // import { CreateInvoice } from '@/app/ui/transaksi/buttons';
 import { kanit } from '@/app/ui/fonts';
 import { Suspense } from 'react';
-// import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
+import { SearchTransaksiSkeleton, TransaksiTableSkeleton } from '@/app/ui/skeletons';
 import { fetchTransaksiPages } from '@/app/lib/data';
 import { Metadata } from 'next';
 
@@ -20,24 +20,27 @@ export default async function Page({
     page?: string;
   };
 }) {
+  // console.log('Fetching revenue data...');
+  //   await new Promise((resolve => setTimeout(resolve, 3000)));
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
 
   const totalPages = await fetchTransaksiPages(query);
-
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
-        <div>
-          <h1 className={`${kanit.className} text-xl`}>Transaksi Page</h1>
-        </div>
+        <h1 className={`${kanit.className} text-2xl`}>Transaksi
+        </h1>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-        <Search placeholder="Search transaksi..." />
-        {/* <CreateInvoice /> */}
+        <Suspense fallback={<SearchTransaksiSkeleton />}>
+          <Search placeholder="Search transaksi..." />
+        </Suspense>
+        {/* <Suspense fallback={<CreateReservationsSkeleton />}>
+          <CreateReservation />
+        </Suspense> */}
       </div>
-
-      <Suspense key={query + currentPage} fallback>
+      <Suspense key={query + currentPage} fallback={<TransaksiTableSkeleton />}>
         <Table query={query} currentPage={currentPage} />
       </Suspense>
       <div className="mt-5 flex w-full justify-center">

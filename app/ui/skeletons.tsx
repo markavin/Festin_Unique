@@ -59,6 +59,36 @@ export function TransaksiSkeleton() {
   );
 }
 
+export function PelangganSkeleton() {
+  return (
+    <div className="flex flex-row items-center justify-between border-b border-gray-100 py-4">
+      <div className="flex items-center">
+        <div className="mr-2 h-8 w-8 rounded-full bg-gray-200" />
+        <div className="min-w-0">
+          <div className="h-5 w-40 rounded-md bg-gray-200" />
+          <div className="mt-2 h-4 w-12 rounded-md bg-gray-200" />
+        </div>
+      </div>
+      <div className="mt-2 h-4 w-12 rounded-md bg-gray-200" />
+    </div>
+  );
+}
+
+export function PaketSkeleton() {
+  return (
+    <div className="flex flex-row items-center justify-between border-b border-gray-100 py-4">
+      <div className="flex items-center">
+        <div className="mr-2 h-8 w-8 rounded-full bg-gray-200" />
+        <div className="min-w-0">
+          <div className="h-5 w-40 rounded-md bg-gray-200" />
+          <div className="mt-2 h-4 w-12 rounded-md bg-gray-200" />
+        </div>
+      </div>
+      <div className="mt-2 h-4 w-12 rounded-md bg-gray-200" />
+    </div>
+  );
+}
+
 export function LatestTransaksisSkeleton() {
   return (
     <div
@@ -163,6 +193,54 @@ export function TransaksiMobileSkeleton() {
   );
 }
 
+export function PelangganMobileSkeleton() {
+  return (
+    <div className="mb-2 w-full rounded-md bg-white p-4">
+      <div className="flex items-center justify-between border-b border-gray-100 pb-8">
+        <div className="flex items-center">
+          <div className="mr-2 h-8 w-8 rounded-full bg-gray-100"></div>
+          <div className="h-6 w-16 rounded bg-gray-100"></div>
+        </div>
+        <div className="h-6 w-16 rounded bg-gray-100"></div>
+      </div>
+      <div className="flex w-full items-center justify-between pt-4">
+        <div>
+          <div className="h-6 w-16 rounded bg-gray-100"></div>
+          <div className="mt-2 h-6 w-24 rounded bg-gray-100"></div>
+        </div>
+        <div className="flex justify-end gap-2">
+          <div className="h-10 w-10 rounded bg-gray-100"></div>
+          <div className="h-10 w-10 rounded bg-gray-100"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function PaketMobileSkeleton() {
+  return (
+    <div className="mb-2 w-full rounded-md bg-white p-4">
+      <div className="flex items-center justify-between border-b border-gray-100 pb-8">
+        <div className="flex items-center">
+          <div className="mr-2 h-8 w-8 rounded-full bg-gray-100"></div>
+          <div className="h-6 w-16 rounded bg-gray-100"></div>
+        </div>
+        <div className="h-6 w-16 rounded bg-gray-100"></div>
+      </div>
+      <div className="flex w-full items-center justify-between pt-4">
+        <div>
+          <div className="h-6 w-16 rounded bg-gray-100"></div>
+          <div className="mt-2 h-6 w-24 rounded bg-gray-100"></div>
+        </div>
+        <div className="flex justify-end gap-2">
+          <div className="h-10 w-10 rounded bg-gray-100"></div>
+          <div className="h-10 w-10 rounded bg-gray-100"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function TransaksiTableSkeleton() {
   return (
     <div className="mt-6 flow-root">
@@ -216,3 +294,240 @@ export function TransaksiTableSkeleton() {
     </div>
   );
 }
+
+export function PelangganTableSkeleton() {
+  return (
+    <div className="mt-6 flow-root">
+      <div className="inline-block min-w-full align-middle">
+        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+          <div className="md:hidden">
+            <PelangganMobileSkeleton />
+            <PelangganMobileSkeleton />
+            <PelangganMobileSkeleton />
+            <PelangganMobileSkeleton />
+            <PelangganMobileSkeleton />
+            <PelangganMobileSkeleton />
+          </div>
+          <table className="hidden min-w-full text-gray-900 md:table">
+            <thead className="rounded-lg text-left text-sm font-normal">
+              <tr>
+                <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
+                  Nama
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Email
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  No Hp
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Total Transaksi
+                </th>
+                <th
+                  scope="col"
+                  className="relative pb-4 pl-3 pr-6 pt-2 sm:pr-6"
+                >
+                  <span className="sr-only">Edit</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white">
+              <TableRowSkeleton />
+              <TableRowSkeleton />
+              <TableRowSkeleton />
+              <TableRowSkeleton />
+              <TableRowSkeleton />
+              <TableRowSkeleton />
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function PaketTableSkeleton() {
+  return (
+    <div className="mt-6 flow-root">
+      <div className="inline-block min-w-full align-middle">
+        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+          <div className="md:hidden">
+            <PaketMobileSkeleton />
+            <PaketMobileSkeleton />
+            <PaketMobileSkeleton />
+            <PaketMobileSkeleton />
+            <PaketMobileSkeleton />
+            <PaketMobileSkeleton />
+          </div>
+          <table className="hidden min-w-full text-gray-900 md:table">
+            <thead className="rounded-lg text-left text-sm font-normal">
+              <tr>
+                <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
+                  Paket
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Nama
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Harga
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Durasi
+                </th>
+                <th
+                  scope="col"
+                  className="relative pb-4 pl-3 pr-6 pt-2 sm:pr-6"
+                >
+                  <span className="sr-only">Edit</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white">
+              <TableRowSkeleton />
+              <TableRowSkeleton />
+              <TableRowSkeleton />
+              <TableRowSkeleton />
+              <TableRowSkeleton />
+              <TableRowSkeleton />
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function SearchTransaksiSkeleton() {
+  return (
+    <div className="relative flex flex-1 flex-shrink-0">
+      <div className="peer block w-[870px] h-[30px] rounded-sm  bg-gray-100 py-[9px] pl-10  outline-2">
+      </div>
+    </div>
+  );
+}
+
+export function PageTransaksiSkeleton() {
+  return (
+    <>
+    <div className="bg-gray-200 w-[160px] h-[40px] rounded-sm "></div>
+    <div className="mt-4 flex items-center justify-between gap-2 md:mt-8"> 
+      <SearchTransaksiSkeleton />
+      {/* <CreateReservationsSkeleton /> */}
+    </div>
+       <div className="mt-6 flow-root">
+        <TransaksiTableSkeleton />
+      </div>
+    </>
+  );
+}
+
+
+export function SearchPelangganSkeleton() {
+  return (
+    <div className="relative flex flex-1 flex-shrink-0">
+      <div className="peer block w-[870px] h-[30px] rounded-sm  bg-gray-100 py-[9px] pl-10  outline-2">
+      </div>
+    </div>
+  );
+}
+
+export function PagePelangganSkeleton() {
+  return (
+    <>
+    <div className="bg-gray-200 w-[160px] h-[40px] rounded-sm "></div>
+    <div className="mt-4 flex items-center justify-between gap-2 md:mt-8"> 
+      <SearchTransaksiSkeleton />
+      {/* <CreateReservationsSkeleton /> */}
+    </div>
+       <div className="mt-6 flow-root">
+        <TransaksiTableSkeleton />
+      </div>
+    </>
+  );
+}
+
+export function SearchPaketSkeleton() {
+  return (
+    <div className="relative flex flex-1 flex-shrink-0">
+      <div className="peer block w-[870px] h-[30px] rounded-sm  bg-gray-100 py-[9px] pl-10  outline-2">
+      </div>
+    </div>
+  );
+}
+
+export function PagePaketSkeleton() {
+  return (
+    <>
+    <div className="bg-gray-200 w-[160px] h-[40px] rounded-sm "></div>
+    <div className="mt-4 flex items-center justify-between gap-2 md:mt-8"> 
+      <SearchTransaksiSkeleton />
+      {/* <CreateReservationsSkeleton /> */}
+    </div>
+       <div className="mt-6 flow-root">
+        <TransaksiTableSkeleton />
+      </div>
+    </>
+  );
+}
+
+export function DetailPendapatanChartSkeleton() {
+  return (
+    <div className={`${shimmer} relative w-full overflow-hidden md:col-span-4`}>
+      <div className="mb-4 h-8 w-36 rounded-md bg-gray-100" />
+      <div className="rounded-xl bg-gray-100 p-4">
+        <div className="mt-0 grid h-[410px] grid-cols-12 items-end gap-2 rounded-md bg-white p-4 sm:grid-cols-13 md:gap-4" />
+        <div className="flex items-center pb-2 pt-6">
+          <div className="h-5 w-5 rounded-full bg-gray-200" />
+          <div className="ml-2 h-4 w-20 rounded-md bg-gray-200" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function LatestTransaksiSkeleton() {
+  return (
+    <div
+      className={`${shimmer} relative flex w-full flex-col overflow-hidden md:col-span-4`}
+    >
+      <div className="mb-4 h-8 w-36 rounded-md bg-gray-100" />
+      <div className="flex grow flex-col justify-between rounded-xl bg-gray-100 p-4">
+        <div className="bg-white px-6">
+          <TransaksiSkeleton />
+          <TransaksiSkeleton />
+          <TransaksiSkeleton />
+          <TransaksiSkeleton />
+          <TransaksiSkeleton />
+          <div className="flex items-center pb-2 pt-6">
+            <div className="h-5 w-5 rounded-full bg-gray-200" />
+            <div className="ml-2 h-4 w-20 rounded-md bg-gray-200" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function LatestPaketSkeleton() {
+  return (
+    <div
+      className={`${shimmer} relative flex w-full flex-col overflow-hidden md:col-span-4`}
+    >
+      <div className="mb-4 h-8 w-36 rounded-md bg-gray-100" />
+      <div className="flex grow flex-col justify-between rounded-xl bg-gray-100 p-4">
+        <div className="bg-white px-6">
+          <PaketSkeleton />
+          <PaketSkeleton />
+          <PaketSkeleton />
+          <PaketSkeleton />
+          <PaketSkeleton />
+          <div className="flex items-center pb-2 pt-6">
+            <div className="h-5 w-5 rounded-full bg-gray-200" />
+            <div className="ml-2 h-4 w-20 rounded-md bg-gray-200" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
