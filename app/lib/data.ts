@@ -128,8 +128,8 @@ export async function fetchFilteredTransaksi(query: string){
         transaksi.tanggal_transaksi::text ILIKE ${`%${query}%`} OR
         transaksi.metode_bayar ILIKE ${`%${query}%`} OR
         transaksi.status ILIKE ${`%${query}%`}
-        ORDER BY transaksi.total_bayar DESC
-    
+        ORDER BY transaksi.tanggal_transaksi DESC
+        LIMIT 10
          `;
     return transaksi.rows;
   } catch (error) {
@@ -250,7 +250,8 @@ export async function fetchFilteredPelanggan(query: string) {
 		LEFT JOIN transaksi ON pelanggan.id = transaksi.pelanggan_id
 		WHERE
 		  pelanggan.name ILIKE ${`%${query}%`} OR
-      pelanggan.email ILIKE ${`%${query}%`}
+      pelanggan.email ILIKE ${`%${query}%`} OR
+      pelanggan.nohp ILIKE ${`%${query}%`} 
 		GROUP BY pelanggan.id, pelanggan.name, pelanggan.email, pelanggan.nohp
 		ORDER BY pelanggan.name ASC
 	  `;

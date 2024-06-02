@@ -2,6 +2,7 @@ import { kanit } from '@/app/ui/fonts';
 import Search from '@/app/ui/search';
 import { FormattedPelangganTable } from '@/app/lib/definitions';
 import { fetchFilteredPelanggan } from '@/app/lib/data';
+import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 
 export default async function PelangganTable({
   query,
@@ -38,6 +39,9 @@ export default async function PelangganTable({
                         <p className="text-sm text-gray-500">
                           {pelanggan.nohp}
                         </p>
+                        <p className="text-sm text-gray-500">
+                          {formatCurrency(pelanggan.total_transaksi)}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -46,9 +50,9 @@ export default async function PelangganTable({
               <table className="hidden min-w-full rounded-md text-gray-900 md:table">
                 <thead className="rounded-md bg-gray-50 text-left text-sm font-normal">
                   <tr>
-                    <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
+                    {/* <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
                       ID
-                    </th>
+                    </th> */}
                     <th scope="col" className="px-4 py-5 font-medium">
                       Nama
                     </th>
@@ -56,16 +60,19 @@ export default async function PelangganTable({
                       Email
                     </th>
                     <th scope="col" className="px-4 py-5 font-medium">
-                      No HP
+                      Nomor HP
+                    </th>
+                    <th scope="col" className="px-4 py-5 font-medium">
+                      Total Transaksi
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 text-gray-900">
                   {pelanggans.map((pelanggan) => (
                     <tr key={pelanggan.id} className="group">
-                      <td className="whitespace-nowrap bg-white py-5 pl-4 pr-3 text-sm text-black group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
+                      {/* <td className="whitespace-nowrap bg-white py-5 pl-4 pr-3 text-sm text-black group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
                         {pelanggan.id}
-                      </td>
+                      </td> */}
                       <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                         {pelanggan.name}
                       </td>
@@ -74,6 +81,9 @@ export default async function PelangganTable({
                       </td>
                       <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                         {pelanggan.nohp}
+                      </td>
+                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
+                        {(pelanggan.total_transaksi)}
                       </td>
                     </tr>
                   ))}

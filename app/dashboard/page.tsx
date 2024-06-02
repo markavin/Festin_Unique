@@ -27,6 +27,7 @@ export default async function Page() {
         Dashboard
       </h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        
         <Card title="Berhasil" value={totalBerhasilransaksi} type="Berhasil" />
         <Card title="Gagal" value={totalGagalTransaksi} type="Gagal" /> 
        <Card title="Total Invoices" value={numberOfTransaksi} type="transaksi" />
