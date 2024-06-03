@@ -10,7 +10,7 @@ export default async function LatestTransaksis(){
 const latestTransaksis = await fetchLatestTransaksi();
  return (
     <div className="flex w-full flex-col md:col-span-4">
-      <h2 className={`${bebas_Neue.className} mb-4 text-xl md:text-2xl`}>
+      <h2 className={`${bebas_Neue.className} mb-4 text-xl md:text-2xl `}>
        Transaksi Terbaru
       </h2>
       <div className="flex grow flex-col justify-between rounded-xl bg-gradient-to-b from-red-900 to-gray-950 p-4">

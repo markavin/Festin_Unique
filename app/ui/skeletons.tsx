@@ -400,7 +400,7 @@ export function PaketTableSkeleton() {
 export function SearchTransaksiSkeleton() {
   return (
     <div className="relative flex flex-1 flex-shrink-0">
-      <div className="peer block w-[870px] h-[30px] rounded-sm  bg-gray-100 py-[9px] pl-10  outline-2">
+      <div className="peer block w-[870px] h-[30px] rounded-sm  bg-gray-100 py-[9px] pl-10 outline-2">
       </div>
     </div>
   );

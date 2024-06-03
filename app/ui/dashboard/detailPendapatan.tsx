@@ -17,7 +17,7 @@ export default async function DetailPendapatanChart() {
 
   return (
     <div className="w-full md:col-span-4">
-      <h2 className={`${bebas_Neue.className} mb-4 text-xl md:text-2xl text-center`}>
+      <h2 className={`${bebas_Neue.className} mb-4 text-xl md:text-2xl`}>
         Detail Pendapatan Terbaru
       </h2>
       <div className="rounded-xl bg-gradient-to-b from-red-900 to-gray-950 p-4">
