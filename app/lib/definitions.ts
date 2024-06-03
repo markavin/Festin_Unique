@@ -173,3 +173,11 @@ export type PaketForm = {
   harga : number;
   gambar_paket : string;
 };
+
+export type Transaksi = {
+  id: string; // Will be created on the database
+  pelanggan_id: string;
+  total_bayar: number; // Stored in cents
+  status: 'Gagal' | 'Berhasil';
+  date: string;
+};
