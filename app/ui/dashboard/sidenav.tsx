@@ -26,25 +26,25 @@ export default function SideNav() {
         <Link href="/dashboard">
           <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-amber-600 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
             <HomeIcon className="w-6" />
-            Home
+            <span className="hidden md:flex">Home</span>
           </button>
         </Link>
         <Link href="/dashboard/transaksi">
           <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-amber-600 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
             <CurrencyDollarIcon className="w-6" />
-            Transaksi
+            <span className="hidden md:flex">Transaksi</span>
           </button>
         </Link>
         <Link href="/dashboard/pelanggan">
           <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-amber-600 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
             <UserGroupIcon className="w-6" />
-            Pelanggan
+            <span className="hidden md:flex">Pelanggan</span>
           </button>
         </Link>
         <Link href="/dashboard/paket">
           <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-red-900 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
             <DocumentIcon className="w-6" />
-            Paket
+            <span className="hidden md:flex">Paket</span>
           </button>
         </Link>
         <form
@@ -53,8 +53,9 @@ export default function SideNav() {
             await signOut();
           }}>
           
-          <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-amber-600 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
+          <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-red-900 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
             <ArrowRightOnRectangleIcon className="w-6" />
+            <span className="hidden md:flex"></span>
           </button>
         </form>
       </nav>

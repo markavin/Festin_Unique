@@ -424,9 +424,14 @@ export function PageTransaksiSkeleton() {
 
 export function SearchPelangganSkeleton() {
   return (
-    <div className="relative flex flex-1 flex-shrink-0">
-      <div className="peer block w-[870px] h-[30px] rounded-sm  bg-gray-100 py-[9px] pl-10  outline-2">
-      </div>
+    <div className="peer block w-full rounded-md bg-gray-200 py-[5px] pl-10 text-sm outline-2 placeholder:text-gray-500">
+    </div>
+  );
+}
+export function CreatePelangganSkeleton() {
+  return (
+    <div
+      className="flex flex-wrap h-8 w-1/6 items-center rounded-lg bg-gray-300 py-[5px] text-sm font-medium text-white">
     </div>
   );
 }
@@ -434,14 +439,12 @@ export function SearchPelangganSkeleton() {
 export function PagePelangganSkeleton() {
   return (
     <>
-    <div className="bg-gray-200 w-[160px] h-[40px] rounded-sm "></div>
-    <div className="mt-4 flex items-center justify-between gap-2 md:mt-8"> 
+     <div className={`${shimmer} relative mb-6 h-10 w-36 overflow-hidden rounded-md bg-gray-100`}/>
+     <div className={`${shimmer} relative flex flex-wrap gap-4`}>
       <SearchTransaksiSkeleton />
-      {/* <CreateReservationsSkeleton /> */}
+      <CreatePelangganSkeleton />
     </div>
-       <div className="mt-6 flow-root">
         <TransaksiTableSkeleton />
-      </div>
     </>
   );
 }
@@ -531,3 +534,14 @@ export function LatestPaketSkeleton() {
   );
 }
 
+// export function LoadingPelangganPage() {
+//   return ( <>
+//    <div className={`${shimmer} relative mb-6 h-10 w-36 overflow-hidden rounded-md bg-gray-100`}/>
+//    <div className={`${shimmer} relative flex flex-wrap gap-4`}> 
+//           <ReservationsSearchSkeleton />
+//           <CreateReservationsSkeleton />
+//   </div> 
+//         <ReservationsTableSkeleton />
+//         </>
+//   );
+// }
