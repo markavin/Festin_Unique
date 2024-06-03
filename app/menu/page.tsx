@@ -7,7 +7,11 @@ import Link from 'next/link';
 import { bebas_Neue } from '@/app/ui/fontz';
 import { mansalva } from '@/app/ui/fontz';
 import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline';
+import { Metadata } from 'next';
 
+export const metadata: Metadata = {
+  title: 'Package | Festin unique Package',
+};
 export default function MenuPage() {
   return (
     <div className="min-h-screen bg-gray-100">

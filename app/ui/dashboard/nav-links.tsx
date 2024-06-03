@@ -34,10 +34,11 @@ const links = [
     icon: DocumentIcon
   },
 ];
+
 export default function NavLinks() {
   const pathname = usePathname();
   return (
-    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 p-4 space-y-2 md:space-y-0 md:space-x-2 md:flex md:items-center">
+    <div className="fixed top-0 left-0 w-16 bg-gray-800 h-screen flex flex-col items-center justify-center">
       {links.map((link) => {
         const LinkIcon = link.icon;
         return (
@@ -45,13 +46,13 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              'flex h-[48px] items-center justify-center gap-2 rounded-md p-3 text-white font-medium hover:bg hover:text-orange-600 md:flex-none md:justify-start md:p-2 md:px-3',
+              'flex items-center gap-2 p-3 text-white hover:bg-orange-600 hover:text-white md:flex-none md:justify-start md:p-2 md:px-3',
               {
-                ' text-orange-600': pathname === link.href,
+                'bg-orange-600': pathname === link.href,
               },
             )}
           >
-            <LinkIcon className="w-6" />
+            <LinkIcon className="w-6 h-6" />
             <p className="hidden md:block">{link.name}</p>
           </Link>
         );

@@ -58,15 +58,15 @@ async function seedTransaksi(client) {
     // Create the "invoices" table if it doesn't exist
     const createTable = await client.sql`
     CREATE TABLE IF NOT EXISTS transaksi (
-    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-    pelanggan_id VARCHAR(255) NOT NULL,
-    paket_id VARCHAR(255) NOT NULL,
-    tanggal_transaksi DATE NOT NULL,
-    total_bayar INT NOT NULL,
-    metode_bayar VARCHAR(255) NOT NULL,
-    status VARCHAR(255) NOT NULL
-  );
-`;
+      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+      pelanggan_id UUID NOT NULL,
+      paket_id UUID NOT NULL,
+      tanggal_transaksi DATE NOT NULL,
+      total_bayar INT NOT NULL,
+      metode_bayar VARCHAR(255) NOT NULL,
+      status VARCHAR(255) NOT NULL
+    );
+  `;
 
     console.log(`Created "transaksi" table`);
 
