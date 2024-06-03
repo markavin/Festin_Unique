@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import { UpdateInvoice, DeleteInvoice } from '@/app/ui/transaksi/buttons';
+// import { up, DeleteInvoice } from '@/app/ui/transaksi/buttons';
 import { formatDateToLocal, formatCurrency} from '@/app/lib/utils';
 import { fetchfilteredPaket } from '@/app/lib/data';
+import { DeletePaket, UpdatePaket } from './buttons';
 
 export default async function PaketsTable({
   query,
@@ -48,8 +49,8 @@ export default async function PaketsTable({
                     {/* <p>{formatDateToLocal(transaksiItem.tanggal_transaksi)}</p> */}
                   </div>
                   <div className="flex justify-end gap-2 whitespace-nowrap px-6 py-4 text-sm">
-                    {/* <UpdateInvoice id={transaksiItem.id} />
-                    <DeleteInvoice id={transaksiItem.id} /> */}
+                    <UpdatePaket id={paket.id} />
+                    <DeletePaket id={paket.id} />
                   </div>
                 </div>
               </div>
@@ -107,8 +108,8 @@ export default async function PaketsTable({
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
-                      {/* <UpdateInvoice id={transaksiItem.id} />
-                      <DeleteInvoice id={transaksiItem.id} /> */}
+                    <UpdatePaket id={paket.id} />
+                    <DeletePaket id={paket.id} />
                     </div>
                   </td>
                 </tr>

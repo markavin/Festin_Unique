@@ -7,10 +7,12 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
+import { createTransaksi } from '@/app/lib/actions';
 
 export default function Form({ pelanggans }: { pelanggans: PelangganField[] }) {
   return (
-    <form>
+    <form action={createTransaksi}>
+   
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Pelanggan Name */}
         <div className="mb-4">
@@ -37,7 +39,7 @@ export default function Form({ pelanggans }: { pelanggans: PelangganField[] }) {
           </div>
         </div>
 
-        {/* Invoice Amount */}
+        {/* Transaksi Amount */}
         <div className="mb-4">
           <label htmlFor="amount" className="mb-2 block text-sm font-medium">
             Choose an amount
@@ -57,10 +59,10 @@ export default function Form({ pelanggans }: { pelanggans: PelangganField[] }) {
           </div>
         </div>
 
-        {/* Invoice Status */}
+        {/* Transaksi Status */}
         <fieldset>
           <legend className="mb-2 block text-sm font-medium">
-            Set the invoice status
+            Set the Transaksi status
           </legend>
           <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
             <div className="flex gap-4">

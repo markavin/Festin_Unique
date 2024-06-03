@@ -531,3 +531,24 @@ export function LatestPaketSkeleton() {
   );
 }
 
+export function CreatePaketsSkeleton() {
+  return (
+   <div className="relative flex flex-1 flex shrink-0">
+    <div className=" peer block w-[1000px] h-[30px] rounded-sm bg-white-200 py-[9px] pl-10 outline-2"> 
+
+    </div>
+
+   </div>
+  );
+}
+
+export function CreateTransaksiSkeleton() {
+  return (
+   <div className="relative flex flex-1 flex shrink-0">
+    <div className=" peer block w-[1000px] h-[30px] rounded-sm bg-white-200 py-[9px] pl-10 outline-2"> 
+
+    </div>
+
+   </div>
+  );
+}

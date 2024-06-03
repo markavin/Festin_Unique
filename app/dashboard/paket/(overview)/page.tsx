@@ -4,9 +4,10 @@ import Table from '@/app/ui/paket/table';
 // import { CreateInvoice } from '@/app/ui/transaksi/buttons';
 import { kanit } from '@/app/ui/fonts';
 import { Suspense } from 'react';
-import { PaketTableSkeleton, SearchPaketSkeleton } from '@/app/ui/skeletons';
+import { PaketTableSkeleton, SearchPaketSkeleton,CreatePaketsSkeleton } from '@/app/ui/skeletons';
 import { fetchPaketPages } from '@/app/lib/data';
 import { Metadata } from 'next';
+import { CreatePaket } from '@/app/ui/paket/buttons';
 
 export const metadata: Metadata = {
   title: 'Paket | Acme Dashboard',
@@ -36,9 +37,9 @@ export default async function Page({
         <Suspense fallback={<SearchPaketSkeleton />}>
           <Search placeholder="Search paket..." />
         </Suspense>
-        {/* <Suspense fallback={<CreateReservationsSkeleton />}>
-          <CreateReservation />
-        </Suspense> */}
+        <Suspense fallback={<CreatePaketsSkeleton />}>
+          <CreatePaket />
+        </Suspense>
       </div>
       <Suspense key={query + currentPage} fallback={<PaketTableSkeleton />}>
         <Table query={query} currentPage={currentPage} />

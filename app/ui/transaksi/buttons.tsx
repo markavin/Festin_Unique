@@ -1,5 +1,7 @@
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { deleteTransaksi } from '@/app/lib/actions';
+ 
 
 export function CreateTransaksi() {
   return (
@@ -16,7 +18,7 @@ export function CreateTransaksi() {
 export function UpdateTransaksi({ id }: { id: string }) {
   return (
     <Link
-      href="/dashboard/transaksi"
+    href={`/dashboard/transaksi/${id}/edit`}
       className="rounded-md border p-2 hover:bg-gray-100"
     >
       <PencilIcon className="w-5" />
@@ -25,12 +27,13 @@ export function UpdateTransaksi({ id }: { id: string }) {
 }
 
 export function DeleteTransaksi({ id }: { id: string }) {
+  const deleteTransaksiWithId = deleteTransaksi.bind(null, id);
   return (
-    <>
+    <form action={deleteTransaksiWithId}>
       <button className="rounded-md border p-2 hover:bg-gray-100">
         <span className="sr-only">Delete</span>
         <TrashIcon className="w-5" />
       </button>
-    </>
+      </form>
   );
 }
