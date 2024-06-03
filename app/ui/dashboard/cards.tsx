@@ -49,7 +49,7 @@ export function Card({
   const Icon = iconMap[type];
 
   return (
-    <div className="rounded-xl bg-gray-400 p-2 shadow-sm">
+    <div className="rounded-xl bg-gradient-to-b from-red-900 to-gray-950 p-2">
       <div className="flex p-4">
         {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
         <h3 className="ml-2 text-sm font-medium">{title}</h3>

@@ -13,7 +13,7 @@ const latestTransaksis = await fetchLatestTransaksi();
       <h2 className={`${bebas_Neue.className} mb-4 text-xl md:text-2xl`}>
        Transaksi Terbaru
       </h2>
-      <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
+      <div className="flex grow flex-col justify-between rounded-xl bg-gradient-to-b from-red-900 to-gray-950 p-4">
         {/* NOTE: comment in this code when you get to this point in the course */}
 
         <div className="bg-white px-6">

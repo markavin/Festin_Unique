@@ -33,7 +33,7 @@ export default async function Page({
         <h1 className={`${kanit.className} text-2xl`}>Transaksi
         </h1>
       </div>
-      <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+      <div className="mt-4 flex items-center justify-between gap-2 md:mt-8 hover:from-red-700 hover:to-amber-600">
         <Suspense fallback={<SearchTransaksiSkeleton />}>
           <Search placeholder="Search transaksi..." />
         </Suspense>

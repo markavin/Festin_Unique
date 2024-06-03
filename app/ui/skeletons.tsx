@@ -534,19 +534,6 @@ export function LatestPaketSkeleton() {
   );
 }
 
-<<<<<<< HEAD
-// export function LoadingPelangganPage() {
-//   return ( <>
-//    <div className={`${shimmer} relative mb-6 h-10 w-36 overflow-hidden rounded-md bg-gray-100`}/>
-//    <div className={`${shimmer} relative flex flex-wrap gap-4`}> 
-//           <ReservationsSearchSkeleton />
-//           <CreateReservationsSkeleton />
-//   </div> 
-//         <ReservationsTableSkeleton />
-//         </>
-//   );
-// }
-=======
 export function CreatePaketsSkeleton() {
   return (
    <div className="relative flex flex-1 flex shrink-0">
@@ -568,4 +555,3 @@ export function CreateTransaksiSkeleton() {
    </div>
   );
 }
->>>>>>> f2249215dd05f926f6cb82d1defeb20075156778

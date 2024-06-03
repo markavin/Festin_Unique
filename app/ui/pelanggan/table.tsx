@@ -36,7 +36,7 @@ export default async function PelangganTable({
                           {formatCurrency(pelanggan.total_transaksi)}
                         </p>
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 items-center">
                         <UpdatePelanggan id={pelanggan.id} />
                         <DeletePelanggan id={pelanggan.id} />
                       </div>
@@ -70,17 +70,17 @@ export default async function PelangganTable({
                       <td className="border border-gray-300 px-4 py-3 text-sm text-center">
                         {pelanggan.name}
                       </td>
-                      <td className="border border-gary-300 px-4 py-3 text-sm text-center">
+                      <td className="border border-gray-300 px-4 py-3 text-sm text-center">
                         {pelanggan.email}
                       </td>
                       <td className="border border-gray-300 px-4 py-3 text-sm text-center">
                         {pelanggan.nohp}
                       </td>
                       <td className="border border-gray-300 px-4 py-3 text-sm text-center">
-                        {(pelanggan.total_transaksi)}
+                        {formatCurrency(pelanggan.total_transaksi)}
                       </td>
                       <td className="border border-gray-300 px-4 py-3 text-sm text-center">
-                        <div className="flex justify-center gap-3">
+                        <div className="flex justify-center items-center gap-3">
                           <UpdatePelanggan id={pelanggan.id} />
                           <DeletePelanggan id={pelanggan.id} />
                         </div>
