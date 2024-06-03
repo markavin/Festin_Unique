@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { UpdateInvoice, DeleteInvoice } from '@/app/ui/transaksi/buttons';
+import { UpdateTransaksi, DeleteTransaksi } from '@/app/ui/transaksi/buttons';
 import TransaksiStatus from '@/app/ui/transaksi/status';
 import TransaksiMetodeBayar from '@/app/ui/transaksi/metodebayar';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
@@ -50,8 +50,8 @@ export default async function TransaksiTable({
                     <p>{formatDateToLocal(transaksiItem.tanggal_transaksi)}</p>
                   </div>
                   <div className="flex justify-end gap-2 whitespace-nowrap px-6 py-4 text-sm">
-                    {/* <UpdateInvoice id={transaksiItem.id} />
-                    <DeleteInvoice id={transaksiItem.id} /> */}
+                    {/* <UpdateTransaksi id={transaksiItem.id} />
+                    <DeleteTransaksi id={transaksiItem.id} /> */}
                   </div>
                 </div>
               </div>
@@ -121,8 +121,8 @@ export default async function TransaksiTable({
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
-                      {/* <UpdateInvoice id={transaksiItem.id} />
-                      <DeleteInvoice id={transaksiItem.id} /> */}
+                      {/* <UpdateTransaksi id={transaksiItem.id} />
+                      <DeleteTransaksi id={transaksiItem.id} /> */}
                     </div>
                   </td>
                 </tr>
