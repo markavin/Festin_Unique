@@ -45,7 +45,7 @@ export default async function PelangganTable({
                 ))}
               </div>
               <table className="hidden min-w-full rounded-lg bg-white border border-gray-300 text-gray-900 md:table">
-                <thead className="bg-gradient-to-b from-red-800 to-amber-950 to-red-800 text-left text-sm text-white font-normal">
+                <thead className="bg-gradient-to-b from-red-800 to-amber-950 text-white">
                   <tr>
                     <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
                       Nama

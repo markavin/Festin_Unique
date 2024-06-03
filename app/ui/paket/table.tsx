@@ -17,7 +17,7 @@ export default async function PaketsTable({
       <div className="mt-6 flow-root">
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full align-middle">
-            <div className="overflow-hidden rounded-lg border border-gray-300">
+            <div className="overflow-hidden bg-white rounded-lg border border-gray-300">
               <div className="md:hidden">
                 {paket?.map((paket) => (
                   <div
@@ -25,26 +25,22 @@ export default async function PaketsTable({
                     className="mb-2 w-full rounded-lg bg-white p-4 border-b border-gray-300"
                   >
                     <div className="flex items-center justify-between pb-4">
-                      <div>
-                        <div className="mb-2 flex items-center">
-                          <div className="flex items-center justify-center h-20 w-20 rounded-full overflow-hidden bg-gray-100">
-                            <Image
-                              src={paket.gambar_paket}
-                              className="object-cover"
-                              layout="fill"
-                              objectFit="cover"
-                              alt=''
-                            />
-                          </div>
-                          <p className="ml-2 text-sm text-gray-500">
-                            {paket.durasi}
-                          </p>
+                      <div className="flex items-center">
+                        <div className="relative w-14 h-14 overflow-hidden rounded-full">
+                          <Image
+                            src={paket.gambar_paket}
+                            layout="fill"
+                            objectFit="cover"
+                            alt={`${paket.nama_paket}'s profile picture`}
+                          />
+                        </div>
+                        <div className="ml-4">
+                          <p className="text-lg font-semibold">{paket.nama_paket}</p>
+                          <p className="text-sm text-gray-500">{paket.durasi}</p>
                         </div>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">
-                          {paket.harga}
-                        </p>
+                        <p className="text-sm text-gray-500">{paket.harga}</p>
                         <div className="flex gap-2">
                           <UpdatePaket id={paket.id} />
                           <DeletePaket id={paket.id} />
@@ -54,8 +50,8 @@ export default async function PaketsTable({
                   </div>
                 ))}
               </div>
-              <table className="hidden min-w-full rounded-lg bg-white border border-gray-300 text-gray-900 md:table">
-                <thead className="bg-gradient-to-b from-red-800 to-amber-950 to-red-800 text-left text-sm text-white font-normal">
+              <table className="min-w-full divide-y divide-gray-200 text-gray-900 md:table">
+                <thead className="bg-gradient-to-b from-red-800 to-amber-950 text-white">
                   <tr>
                     <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
                       Gambar Paket
@@ -78,17 +74,18 @@ export default async function PaketsTable({
                   {paket?.map((paket) => (
                     <tr key={paket.id} className="group">
                       <td className="border border-gray-300 px-4 py-3 text-sm text-center">
-                        <div className="flex items-center justify-center h-12 w-12 mx-auto">
-                          <Image
-                            src={paket.gambar_paket}
-                            className="object-cover rounded-full"
-                            width={48}
-                            height={48}
-                            alt='54  '
-                          />
+                        <div className="flex items-center justify-center">
+                          <div className="relative w-14 h-14 overflow-hidden rounded-full">
+                            <Image
+                              src={paket.gambar_paket}
+                              layout="fill"
+                              objectFit="cover"
+                              alt={`${paket.nama_paket}'s profile picture`}
+                            />
+                          </div>
                         </div>
                       </td>
-                      <td className="border border-gray-300 px-4 py-3 text-sm text-center">
+                      <td className="border border-gray-300 px-4 py-3 text-sm font-semibold   text-center">
                         {paket.nama_paket}
                       </td>
                       <td className="border border-gray-300 px-4 py-3 text-sm text-center">

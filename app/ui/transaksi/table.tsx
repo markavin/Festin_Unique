@@ -100,7 +100,6 @@ export default async function TransaksiTable({
                       </div>
                       <div>
                         <p className="text-lg font-semibold">{transaksiItem.nama_paket}</p>
-                        {/* <p className="text-sm text-gray-500">{transaksiItem.name}</p> */}
                       </div>
                     </div>
                   </td>
