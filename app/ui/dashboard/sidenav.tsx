@@ -42,7 +42,7 @@ export default function SideNav() {
           </button>
         </Link>
         <Link href="/dashboard/paket">
-          <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-red-900 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
+          <button className="flex items-center gap-2 px-8 py-2 text-white text-md transition duration-500 ease-out text-md bg-transparent rounded-lg hover:text-amber-600 hover:underline hover:decoration-amber-600 focus:bg-opacity-10 focus:outline-none focus:text-amber-600 active:bg-white active:bg-opacity-10">
             <DocumentIcon className="w-6" />
             Paket
           </button>
