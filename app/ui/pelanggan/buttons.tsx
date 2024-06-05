@@ -1,5 +1,6 @@
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { deletePelanggan } from '@/app/lib/actions';
 
 
 export function CreatePelanggan() {
@@ -26,12 +27,13 @@ export function UpdatePelanggan({ id }: { id: string }) {
 }
 
 export function DeletePelanggan({ id }: { id: string }) {
+  const deletePelangganWithId = deletePelanggan.bind(null, id);
   return (
-    <>
-      <button className="rounded-md bg-gradient-to-b from-gray-800 to-red-900 border p-2 hover:from-red-700 hover:to-amber-600 text-white">
+    <form action={deletePelangganWithId}>
+      <button className="rounded-md border p-2 hover:bg-gray-100">
         <span className="sr-only">Delete</span>
-        <TrashIcon className="w-5 " />
+        <TrashIcon className="w-4" />
       </button>
-    </>
+    </form>
   );
 }

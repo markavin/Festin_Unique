@@ -33,7 +33,7 @@ export default async function PelangganTable({
                         <p className="text-sm text-gray-500">{pelanggan.email}</p>
                         <p className="text-sm text-gray-500">{pelanggan.nohp}</p>
                         <p className="text-sm text-gray-500">
-                          {formatCurrency(pelanggan.total_transaksi)}
+                          {(pelanggan.total_transaksi)}
                         </p>
                       </div>
                       <div className="flex gap-2 items-center">
@@ -77,7 +77,7 @@ export default async function PelangganTable({
                         {pelanggan.nohp}
                       </td>
                       <td className="border border-gray-300 px-4 py-3 text-sm text-center">
-                        {formatCurrency(pelanggan.total_transaksi)}
+                        {(pelanggan.total_transaksi)}
                       </td>
                       <td className="border border-gray-300 px-4 py-3 text-sm text-center">
                         <div className="flex justify-center items-center gap-3">
