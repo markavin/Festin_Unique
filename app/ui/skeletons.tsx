@@ -400,7 +400,7 @@ export function PaketTableSkeleton() {
 export function SearchTransaksiSkeleton() {
   return (
     <div className="relative flex flex-1 flex-shrink-0">
-      <div className="peer block w-[870px] h-[30px] rounded-sm  bg-gray-100 py-[9px] pl-10  outline-2">
+      <div className="peer block w-[870px] h-[30px] rounded-sm  bg-gray-100 py-[9px] pl-10 outline-2">
       </div>
     </div>
   );
@@ -534,14 +534,24 @@ export function LatestPaketSkeleton() {
   );
 }
 
-// export function LoadingPelangganPage() {
-//   return ( <>
-//    <div className={`${shimmer} relative mb-6 h-10 w-36 overflow-hidden rounded-md bg-gray-100`}/>
-//    <div className={`${shimmer} relative flex flex-wrap gap-4`}> 
-//           <ReservationsSearchSkeleton />
-//           <CreateReservationsSkeleton />
-//   </div> 
-//         <ReservationsTableSkeleton />
-//         </>
-//   );
-// }
+export function CreatePaketsSkeleton() {
+  return (
+   <div className="relative flex flex-1 flex shrink-0">
+    <div className=" peer block w-[1000px] h-[30px] rounded-sm bg-white-200 py-[9px] pl-10 outline-2"> 
+
+    </div>
+
+   </div>
+  );
+}
+
+export function CreateTransaksiSkeleton() {
+  return (
+   <div className="relative flex flex-1 flex shrink-0">
+    <div className=" peer block w-[1000px] h-[30px] rounded-sm bg-white-200 py-[9px] pl-10 outline-2"> 
+
+    </div>
+
+   </div>
+  );
+}

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { UpdateInvoice, DeleteInvoice } from '@/app/ui/transaksi/buttons';
+import { UpdateTransaksi, DeleteTransaksi } from '@/app/ui/transaksi/buttons';
 import TransaksiStatus from '@/app/ui/transaksi/status';
 import TransaksiMetodeBayar from '@/app/ui/transaksi/metodebayar';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
@@ -12,117 +12,116 @@ export default async function TransaksiTable({
   query: string;
   currentPage: number;
 }) {
-  const transaksi = await fetchFilteredTransaksi(query );
+  const transaksi = await fetchFilteredTransaksi(query);
+
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+        <div className="overflow-hidden bg-white shadow-md rounded-lg">
           <div className="md:hidden">
             {transaksi?.map((transaksiItem) => (
               <div
                 key={transaksiItem.id}
-                className="mb-2 w-full rounded-md bg-white p-4"
+                className="mb-2 w-full rounded-lg bg-white p-4 border-b border-gray-300"
               >
-                <div className="flex items-center justify-between border-b pb-4">
-                  <div>
-                    <div className="mb-2 flex items-center">
+                <div className="flex items-center justify-between pb-4">
+                  <div className="flex items-center gap-4">
+                    <div className="relative w-14 h-14 overflow-hidden rounded-full">
                       <Image
                         src={transaksiItem.gambar_paket}
-                        className="mr-2 rounded-full"
-                        width={28}
-                        height={28}
-                        alt={`${transaksiItem.nama_paket}'s profile picture`}
+                        layout="fill"
+                        objectFit="cover"
+                        alt=''
                       />
-                      <p>{transaksiItem.nama_paket}</p>
-                      <p className="text-sm text-gray-500">
-                        {transaksiItem.name}
-                      </p>
                     </div>
-                    <TransaksiStatus status={transaksiItem.status} />
+                    <div>
+                      <p className="text-lg font-semibold">{transaksiItem.nama_paket}</p>
+                      {/* <p className="text-sm text-gray-500">{transaksiItem.name}</p> */}
+                    </div>
                   </div>
-                  <TransaksiMetodeBayar metode_bayar={transaksiItem.metode_bayar} />
+                  <div className="flex items-center gap-4">
+                    <TransaksiStatus status={transaksiItem.status} />
+                    <TransaksiMetodeBayar metode_bayar={transaksiItem.metode_bayar} />
+                  </div>
                 </div>
-                <div className="flex w-full items-center justify-between pt-4">
+                <div className="flex items-center justify-between pt-4">
                   <div>
                     <p className="text-xl font-medium">
                       {formatCurrency(transaksiItem.total_bayar)}
                     </p>
-                    <p>{formatDateToLocal(transaksiItem.tanggal_transaksi)}</p>
+                    <p className="text-sm text-gray-500">{formatDateToLocal(transaksiItem.tanggal_transaksi)}</p>
                   </div>
-                  <div className="flex justify-end gap-2 whitespace-nowrap px-6 py-4 text-sm">
-                    {/* <UpdateInvoice id={transaksiItem.id} />
-                    <DeleteInvoice id={transaksiItem.id} /> */}
+                  <div className="flex gap-2">
+                    <UpdateTransaksi id={transaksiItem.id} />
+                    <DeleteTransaksi id={transaksiItem.id} />
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <table className="hidden min-w-full text-gray-900 md:table">
-            <thead className="rounded-lg text-left text-sm font-normal">
+          <table className="min-w-full divide-y divide-gray-200 text-gray-900 md:table">
+            <thead className="bg-gradient-to-b from-red-800 to-amber-950 text-white">
               <tr>
-                <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
+                <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
                   Paket
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
+                <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
                   Nama
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
+                <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
                   Total Bayar
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
+                <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
                   Tanggal Transaksi
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
+                <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
                   Metode Bayar
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
+                <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
                   Status
                 </th>
-                <th scope="col" className="relative py-3 pl-6 pr-3">
-                  <span className="sr-only">Edit</span>
+                <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
+                  Aksi
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white">
+            <tbody className="divide-y divide-gray-200">
               {transaksi?.map((transaksiItem) => (
-                <tr
-                  key={transaksiItem.id}
-                  className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
-                >
-                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    <div className="flex items-center gap-3">
-                      <Image
-                        src={transaksiItem.gambar_paket}
-                        className="rounded-full"
-                        width={28}
-                        height={28}
-                        alt={`${transaksiItem.nama_paket}'s profile picture`}
-                      />
-                      <p>{transaksiItem.nama_paket}</p>
-                      <p className="text-sm text-gray-500">
-                        {transaksiItem.name}
-                      </p>
+                <tr key={transaksiItem.id} className="group">
+                  <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">
+                    <div className="flex items-center gap-4">
+                      <div className="relative w-12 h-12 overflow-hidden rounded-full">
+                        <Image
+                          src={transaksiItem.gambar_paket}
+                          layout="fill"
+                          objectFit="cover"
+                          alt=''
+                        />
+                      </div>
+                      <div>
+                        <p className="text-lg font-semibold">{transaksiItem.nama_paket}</p>
+                      </div>
                     </div>
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {transaksiItem.name}
+                  <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">
+                    <p className="text-sm text-gray-900">{transaksiItem.name}</p>
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {formatCurrency(transaksiItem.total_bayar)}
+                  <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">
+                    <p className="text-sm text-gray-900">{formatCurrency(transaksiItem.total_bayar)}</p>
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {formatDateToLocal(transaksiItem.tanggal_transaksi)}
+                  <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">
+                    <p className="text-sm text-gray-900">{formatDateToLocal(transaksiItem.tanggal_transaksi)}</p>
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
+                  <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">
                     <TransaksiMetodeBayar metode_bayar={transaksiItem.metode_bayar} />
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
+                  <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">
                     <TransaksiStatus status={transaksiItem.status} />
                   </td>
-                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    <div className="flex justify-end gap-3">
-                      {/* <UpdateInvoice id={transaksiItem.id} />
-                      <DeleteInvoice id={transaksiItem.id} /> */}
+                  <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">
+                    <div className="flex gap-2">
+                      <UpdateTransaksi id={transaksiItem.id} />
+                      <DeleteTransaksi id={transaksiItem.id} />
                     </div>
                   </td>
                 </tr>

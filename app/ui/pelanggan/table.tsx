@@ -33,10 +33,10 @@ export default async function PelangganTable({
                         <p className="text-sm text-gray-500">{pelanggan.email}</p>
                         <p className="text-sm text-gray-500">{pelanggan.nohp}</p>
                         <p className="text-sm text-gray-500">
-                          {formatCurrency(pelanggan.total_transaksi)}
+                          {(pelanggan.total_transaksi)}
                         </p>
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 items-center">
                         <UpdatePelanggan id={pelanggan.id} />
                         <DeletePelanggan id={pelanggan.id} />
                       </div>
@@ -45,7 +45,7 @@ export default async function PelangganTable({
                 ))}
               </div>
               <table className="hidden min-w-full rounded-lg bg-white border border-gray-300 text-gray-900 md:table">
-                <thead className="bg-gradient-to-b from-red-800 to-amber-950 to-red-800 text-left text-sm text-white font-normal">
+                <thead className="bg-gradient-to-b from-red-800 to-amber-950 text-white">
                   <tr>
                     <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
                       Nama
@@ -70,7 +70,7 @@ export default async function PelangganTable({
                       <td className="border border-gray-300 px-4 py-3 text-sm text-center">
                         {pelanggan.name}
                       </td>
-                      <td className="border border-gary-300 px-4 py-3 text-sm text-center">
+                      <td className="border border-gray-300 px-4 py-3 text-sm text-center">
                         {pelanggan.email}
                       </td>
                       <td className="border border-gray-300 px-4 py-3 text-sm text-center">
@@ -80,7 +80,7 @@ export default async function PelangganTable({
                         {(pelanggan.total_transaksi)}
                       </td>
                       <td className="border border-gray-300 px-4 py-3 text-sm text-center">
-                        <div className="flex justify-center gap-3">
+                        <div className="flex justify-center items-center gap-3">
                           <UpdatePelanggan id={pelanggan.id} />
                           <DeletePelanggan id={pelanggan.id} />
                         </div>

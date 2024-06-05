@@ -4,9 +4,10 @@ import Table from '@/app/ui/transaksi/table';
 // import { CreateInvoice } from '@/app/ui/transaksi/buttons';
 import { kanit } from '@/app/ui/fonts';
 import { Suspense } from 'react';
-import { SearchTransaksiSkeleton, TransaksiTableSkeleton } from '@/app/ui/skeletons';
+import { SearchTransaksiSkeleton, TransaksiTableSkeleton,CreateTransaksiSkeleton } from '@/app/ui/skeletons';
 import { fetchTransaksiPages } from '@/app/lib/data';
 import { Metadata } from 'next';
+import { CreateTransaksi } from '@/app/ui/transaksi/buttons';
 
 export const metadata: Metadata = {
   title: 'Transaksi | Acme Dashboard',
@@ -32,13 +33,13 @@ export default async function Page({
         <h1 className={`${kanit.className} text-2xl`}>Transaksi
         </h1>
       </div>
-      <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+      <div className="mt-4 flex items-center justify-between gap-2 md:mt-8 hover:from-red-700 hover:to-amber-600">
         <Suspense fallback={<SearchTransaksiSkeleton />}>
           <Search placeholder="Search transaksi..." />
         </Suspense>
-        {/* <Suspense fallback={<CreateReservationsSkeleton />}>
-          <CreateReservation />
-        </Suspense> */}
+        <Suspense fallback={<CreateTransaksiSkeleton />}>
+          <CreateTransaksi />
+        </Suspense>
       </div>
       <Suspense key={query + currentPage} fallback={<TransaksiTableSkeleton />}>
         <Table query={query} currentPage={currentPage} />

@@ -221,7 +221,9 @@ export async function fetchPelanggan() {
     const data = await sql<PelangganField>`
       SELECT
         id,
-        name
+        name,
+        email,
+        nohp
       FROM pelanggan
       ORDER BY name ASC
     `;
@@ -298,6 +300,8 @@ export async function fetchLatestPaket() {
     throw new Error('Failed to fetch the latest paket.');
   }
 }
+
+
 export async function fetchfilteredPaket(query: string) {
   unstable_noStore()
   try {
@@ -367,13 +371,13 @@ export async function fetchPelangganById(id: string) {
   unstable_noStore()
   // try {
   const data = await sql<PelangganForm>`
-   SELECT
+    SELECT
       pelanggan.id,
       pelanggan.name,
       pelanggan.email,
-      pelanggan.image_url
+      pelanggan.nohp
     FROM pelanggan
-    WHERE pelanggan.id = ${id};
+    WHERE pelanggan.id = ${ id };
   `;
   const pelanggan = data.rows.map((pelanggan) => ({
     ...pelanggan,
