@@ -4,19 +4,18 @@ import Image from 'next/image';
 import { fetchLatestPaket } from '@/app/lib/data';
 import { LatestPaket } from '@/app/lib/definitions';
 import { kanit } from '@/app/ui/fonts';
+import imagePath from '/mnt/data/image.png';
 
 export default async function LatestPakets(){
-    const latestPakets = fetchLatestPaket()
+    const latestPakets = await fetchLatestPaket();
     return (
         <div className="flex w-full flex-col md:col-span-4">
             <h2 className={`${kanit.className} mb-4 text-xl md:text-2xl`}>
                 Latest Paket
             </h2>
             <div className="flex grow flex-col justify-between rounded-xl bg-gradient-to-b from-red-900 to-gray-950 p-4">
-                {/* NOTE: comment in this code when you get to this point in the course */}
-
-                <div className="bg-white px-6">
-                    {(await latestPakets).map((paket, i) => {
+                <div className="bg-white px-6 py-4 overflow-y-auto rounded-lg">
+                    {latestPakets.map((paket, i) => {
                         return (
                             <div
                                 key={paket.id}
@@ -28,20 +27,18 @@ export default async function LatestPakets(){
                                 )}
                             >
                                 <div className="flex items-center">
+                                <div className="relative w-14 h-14 overflow-hidden rounded-full">
                                     <Image
-                                        src={paket.gambar_paket}
-                                        alt={`${paket.nama_paket}'s profile picture`}
-                                        className="mr-4 rounded-full"
-                                        width={32}
-                                        height={32}
+                                      src={paket.gambar_paket}
+                                      layout="fill"
+                                      objectFit="cover"
+                                      alt={`${paket.nama_paket}'s profile picture`}
                                     />
-                                    <div className="min-w-0">
+                                    </div>
+                                    <div className="min-w-0 ml-4">
                                         <p className="truncate text-sm font-semibold md:text-base">
                                             {paket.durasi}
                                         </p>
-                                        {/* <p className="hidden text-sm text-gray-500 sm:block">
-                                            {paket.harga}
-                                        </p> */}
                                     </div>
                                 </div>
                                 <p

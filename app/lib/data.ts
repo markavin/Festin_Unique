@@ -12,7 +12,8 @@ import {
   PelangganForm,
   LatestPaketRaw,
   TransaksiTableType,
-  PaketTableType
+  PaketTableType,
+  PaketField
 } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore } from 'next/cache';
@@ -44,18 +45,18 @@ export async function fetchLatestTransaksi() {
   unstable_noStore();
   try {
     const data = await sql<LatestTransaksiRaw>`
-    SELECT 
-    transaksi.total_bayar, 
-    pelanggan.name, 
-    paket.nama_paket, 
-    paket.gambar_paket, 
-    transaksi.id
-    FROM transaksi
-    LEFT JOIN pelanggan ON transaksi.pelanggan_id = pelanggan_id
-    LEFT JOIN paket ON transaksi.paket_id = paket_id
-    ORDER BY transaksi.total_bayar DESC
-    LIMIT 5;
-      `;
+      SELECT 
+        transaksi.total_bayar, 
+        pelanggan.name, 
+        paket.nama_paket, 
+        paket.gambar_paket, 
+        transaksi.id
+      FROM transaksi
+      LEFT JOIN pelanggan ON transaksi.pelanggan_id = pelanggan.id
+      LEFT JOIN paket ON transaksi.paket_id = paket.id
+      ORDER BY transaksi.tanggal_transaksi DESC
+      LIMIT 5;
+    `;
     const LatestTransaksi = data.rows.map((transaksi) => ({
       ...transaksi,
       total_bayar: formatCurrency(transaksi.total_bayar),
@@ -67,6 +68,7 @@ export async function fetchLatestTransaksi() {
   }
 }
 
+
 export async function fetchCardData() {
   unstable_noStore()
 
@@ -76,6 +78,7 @@ export async function fetchCardData() {
     // how to initialize multiple queries in parallel with JS.
     const transaksiCountPromise = sql`SELECT COUNT(*) FROM transaksi`;
     const pelangganCountPromise = sql`SELECT COUNT(*) FROM pelanggan`;
+    const paketCountPromise = sql`SELECT COUNT(*) FROM paket`;
     const transaksiStatusPromise = sql`SELECT
          SUM(CASE WHEN status = 'Berhasil' THEN total_bayar ELSE 0 END) AS "Berhasil",
          SUM(CASE WHEN status = 'Gagal' THEN total_bayar ELSE 0 END) AS "Gagal"
@@ -84,17 +87,20 @@ export async function fetchCardData() {
     const data = await Promise.all([
       transaksiCountPromise,
       pelangganCountPromise,
+      paketCountPromise,
       transaksiStatusPromise,
     ]);
 
     const numberOfTransaksi = Number(data[0].rows[0].count ?? '0');
     const numberOfPelanggan = Number(data[1].rows[0].count ?? '0');
-    const totalBerhasilransaksi = formatCurrency(data[2].rows[0].Berhasil ?? '0');
-    const totalGagalTransaksi = formatCurrency(data[2].rows[0].Gagal ?? '0');
+    const numberOfPaket = Number(data[2].rows[0].count ?? '0');
+    const totalBerhasilransaksi = formatCurrency(data[3].rows[0].Berhasil ?? '0');
+    const totalGagalTransaksi = formatCurrency(data[3].rows[0].Gagal ?? '0');
 
     return {
       numberOfTransaksi,
       numberOfPelanggan,
+      numberOfPaket,
       totalBerhasilransaksi,
       totalGagalTransaksi,
     };
@@ -104,9 +110,14 @@ export async function fetchCardData() {
   }
 }
 
-const ITEMS_PER_PAGE = 6;
-export async function fetchFilteredTransaksi(query: string){
+const ITEMS_PER_PAGE = 10;
+export async function fetchFilteredTransaksi(
+  query: string,
+  // currentPage: number,
+){
   unstable_noStore()
+  // const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
   try {
     const transaksi = await sql<TransaksiTableType>`
       SELECT
@@ -119,8 +130,8 @@ export async function fetchFilteredTransaksi(query: string){
         paket.nama_paket,
         paket.gambar_paket
       FROM transaksi
-      LEFT JOIN pelanggan ON transaksi.pelanggan_id = pelanggan_id
-      LEFT JOIN paket ON transaksi.paket_id = paket_id
+      LEFT JOIN pelanggan ON transaksi.pelanggan_id = pelanggan.id
+      LEFT JOIN paket ON transaksi.paket_id = paket.id
       WHERE
         pelanggan.name ILIKE ${`%${query}%`} OR
         paket.nama_paket ILIKE ${`%${query}%`} OR
@@ -128,9 +139,9 @@ export async function fetchFilteredTransaksi(query: string){
         transaksi.tanggal_transaksi::text ILIKE ${`%${query}%`} OR
         transaksi.metode_bayar ILIKE ${`%${query}%`} OR
         transaksi.status ILIKE ${`%${query}%`}
-        ORDER BY transaksi.tanggal_transaksi DESC
-        LIMIT 10
-         `;
+      ORDER BY transaksi.tanggal_transaksi DESC
+      LIMIT 10
+    `;
     return transaksi.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -236,27 +247,48 @@ export async function fetchPelanggan() {
   }
 }
 
+export async function fetchPaket() {
+  try {
+    const data = await sql<PaketField>`
+      SELECT
+        id,
+        nama_paket,
+        durasi,
+        harga,
+        gambar_paket
+      FROM paket
+      ORDER BY nama_paket ASC
+    `;
+
+    const paket = data.rows;
+    return paket;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch all paket.');
+  }
+}
+
 export async function fetchFilteredPelanggan(query: string) {
   unstable_noStore()
   try {
     const data = await sql<PelangganTableType>`
-		SELECT
-		  pelanggan.id,
-		  pelanggan.name,
-		  pelanggan.email,
-		  pelanggan.nohp,
-		  COUNT(transaksi.id) AS total_transaksi,
-		  SUM(CASE WHEN transaksi.status = 'Berhasil' THEN transaksi.total_bayar ELSE 0 END) AS total_Berhasil,
-		  SUM(CASE WHEN transaksi.status = 'Gagal' THEN transaksi.total_bayar ELSE 0 END) AS total_Gagal
-		FROM pelanggan
-		LEFT JOIN transaksi ON pelanggan.id = transaksi.pelanggan_id
-		WHERE
-		  pelanggan.name ILIKE ${`%${query}%`} OR
-      pelanggan.email ILIKE ${`%${query}%`} OR
-      pelanggan.nohp ILIKE ${`%${query}%`} 
-		GROUP BY pelanggan.id, pelanggan.name, pelanggan.email, pelanggan.nohp
-		ORDER BY pelanggan.name ASC
-	  `;
+      SELECT
+        pelanggan.id,
+        pelanggan.name,
+        pelanggan.email,
+        pelanggan.nohp,
+        COUNT(transaksi.id) AS total_transaksi,
+        SUM(CASE WHEN transaksi.status = 'Berhasil' THEN transaksi.total_bayar ELSE 0 END) AS total_Berhasil,
+        SUM(CASE WHEN transaksi.status = 'Gagal' THEN transaksi.total_bayar ELSE 0 END) AS total_Gagal
+      FROM pelanggan
+      LEFT JOIN transaksi ON pelanggan.id = transaksi.pelanggan_id
+      WHERE
+        pelanggan.name ILIKE ${`%${query}%`} OR
+        pelanggan.email ILIKE ${`%${query}%`} OR
+        pelanggan.nohp ILIKE ${`%${query}%`}
+      GROUP BY pelanggan.id, pelanggan.name, pelanggan.email, pelanggan.nohp
+      ORDER BY MAX(transaksi.tanggal_transaksi) DESC
+    `;
 
     const pelanggan = data.rows.map((pelanggan) => ({
       ...pelanggan,

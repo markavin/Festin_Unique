@@ -1,6 +1,6 @@
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { deleteTransaksi } from '@/app/lib/actions';
+// import { deleteTransaksi } from '@/app/lib/actions';
  
 
 export function CreateTransaksi() {
@@ -27,13 +27,13 @@ export function UpdateTransaksi({ id }: { id: string }) {
 }
 
 export function DeleteTransaksi({ id }: { id: string }) {
-  const deleteTransaksiWithId = deleteTransaksi.bind(null, id);
+  // const deleteTransaksiWithId = deleteTransaksi.bind(null, id);
   return (
-    <form action={deleteTransaksiWithId}>
+    // <form action={deleteTransaksiWithId}>
       <button className="rounded-md border p-2 bg-gradient-to-b from-gray-800 to-red-900 hover:bg-gray-100 text-white">
         <span className="sr-only">Delete</span>
         <TrashIcon className="w-5" />
       </button>
-      </form>
+      // </form>
   );
 }

@@ -48,7 +48,7 @@ export default async function DetailPendapatanChart() {
         </div>
         <div className="flex items-center pb-2 pt-6">
           <CalendarIcon className="h-5 w-5 text-black-500" />
-         <strong> <h3 className="ml-2 text-sm text-black-500">Last 12 months</h3></strong>
+         <strong> <h3 className="ml-2 text-sm text-white">Last 12 months</h3></strong>
         </div>
       </div>
     </div>
