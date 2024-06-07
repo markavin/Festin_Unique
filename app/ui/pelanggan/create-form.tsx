@@ -19,7 +19,7 @@ export default function Form({ pelanggan }: { pelanggan: PelangganField[] }) {
       <div className="rounded-md bg-gradient-to-b from-gray-700 to-red-950 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
-          <label htmlFor="amount" className="mb-2 block text-sm font-medium text-white">
+          <label htmlFor="pelanggan" className="mb-2 block text-sm font-medium text-white">
             Name
           </label>
           <div className="relative mt-2 rounded-md">
@@ -39,7 +39,7 @@ export default function Form({ pelanggan }: { pelanggan: PelangganField[] }) {
 
         {/* Pelanggan Email */}
         <div className="mb-4">
-          <label htmlFor="amount" className="mb-2 block text-sm font-medium text-white">
+          <label htmlFor="email" className="mb-2 block text-sm font-medium text-white">
             Email
           </label>
           <div className="relative mt-2 rounded-md">
@@ -59,7 +59,7 @@ export default function Form({ pelanggan }: { pelanggan: PelangganField[] }) {
 
         {/* pelanggan No hp */}
         <div className="mb-4">
-          <label htmlFor="amount" className="mb-2 block text-sm font-medium text-white">
+          <label htmlFor="nohp" className="mb-2 block text-sm font-medium text-white">
             No Hp
           </label>
           <div className="relative mt-2 rounded-md">

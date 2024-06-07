@@ -19,12 +19,21 @@ const FormSchema = z.object({
 const FormSchemaz = z.object({
   id: z.string(),
   pelangganId: z.string(),
-  paketId:z.string(),
+  paketId: z.string(),
   total_bayar: z.coerce.number(),
   tanggal_transaksi: z.string(),
   metode_bayar: z.enum(['Qris', 'Tunai', 'Debit']),
   status: z.enum(['Berhasil', 'Gagal']),
 });
+
+const FormSchemaP = z.object({
+  id: z.string(),
+  nama_paket: z.string(),
+  durasi: z.string(),
+  harga: z.coerce.number(),
+  gambar_paket: z.string(),
+});
+
 
 const CreatePelanggan = FormSchema.omit({ id: true });
 const UpdatePelanggan = FormSchema.omit({ id: true });
@@ -39,7 +48,7 @@ export async function createPelanggan(formData: FormData) {
     nohp: formData.get('nohp'),
   });
   // Test it out:
-  
+
   const date = new Date().toISOString().split('T')[0];
 
   await sql`
@@ -51,7 +60,7 @@ export async function createPelanggan(formData: FormData) {
   redirect('/dashboard/pelanggan');
 }
 
- 
+
 export async function updatePelanggan(id: string, formData: FormData) {
   const { name, email, nohp } = UpdatePelanggan.parse({
     name: formData.get('name'),
@@ -68,7 +77,7 @@ export async function updatePelanggan(id: string, formData: FormData) {
   } catch (error) {
     return { message: 'Database Error: Failed to Update Pelanggan.' };
   }
- 
+
   revalidatePath('/dashboard/pelanggan');
   redirect('/dashboard/pelanggan');
 }
@@ -118,7 +127,7 @@ export async function updateTransaksi(id: string, formData: FormData) {
   const total_bayarInCents = total_bayar * 100;
 
   try {
-  await sql`
+    await sql`
   UPDATE transaksi 
   SET pelanggan_id = ${pelangganId}, paket_id = ${paketId}, total_bayar = ${total_bayarInCents}, metode_bayar = ${metode_bayar}, status=${status}
   WHERE id = ${id}
@@ -136,6 +145,86 @@ export async function deleteTransaksi(id: string) {
   await sql`DELETE FROM transaksi WHERE id = ${id}`;
   revalidatePath('/dashboard/transaksi');
   return { message: 'Deleted Reservations.' };
+}
+
+
+const CreatePaket = FormSchemaP.omit({ id: true });
+const UpdatePaket = FormSchemaP.omit({ id: true });
+
+export async function createPaket(formData: FormData) {
+  const img = formData.get('image');
+  console.log(img);
+
+  let fileName = '';
+  if (img instanceof File) {
+    fileName = '/paket/' + img.name;
+    console.log(fileName);
+  };
+
+
+  const { nama_paket, durasi, harga, gambar_paket } = CreatePaket.parse({
+    nama_paket: formData.get('nama_paket'),
+    durasi: formData.get('durasi'),
+    harga: Number(formData.get('harga')),
+    gambar_paket: fileName,
+  });
+
+  const hargaInCents = harga * 100;
+
+  await sql`
+    INSERT INTO paket (id, nama_paket, durasi, harga, gambar_paket)
+    VALUES ($ ${nama_paket}, ${durasi}, ${hargaInCents}, ${gambar_paket}
+    )
+  `;
+
+  revalidatePath('/dashboard/paket');
+  redirect('/dashboard/paket');
+}
+
+
+// Function to update a transaction
+// export async function updatePaket(formData: FormData) {
+//   const image = formData.get('image');
+//   console.log(image);
+
+//   let fileName = '';
+//   if (image instanceof File) {
+//     fileName = '/paket/' + image.name;
+//     console.log('Image Uploaded', fileName);
+//   };
+
+//   const { nama_paket, durasi, harga, gambar_paket } = UpdatePaket.parse({
+//     nama_paket: formData.get('nama_paket'),
+//     durasi: formData.get('durasi'),
+//     harga: Number(formData.get('harga')),
+//     gambar_paket: fileName,
+//   });
+
+//   const updateFields = { nama_paket, durasi, harga, gambar_paket };
+//   if (fileName) {
+//     updateFields.gambar_paket = fileName;
+//   }
+//   const hargaInCents = harga * 100;
+
+//   try {
+//     await sql`
+//   UPDATE paket 
+//   SET nama_paket = ${nama_paket}, durasi = ${durasi}, harga = ${hargaInCents}, gambar_paket =${gambar_paket}
+//   WHERE id = ${id}
+// `;
+
+//   } catch (error) {
+//     return { message: 'Database Error: Failed to Update paket.' };
+//   }
+
+//   revalidatePath('/dashboard/paket');
+//   redirect('/dashboard/paket');
+// }
+
+export async function deletePaket(id: string) {
+  await sql`DELETE FROM paket WHERE id = ${id}`;
+  revalidatePath('/dashboard/paket');
+  return { message: 'Deleted paket.' };
 }
 
 // Function to handle authentication
