@@ -16,10 +16,10 @@ import { useState } from 'react';
 export default function Form({ pelanggan }: { pelanggan: PelangganField[] }) {
   return (
     <form action={createPelanggan}>
-      <div className="rounded-md bg-gray-50 p-4 md:p-6">
+      <div className="rounded-md bg-gradient-to-b from-gray-700 to-red-950 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
-          <label htmlFor="amount" className="mb-2 block text-sm font-medium">
+          <label htmlFor="amount" className="mb-2 block text-sm font-medium text-white">
             Name
           </label>
           <div className="relative mt-2 rounded-md">
@@ -39,7 +39,7 @@ export default function Form({ pelanggan }: { pelanggan: PelangganField[] }) {
 
         {/* Pelanggan Email */}
         <div className="mb-4">
-          <label htmlFor="amount" className="mb-2 block text-sm font-medium">
+          <label htmlFor="amount" className="mb-2 block text-sm font-medium text-white">
             Email
           </label>
           <div className="relative mt-2 rounded-md">
@@ -59,7 +59,7 @@ export default function Form({ pelanggan }: { pelanggan: PelangganField[] }) {
 
         {/* pelanggan No hp */}
         <div className="mb-4">
-          <label htmlFor="amount" className="mb-2 block text-sm font-medium">
+          <label htmlFor="amount" className="mb-2 block text-sm font-medium text-white">
             No Hp
           </label>
           <div className="relative mt-2 rounded-md">
@@ -101,7 +101,8 @@ export default function Form({ pelanggan }: { pelanggan: PelangganField[] }) {
         >
           Cancel
         </Link>
-        <Button type="submit">Create Pelanggan</Button>
+        <Button type="submit" className="bg-gradient-to-b from-gray-800 to-red-900 text-white hover:bg-amber-600">
+        Create Pelanggan</Button>
       </div>
     </form>
   );

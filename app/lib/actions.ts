@@ -15,7 +15,17 @@ const FormSchema = z.object({
   email: z.string(),
   nohp: z.string(),
 });
- 
+
+const FormSchemaz = z.object({
+  id: z.string(),
+  pelangganId: z.string(),
+  paketId:z.string(),
+  total_bayar: z.coerce.number(),
+  tanggal_transaksi: z.string(),
+  metode_bayar: z.enum(['Qris', 'Tunai', 'Debit']),
+  status: z.enum(['Berhasil', 'Gagal']),
+});
+
 const CreatePelanggan = FormSchema.omit({ id: true });
 const UpdatePelanggan = FormSchema.omit({ id: true });
 
@@ -68,53 +78,65 @@ export async function deletePelanggan(id: string) {
   revalidatePath('/dashboard/pelanggan');
 }
 
-// Function to update a transaction
-// export async function updateTransaksi(id: string, formData: FormData) {
-//   const { pelanggan_id, total_bayar, status } = UpdateTransaksi.parse({
-//     pelanggan_id: formData.get('pelanggan_id'),
-//     total_bayar: formData.get('total_bayar'),
-//     status: formData.get('status'),
-//   });
-
-//   const total_bayarInCents = total_bayar * 100;
-
-//   await sql`
-//     UPDATE transaksi
-//     SET pelanggan_id = ${pelanggan_id}, total_bayar = ${total_bayarInCents}, status = ${status}
-//     WHERE id = ${id}
-//   `;
-
-//   revalidatePath('/dashboard/transaksi');
-//   redirect('/dashboard/transaksi');
-// }
-
-// const CreateTransaksi = FormSchema.omit({ id: true, date: true });
+const CreateTransaksi = FormSchemaz.omit({ id: true, tanggal_transaksi: true });
+const UpdateTransaksi = FormSchemaz.omit({ id: true, tanggal_transaksi: true });
 
 // // Function to create a new transaction
-// export async function createTransaksi(formData: FormData) {
-//   const { pelanggan_id, total_bayar, status } = CreateTransaksi.parse({
-//     pelanggan_id: formData.get('pelanggan_id'),
-//     total_bayar: formData.get('total_bayar'),
-//     status: formData.get('status'),
-//   });
+export async function createTransaksi(formData: FormData) {
+  const { pelangganId, paketId, total_bayar, metode_bayar, status } = CreateTransaksi.parse({
+    pelangganId: formData.get('pelangganId'),
+    paketId: formData.get('paketId'),
+    total_bayar: Number(formData.get('total_bayar')),  // Convert to number
+    metode_bayar: formData.get('metode_bayar'),
+    status: formData.get('status'),
+  });
 
-//   const total_bayarInCents = total_bayar * 100;
-//   const date = new Date().toISOString().split('T')[0];
+  const total_bayarInCents = total_bayar * 100;
+  const tanggal_transaksi = new Date().toISOString().split('T')[0];
 
-//   await sql`
-//     INSERT INTO transaksi (pelanggan_id, total_bayar, status, date)
-//     VALUES (${pelanggan_id}, ${total_bayarInCents}, ${status}, ${date})
-//   `;
+  await sql`
+    INSERT INTO transaksi (pelanggan_id, paket_id, tanggal_transaksi, total_bayar, metode_bayar, status)
+    VALUES (${pelangganId}, ${paketId}, ${tanggal_transaksi}, ${total_bayarInCents}, ${metode_bayar}, ${status}
+    )
+  `;
 
-//   revalidatePath('/dashboard/transaksi');
-//   redirect('/dashboard/transaksi');
-// }
+  revalidatePath('/dashboard/transaksi');
+  redirect('/dashboard/transaksi');
+}
 
-// // Function to delete a transaction
-// export async function deleteTransaksi(id: string) {
-//   await sql`DELETE FROM transaksi WHERE id = ${id}`;
-//   revalidatePath('/dashboard/transaksi');
-// }
+
+// Function to update a transaction
+export async function updateTransaksi(id: string, formData: FormData) {
+  const { pelangganId, paketId, total_bayar, metode_bayar, status } = UpdateTransaksi.parse({
+    pelangganId: formData.get('pelangganId'),
+    paketId: formData.get('paketId'),
+    total_bayar: Number(formData.get('total_bayar')),  // Convert to number
+    metode_bayar: formData.get('metode_bayar'),
+    status: formData.get('status'),
+  });
+
+  const total_bayarInCents = total_bayar * 100;
+
+  try {
+  await sql`
+  UPDATE transaksi 
+  SET pelanggan_id = ${pelangganId}, paket_id = ${paketId}, total_bayar = ${total_bayarInCents}, metode_bayar = ${metode_bayar}, status=${status}
+  WHERE id = ${id}
+`;
+
+  } catch (error) {
+    return { message: 'Database Error: Failed to Update transaksi.' };
+  }
+
+  revalidatePath('/dashboard/transaksi');
+  redirect('/dashboard/transaksi');
+}
+
+export async function deleteTransaksi(id: string) {
+  await sql`DELETE FROM transaksi WHERE id = ${id}`;
+  revalidatePath('/dashboard/transaksi');
+  return { message: 'Deleted Reservations.' };
+}
 
 // Function to handle authentication
 export async function authenticate(

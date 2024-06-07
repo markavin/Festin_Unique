@@ -150,6 +150,14 @@ export type PelangganField = {
   nohp: string;
 };
 
+export type PaketField = {
+  id: string;
+  nama_paket: string;
+  durasi: string;
+  harga : number;
+  gambar_paket : string;
+};
+
 export type TransaksiForm = {
   id: string;
   pelanggan_id: string;

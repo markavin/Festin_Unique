@@ -10,7 +10,7 @@ import { Metadata } from 'next';
 import { CreatePaket } from '@/app/ui/paket/buttons';
 
 export const metadata: Metadata = {
-  title: 'Paket | Acme Dashboard',
+  title: 'Paket | Festin Unique Dashboard',
 };
 
 export default async function Page({

@@ -127,8 +127,7 @@ export async function fetchFilteredTransaksi(
         transaksi.metode_bayar,
         transaksi.status,
         pelanggan.name,
-        paket.nama_paket,
-        paket.gambar_paket
+        paket.nama_paket
       FROM transaksi
       LEFT JOIN pelanggan ON transaksi.pelanggan_id = pelanggan.id
       LEFT JOIN paket ON transaksi.paket_id = paket.id
@@ -174,6 +173,7 @@ export async function fetchTransaksiPages(query: string) {
 }
 
 export async function fetchTransaksiById(id: string) {
+  unstable_noStore()
   try {
     const data = await sql<TransaksiForm>`
       SELECT
@@ -201,6 +201,7 @@ export async function fetchTransaksiById(id: string) {
 }
 
 export async function fetchPaketById(id: string) {
+  unstable_noStore()
   try {
     const data = await sql<PaketForm>`
       SELECT
@@ -228,6 +229,7 @@ export async function fetchPaketById(id: string) {
 
 
 export async function fetchPelanggan() {
+  unstable_noStore()
   try {
     const data = await sql<PelangganField>`
       SELECT
@@ -248,6 +250,7 @@ export async function fetchPelanggan() {
 }
 
 export async function fetchPaket() {
+  unstable_noStore()
   try {
     const data = await sql<PaketField>`
       SELECT
@@ -304,6 +307,7 @@ export async function fetchFilteredPelanggan(query: string) {
 }
 
 export async function getUser(email: string) {
+  unstable_noStore()
   try {
     const user = await sql`SELECT * FROM users WHERE email=${email}`;
     return user.rows[0] as User;

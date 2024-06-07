@@ -105,7 +105,7 @@ async function seedPelanggan(client) {
         email VARCHAR(255) NOT NULL,
         nohp VARCHAR(255) NOT NULL
       );
-    `;
+    `
 
     console.log(`Created "pelanggan" table`);
 

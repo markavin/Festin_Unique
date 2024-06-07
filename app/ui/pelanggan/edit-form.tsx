@@ -19,10 +19,10 @@ export default function EditPelangganForm({
 
   return (
     <form action={updatePelangganWithId}>
-      <div className="rounded-md bg-gray-50 p-4 md:p-6">
+      <div className="rounded-md bg-gradient-to-r from-red-950 to-gray-700 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
-          <label htmlFor="amount" className="mb-2 block text-sm font-medium">
+          <label htmlFor="amount" className="mb-2 block text-sm font-medium text-white">
             Name
           </label>
           <div className="relative mt-2 rounded-md">
@@ -42,7 +42,7 @@ export default function EditPelangganForm({
         </div>
 
         <div className="mb-4">
-          <label htmlFor="email" className="mb-2 block text-sm font-medium">
+          <label htmlFor="email" className="mb-2 block text-sm font-medium text-white">
             Email
           </label>
           <div className="relative mt-2 rounded-md">
@@ -62,7 +62,7 @@ export default function EditPelangganForm({
         </div>
 
         <div className="mb-4">
-          <label htmlFor="email" className="mb-2 block text-sm font-medium">
+          <label htmlFor="email" className="mb-2 block text-sm font-medium text-white">
             No hP
           </label>
           <div className="relative mt-2 rounded-md">
@@ -89,7 +89,8 @@ export default function EditPelangganForm({
         >
           Cancel
         </Link>
-        <Button type="submit">Edit Pelanggan</Button>
+        <Button type="submit" className="bg-gradient-to-t from-gray-800 to-red-900 text-white hover:bg-amber-600">
+        Edit Pelanggan</Button>
       </div>
     </form>
   );

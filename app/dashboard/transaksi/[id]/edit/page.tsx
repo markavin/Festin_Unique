@@ -1,12 +1,13 @@
 import Form from '@/app/ui/transaksi/edit-form';
 import Breadcrumbs from '@/app/ui/transaksi/breadcrumbs';
-import { fetchPelanggan , fetchTransaksiById } from '@/app/lib/data';
+import { fetchPelanggan , fetchTransaksiById, fetchPaket } from '@/app/lib/data';
  
 export default async function Page({ params }: { params: { id: string } }) {
     const id = params.id;
-    const [transaksi, pelanggans] = await Promise.all([
+    const [transaksi, pelanggans, pakets] = await Promise.all([
         fetchTransaksiById(id),
         fetchPelanggan(),
+        fetchPaket()
       ]);
   return (
     <main>
@@ -20,7 +21,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           },
         ]}
       />
-      <Form transaksi={transaksi} pelanggans={pelanggans} />
+      <Form transaksi={transaksi} pelanggans={pelanggans} pakets={pakets}/>
     </main>
   );
 }

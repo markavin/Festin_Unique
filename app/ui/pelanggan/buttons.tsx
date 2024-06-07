@@ -30,9 +30,9 @@ export function DeletePelanggan({ id }: { id: string }) {
   const deletePelangganWithId = deletePelanggan.bind(null, id);
   return (
     <form action={deletePelangganWithId}>
-      <button className="rounded-md border p-2 hover:bg-gray-100">
+      <button className="rounded-md border p-2 bg-gradient-to-b from-gray-800 to-red-800   hover:from-red-700 hover:to-amber-600">
         <span className="sr-only">Delete</span>
-        <TrashIcon className="w-4" />
+        <TrashIcon className="w-4 text-white" />
       </button>
     </form>
   );

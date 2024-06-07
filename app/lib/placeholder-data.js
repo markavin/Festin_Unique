@@ -86,7 +86,7 @@ const transaksi = [
   {
     // id: '72367236hsdvw73',
     pelanggan_id: pelanggan[0].id,
-    paket_id: 'b66baf09-2917-4cc4-b184-a5eb200b8353',
+    paket_id: '0e6e54c2-8a80-4d10-ba11-797e8870be0f',
     tanggal_transaksi: '2022-12-06',
     total_bayar: 149000,
     metode_bayar: 'Tunai', 
@@ -95,7 +95,7 @@ const transaksi = [
   {
     // id: '5356r4hgsdcgwc6',
     pelanggan_id: pelanggan[1].id,
-    paket_id: '95de6dab-cb39-47f2-b730-a2adb3982edf',
+    paket_id: '1b602bb5-3021-4fcd-976f-89a143e55b99',
     tanggal_transaksi: '2022-11-14',
     total_bayar: 400000,
     metode_bayar: 'Debit', 
@@ -104,7 +104,7 @@ const transaksi = [
   {
     // id: '62r32hsvch3266b',
     pelanggan_id: pelanggan[3].id,
-    paket_id: 'd6b836bb-4728-4cff-95a6-19341b10dcac',
+    paket_id: '5d4334e6-14fa-42fb-9951-d07712687a59',
     tanggal_transaksi: '2022-10-06',
     total_bayar: 250000,
     metode_bayar: 'Qris', 
@@ -113,7 +113,7 @@ const transaksi = [
   {
     // id: '7634gshgd76hsbf',
     pelanggan_id: pelanggan[2].id,
-    paket_id: '45d1b7ad-f9e4-48f9-a81f-61abdf517c83',
+    paket_id: '84517488-aa09-4cff-bed1-d767e27ca980',
     tanggal_transaksi: '2022-8-14',
     total_bayar: 450000,
     metode_bayar: 'Qris', 

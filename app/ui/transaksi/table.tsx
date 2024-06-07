@@ -7,12 +7,14 @@ import { fetchFilteredTransaksi } from '@/app/lib/data';
 
 export default async function TransaksiTable({
   query,
-  currentPage,
+  // currentPage,
 }: {
   query: string;
-  currentPage: number;
+  // currentPage: number;
 }) {
   const transaksi = await fetchFilteredTransaksi(query);
+
+  console.log(transaksi); // Add this line to check the structure of transaksi
 
   return (
     <div className="mt-6 flow-root">
@@ -26,17 +28,9 @@ export default async function TransaksiTable({
               >
                 <div className="flex items-center justify-between pb-4">
                   <div className="flex items-center gap-4">
-                    <div className="relative w-14 h-14 overflow-hidden rounded-full">
-                      <Image
-                        src={transaksiItem.gambar_paket}
-                        layout="fill"
-                        objectFit="cover"
-                        alt=''
-                      />
-                    </div>
                     <div>
+                      <p className="text-lg font-semibold">{transaksiItem.name}</p>
                       <p className="text-lg font-semibold">{transaksiItem.nama_paket}</p>
-                      {/* <p className="text-sm text-gray-500">{transaksiItem.name}</p> */}
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
@@ -89,22 +83,10 @@ export default async function TransaksiTable({
               {transaksi?.map((transaksiItem) => (
                 <tr key={transaksiItem.id} className="group">
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">
-                    <div className="flex items-center gap-4">
-                      <div className="relative w-12 h-12 overflow-hidden rounded-full">
-                        <Image
-                          src={transaksiItem.gambar_paket}
-                          layout="fill"
-                          objectFit="cover"
-                          alt=''
-                        />
-                      </div>
-                      <div>
-                        <p className="text-lg font-semibold">{transaksiItem.nama_paket}</p>
-                      </div>
-                    </div>
+                    <p className="text-sm text-gray-900 font-semibold">{transaksiItem.nama_paket}</p>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">
-                    <p className="text-sm text-gray-900">{transaksiItem.name}</p>
+                    <p className="text-sm text-gray-900 font-semibold">{transaksiItem.name}</p>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">
                     <p className="text-sm text-gray-900">{formatCurrency(transaksiItem.total_bayar)}</p>
@@ -133,3 +115,4 @@ export default async function TransaksiTable({
     </div>
   );
 }
+

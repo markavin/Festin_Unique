@@ -10,7 +10,7 @@ import { Metadata } from 'next';
 import { CreateTransaksi } from '@/app/ui/transaksi/buttons';
 
 export const metadata: Metadata = {
-  title: 'Transaksi | Acme Dashboard',
+  title: 'Transaksi | Festin Unique Dashboard',
 };
 
 export default async function Page({
@@ -42,7 +42,7 @@ export default async function Page({
         </Suspense>
       </div>
       <Suspense key={query + currentPage} fallback={<TransaksiTableSkeleton />}>
-        <Table query={query} currentPage={currentPage} />
+        <Table query={query} />
       </Suspense>
       <div className="mt-5 flex w-full justify-center">
         <Pagination totalPages={totalPages} />
