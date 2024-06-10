@@ -1,11 +1,11 @@
 import Form from '@/app/ui/transaksi/create-form';
 import Breadcrumbs from '@/app/ui/transaksi/breadcrumbs';
-import { fetchPelanggan } from '@/app/lib/data';
-import { pelanggan } from '@/app/lib/placeholder-data';
- 
+import { fetchPelanggan, fetchPaket } from '@/app/lib/data';
+
 export default async function Page() {
-  const pelanggan = await fetchPelanggan();
- 
+  const pelanggans = await fetchPelanggan();
+  const pakets = await fetchPaket();
+
   return (
     <main>
       <Breadcrumbs
@@ -18,7 +18,7 @@ export default async function Page() {
           },
         ]}
       />
-      <Form pelanggans={pelanggan} />
+      <Form pelanggans={pelanggans} pakets={pakets} />
     </main>
   );
 }

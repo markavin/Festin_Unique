@@ -3,6 +3,7 @@ import {
   ClockIcon,
   UserGroupIcon,
   InboxIcon,
+  DocumentIcon
 } from '@heroicons/react/24/outline';
 import { kanit } from '@/app/ui/fonts';
 import { fetchCardData } from '@/app/lib/data';
@@ -10,6 +11,7 @@ import { fetchCardData } from '@/app/lib/data';
 const iconMap = {
   Berhasil: BanknotesIcon,
   pelanggan: UserGroupIcon,
+  paket: DocumentIcon,
   Gagal: ClockIcon,
   transaksi: InboxIcon,
 };
@@ -18,6 +20,7 @@ export default async function CardWrapper() {
   const {
     numberOfTransaksi,
     numberOfPelanggan,
+    numberOfPaket,
     totalBerhasilransaksi,
     totalGagalTransaksi,
   } = await fetchCardData();
@@ -26,12 +29,17 @@ export default async function CardWrapper() {
       {/* NOTE: comment in this code when you get to this point in the course */}
 
       <Card title="Berhasil" value={totalBerhasilransaksi} type="Berhasil" />
-      <Card title="Pending" value={totalGagalTransaksi} type="Gagal" />
-      <Card title="Total Invoices" value={numberOfTransaksi} type="transaksi" />
+      <Card title="Gagal" value={totalGagalTransaksi} type="Gagal" />
+      <Card title="Total Transaksi" value={numberOfTransaksi} type="transaksi" />
       <Card
         title="Total Pelanggan"
         value={numberOfPelanggan}
         type="pelanggan"
+      />
+      <Card
+        title="Total Paket"
+        value={numberOfPaket}
+        type="paket"
       />
     </>
   );
@@ -44,7 +52,7 @@ export function Card({
 }: {
   title: string;
   value: number | string;
-  type: 'transaksi' | 'pelanggan' | 'Gagal' | 'Berhasil';
+  type: 'transaksi' | 'pelanggan' | 'Gagal' | 'Berhasil' | 'paket';
 }) {
   const Icon = iconMap[type];
 

@@ -12,6 +12,11 @@ import { SearchPelangganSkeleton, PelangganTableSkeleton, CreatePelangganSkeleto
 // } from '@/app/ui/skeletons';
 // import { promise } from 'zod';
 import { fetchPelangganPages } from '@/app/lib/data';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Pelanggan | Festin Unique Dashboard',
+};
 
 export default async function Page({
   searchParams,

@@ -2,32 +2,31 @@
 const shimmer =
   'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent';
 
-export function CardSkeleton() {
-  return (
-    <div
-      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm`}
-    >
-      <div className="flex p-4">
-        <div className="h-5 w-5 rounded-md bg-gray-200" />
-        <div className="ml-2 h-6 w-16 rounded-md bg-gray-200 text-sm font-medium" />
+  export function CardSkeleton() {
+    return (
+      <div className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm`}>
+        <div className="flex p-5">
+          <div className="h-5 w-5 rounded-md bg-gray-200" />
+          <div className="ml-2 h-6 w-16 rounded-md bg-gray-200 text-sm font-medium" />
+        </div>
+        <div className="flex items-center justify-center truncate rounded-xl bg-white px-4 py-8">
+          <div className="h-7 w-20 rounded-md bg-gray-200" />
+        </div>
       </div>
-      <div className="flex items-center justify-center truncate rounded-xl bg-white px-4 py-8">
-        <div className="h-7 w-20 rounded-md bg-gray-200" />
-      </div>
-    </div>
-  );
-}
-
-export function CardsSkeleton() {
-  return (
-    <>
-      <CardSkeleton />
-      <CardSkeleton />
-      <CardSkeleton />
-      <CardSkeleton />
-    </>
-  );
-}
+    );
+  }
+  
+  export function CardsSkeleton() {
+    return (
+      <>
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+      </>
+    );
+  }
 
 export function RevenueChartSkeleton() {
   return (
@@ -118,7 +117,8 @@ export default function DashboardSkeleton() {
       <div
         className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`}
       />
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        <CardSkeleton />
         <CardSkeleton />
         <CardSkeleton />
         <CardSkeleton />
@@ -258,19 +258,27 @@ export function TransaksiTableSkeleton() {
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  Customer
+                  Paket
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Email
+                  Nama
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Amount
+                  Total bayar
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Date
+                  Tanggal transaksi                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  metode bayar
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  metode bayar
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Status
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Aksi
                 </th>
                 <th
                   scope="col"
@@ -323,6 +331,9 @@ export function PelangganTableSkeleton() {
                 <th scope="col" className="px-3 py-5 font-medium">
                   Total Transaksi
                 </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Aksi
+                </th>
                 <th
                   scope="col"
                   className="relative pb-4 pl-3 pr-6 pt-2 sm:pr-6"
@@ -374,6 +385,9 @@ export function PaketTableSkeleton() {
                 <th scope="col" className="px-3 py-5 font-medium">
                   Durasi
                 </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Aksi
+                </th>
                 <th
                   scope="col"
                   className="relative pb-4 pl-3 pr-6 pt-2 sm:pr-6"
@@ -412,7 +426,7 @@ export function PageTransaksiSkeleton() {
     <div className="bg-gray-200 w-[160px] h-[40px] rounded-sm "></div>
     <div className="mt-4 flex items-center justify-between gap-2 md:mt-8"> 
       <SearchTransaksiSkeleton />
-      {/* <CreateReservationsSkeleton /> */}
+      <CreatePaketSkeleton />
     </div>
        <div className="mt-6 flow-root">
         <TransaksiTableSkeleton />
@@ -436,6 +450,14 @@ export function CreatePelangganSkeleton() {
   );
 }
 
+export function CreatePaketSkeleton() {
+  return (
+    <div
+      className="flex flex-wrap h-8 w-1/6 items-center rounded-lg bg-gray-300 py-[5px] text-sm font-medium text-white">
+    </div>
+  );
+}
+
 export function PagePelangganSkeleton() {
   return (
     <>
@@ -444,7 +466,7 @@ export function PagePelangganSkeleton() {
       <SearchTransaksiSkeleton />
       <CreatePelangganSkeleton />
     </div>
-        <TransaksiTableSkeleton />
+        <PelangganTableSkeleton />
     </>
   );
 }
@@ -463,11 +485,11 @@ export function PagePaketSkeleton() {
     <>
     <div className="bg-gray-200 w-[160px] h-[40px] rounded-sm "></div>
     <div className="mt-4 flex items-center justify-between gap-2 md:mt-8"> 
-      <SearchTransaksiSkeleton />
-      {/* <CreateReservationsSkeleton /> */}
+      <SearchPaketSkeleton />
+      <CreatePaketSkeleton />
     </div>
        <div className="mt-6 flow-root">
-        <TransaksiTableSkeleton />
+        <PaketTableSkeleton />
       </div>
     </>
   );
