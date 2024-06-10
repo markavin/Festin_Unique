@@ -114,6 +114,7 @@ export default function EditTransaksiForm({
                   name="metode_bayar"
                   type="radio"
                   value="Qris"
+                  defaultValue={transaksi.metode_bayar}
                   defaultChecked={transaksi.metode_bayar === 'Qris'}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
@@ -130,6 +131,7 @@ export default function EditTransaksiForm({
                   name="metode_bayar"
                   type="radio"
                   value="Tunai"
+                  defaultValue={transaksi.metode_bayar}
                   defaultChecked={transaksi.metode_bayar === 'Tunai'}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
@@ -146,6 +148,7 @@ export default function EditTransaksiForm({
                   name="metode_bayar"
                   type="radio"
                   value="Debit"
+                  defaultValue={transaksi.metode_bayar}
                   defaultChecked={transaksi.metode_bayar === 'Debit'}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
@@ -172,6 +175,7 @@ export default function EditTransaksiForm({
                   name="status"
                   type="radio"
                   value="Berhasil"
+                  defaultValue={transaksi.status}
                   defaultChecked={transaksi.status === 'Berhasil'}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
@@ -188,6 +192,7 @@ export default function EditTransaksiForm({
                   name="status"
                   type="radio"
                   value="Gagal"
+                  defaultValue={transaksi.status}
                   defaultChecked={transaksi.status === 'Gagal'}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
