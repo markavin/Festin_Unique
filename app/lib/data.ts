@@ -405,7 +405,7 @@ export async function fetchPelangganPages(query: string) {
 
 export async function fetchPelangganById(id: string) {
   unstable_noStore()
-  // try {
+  try {
   const data = await sql<PelangganForm>`
     SELECT
       pelanggan.id,
@@ -423,8 +423,8 @@ export async function fetchPelangganById(id: string) {
 
   console.log(pelanggan); // customers is an empty array []
   return pelanggan[0];
-  // } catch (error) {
-  //   console.error('Database Error:', error);
-  //   throw new Error('Failed to fetch customers.');
-  // }
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch customers.');
+  }
 }

@@ -2,6 +2,7 @@ import Form from '@/app/ui/pelanggan/edit-form';
 import Breadcrumbs from '@/app/ui/pelanggan/breadcrumbs';
 import { fetchPelanggan} from '@/app/lib/data';
 import { fetchPelangganById } from '@/app/lib/data';
+import { notFound } from 'next/navigation';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
@@ -9,7 +10,10 @@ export default async function Page({ params }: { params: { id: string } }) {
     fetchPelangganById(id),
     fetchPelanggan(),
   ]);
-  return (
+  if (!pelanggan) {
+    notFound();
+  }
+  return(
     <main>
       <Breadcrumbs
         breadcrumbs={[
