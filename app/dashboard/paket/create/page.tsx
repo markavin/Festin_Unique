@@ -1,9 +1,11 @@
+'use client'
+
 import Form from '@/app/ui/paket/create-form';
 import Breadcrumbs from '@/app/ui/paket/breadcrumbs';
-import { fetchPelanggan } from '@/app/lib/data';
+import { fetchPaket } from '@/app/lib/data';
  
 export default async function Page() {
-  const pelanggan = await fetchPelanggan();
+  const pakets = await fetchPaket();
  
   return (
     <main>
@@ -17,7 +19,7 @@ export default async function Page() {
           },
         ]}
       />
-      <Form pelanggan={pelanggan} />
+      <Form pakets={pakets} />
     </main>
   );
 }

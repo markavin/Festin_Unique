@@ -1,3 +1,4 @@
+import { deletePaket } from '@/app/lib/actions';
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
@@ -16,21 +17,24 @@ export function CreatePaket() {
 export function UpdatePaket({ id }: { id: string }) {
   return (
     <Link
-      href={`"/dashboard/paket/${id}/edit"`}
+      href={`/dashboard/paket/${id}/edit`}
       className="rounded-md bg-gradient-to-t from-gray-800 to-red-900 order p-2 hover:from-red-700 hover:to-amber-600 text-white"
     >
-      <PencilIcon className="w-5" />
+      <PencilIcon className="w-5 h-5 text-white" />
     </Link>
   );
 }
 
 export function DeletePaket({ id }: { id: string }) {
+  const deletePaketwithId = deletePaket.bind(null, id);
   return (
     <>
+      <form action={deletePaketwithId}>
       <button className="rounded-md bg-gradient-to-b from-gray-800 to-red-900 border p-2 hover:from-red-700 hover:to-amber-600 text-white">
         <span className="sr-only">Delete</span>
         <TrashIcon className="w-5 " />
       </button>
+      </form>
     </>
   );
 }

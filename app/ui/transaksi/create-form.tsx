@@ -14,6 +14,7 @@ import {
 import { Button } from '@/app/ui/button';
 import { createTransaksi } from '@/app/lib/actions';
 import { DocumentIcon, ExclamationCircleIcon } from '@heroicons/react/20/solid';
+import { transaksi } from '@/app/lib/placeholder-data';
 
 export default function Form({ pelanggans, pakets }: { pelanggans: PelangganField[], pakets: PaketField[] }) {
   return (
@@ -77,7 +78,7 @@ export default function Form({ pelanggans, pakets }: { pelanggans: PelangganFiel
               id="total_bayar"
               name="total_bayar"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-              defaultValue=""
+              defaultValue=''
             >
               <option value="" disabled>
                 Pilih harga paket

@@ -60,10 +60,10 @@ export default async function PaketsTable({
                       Nama
                     </th>
                     <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
-                      Harga
+                      Durasi
                     </th>
                     <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
-                      Durasi
+                      Harga
                     </th>
                     <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
                       Aksi
@@ -89,10 +89,10 @@ export default async function PaketsTable({
                         {paket.nama_paket}
                       </td>
                       <td className="border border-gray-300 px-4 py-3 text-sm text-center">
-                        {paket.harga}
+                        {paket.durasi}
                       </td>
                       <td className="border border-gray-300 px-4 py-3 text-sm text-center">
-                        {paket.durasi}
+                        {paket.harga}
                       </td>
                       <td className="border border-gray-300 px-4 py-3 text-sm text-center">
                         <div className="flex justify-center gap-3">

@@ -39,54 +39,54 @@ const pelanggan = [
 ];
 const paket = [
   {
-    // id: '1' ,
+    id: '1e3b6c4a-88f4-11ec-b909-0242ac120002',
     nama_paket: 'Paket Reguler',
     durasi: '90 menit',
     harga: 99000,
     gambar_paket: '/paket/paketreguler.jpg',
   },
   {
-    // id: '2' ,
+    id: '1e3b6c4b-88f4-11ec-b909-0242ac120002',
     nama_paket: 'Paket Premium',
     durasi: '95 menit',
     harga: 149000,
     gambar_paket: '/paket/paketpremium.jpg',
   },
   {
-    // id : '3',
+    id: '1e3b6c4c-88f4-11ec-b909-0242ac120002',
     nama_paket: 'Paket Supreme',
     durasi: '100 menit',
     harga: 250000,
     gambar_paket: '/paket/paketsupreme.jpg',
   },
   {
-    // id : '4',
+    id: '1e3b6c4d-88f4-11ec-b909-0242ac120002',
     nama_paket: 'Paket Couple',
     durasi: '100 menit',
     harga: 265000,
     gambar_paket: '/paket/paketcp.jpg',
   },
   {
-    // id : '5',
+    id: '1e3b6c4e-88f4-11ec-b909-0242ac120002',
     nama_paket: 'Paket Trio',
     durasi: '120 menit',
     harga: 400000,
     gambar_paket: '/paket/pakettrio.jpg',
   },
   {
-    // id: '6' ,
+    id: '1e3b6c4f-88f4-11ec-b909-0242ac120002',
     nama_paket: 'Paket Keluarga',
     durasi: '150 menit',
     harga: 450000,
     gambar_paket: '/paket/paketKeluarga.jpg',
   },
-]
+];
 
 const transaksi = [
   {
     // id: '72367236hsdvw73',
     pelanggan_id: pelanggan[0].id,
-    paket_id: '0e6e54c2-8a80-4d10-ba11-797e8870be0f',
+    paket_id: paket[1].id,
     tanggal_transaksi: '2022-12-06',
     total_bayar: 149000,
     metode_bayar: 'Tunai', 
@@ -95,7 +95,7 @@ const transaksi = [
   {
     // id: '5356r4hgsdcgwc6',
     pelanggan_id: pelanggan[1].id,
-    paket_id: '1b602bb5-3021-4fcd-976f-89a143e55b99',
+    paket_id: paket[4].id,
     tanggal_transaksi: '2022-11-14',
     total_bayar: 400000,
     metode_bayar: 'Debit', 
@@ -104,7 +104,7 @@ const transaksi = [
   {
     // id: '62r32hsvch3266b',
     pelanggan_id: pelanggan[3].id,
-    paket_id: '5d4334e6-14fa-42fb-9951-d07712687a59',
+    paket_id: paket[2].id,
     tanggal_transaksi: '2022-10-06',
     total_bayar: 250000,
     metode_bayar: 'Qris', 
@@ -113,13 +113,12 @@ const transaksi = [
   {
     // id: '7634gshgd76hsbf',
     pelanggan_id: pelanggan[2].id,
-    paket_id: '84517488-aa09-4cff-bed1-d767e27ca980',
+    paket_id: paket[5].id,
     tanggal_transaksi: '2022-8-14',
     total_bayar: 450000,
     metode_bayar: 'Qris', 
     status: 'Berhasil',
   },
-  
 ];
 
 // const reservasi = [

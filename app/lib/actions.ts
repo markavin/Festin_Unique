@@ -161,7 +161,6 @@ export async function createPaket(formData: FormData) {
     console.log(fileName);
   };
 
-
   const { nama_paket, durasi, harga, gambar_paket } = CreatePaket.parse({
     nama_paket: formData.get('nama_paket'),
     durasi: formData.get('durasi'),
@@ -169,12 +168,11 @@ export async function createPaket(formData: FormData) {
     gambar_paket: fileName,
   });
 
-  const hargaInCents = harga * 100;
+  // const hargaInCents = harga * 1;
 
   await sql`
-    INSERT INTO paket (id, nama_paket, durasi, harga, gambar_paket)
-    VALUES ($ ${nama_paket}, ${durasi}, ${hargaInCents}, ${gambar_paket}
-    )
+    INSERT INTO paket (nama_paket, durasi, harga, gambar_paket)
+    VALUES (${nama_paket}, ${durasi}, ${harga}, ${gambar_paket})
   `;
 
   revalidatePath('/dashboard/paket');
@@ -183,43 +181,40 @@ export async function createPaket(formData: FormData) {
 
 
 // Function to update a transaction
-// export async function updatePaket(formData: FormData) {
-//   const image = formData.get('image');
-//   console.log(image);
+export async function updatePaket(id: string, formData: FormData) {
+  const image = formData.get('image');
+  console.log(image);
 
-//   let fileName = '';
-//   if (image instanceof File) {
-//     fileName = '/paket/' + image.name;
-//     console.log('Image Uploaded', fileName);
-//   };
+  let fileName = '';
+  if (image instanceof File) {
+    fileName = '/paket/' + image.name;
+    console.log('Image Uploaded', fileName);
+  };
 
-//   const { nama_paket, durasi, harga, gambar_paket } = UpdatePaket.parse({
-//     nama_paket: formData.get('nama_paket'),
-//     durasi: formData.get('durasi'),
-//     harga: Number(formData.get('harga')),
-//     gambar_paket: fileName,
-//   });
+  const { nama_paket, durasi, harga, gambar_paket } = UpdatePaket.parse({
+    nama_paket: formData.get('nama_paket'),
+    durasi: formData.get('durasi'),
+    harga: Number(formData.get('harga')),
+    gambar_paket: fileName,
+  });
 
-//   const updateFields = { nama_paket, durasi, harga, gambar_paket };
-//   if (fileName) {
-//     updateFields.gambar_paket = fileName;
-//   }
-//   const hargaInCents = harga * 100;
+  const updateFields = { nama_paket, durasi, harga, gambar_paket };
+  if (fileName) {
+    updateFields.gambar_paket = fileName;
+  }
+  // const hargaInCents = harga * 1000;
 
-//   try {
-//     await sql`
-//   UPDATE paket 
-//   SET nama_paket = ${nama_paket}, durasi = ${durasi}, harga = ${hargaInCents}, gambar_paket =${gambar_paket}
-//   WHERE id = ${id}
-// `;
 
-//   } catch (error) {
-//     return { message: 'Database Error: Failed to Update paket.' };
-//   }
+    await sql`
+      UPDATE paket 
+      SET nama_paket = ${nama_paket}, durasi = ${durasi}, harga = ${harga}, gambar_paket =${gambar_paket}
+      WHERE id = ${id}
+    `;
 
-//   revalidatePath('/dashboard/paket');
-//   redirect('/dashboard/paket');
-// }
+
+  revalidatePath('/dashboard/paket');
+  redirect('/dashboard/paket');
+}
 
 export async function deletePaket(id: string) {
   await sql`DELETE FROM paket WHERE id = ${id}`;
