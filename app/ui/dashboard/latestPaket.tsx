@@ -37,8 +37,9 @@ export default async function LatestPakets(){
                                     </div>
                                     <div className="min-w-0 ml-4">
                                         <p className="truncate text-sm font-semibold md:text-base">
-                                            {paket.durasi}
+                                            {paket.nama_paket}
                                         </p>
+                                            {paket.durasi}
                                     </div>
                                 </div>
                                 <p

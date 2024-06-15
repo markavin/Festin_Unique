@@ -61,9 +61,11 @@ export type LatestTransaksi = {
   id: string;
   name: string;
   email:string;
+  harga : number;
   nama_paket : string;
   gambar_paket: string;
   total_bayar: string;
+  status: 'Berhasil' | 'Gagal';
 };
 
 export type LatestPaket= {
@@ -96,6 +98,7 @@ export type TransaksiTableType = {
   paket_id : string;
   nama_paket: string;
   gambar_paket: string;
+  harga : number;
   tanggal_transaksi: string;
   total_bayar: number;
   metode_bayar: 'Tunai' | 'Qris' | 'Debit';
@@ -163,6 +166,7 @@ export type TransaksiForm = {
   pelanggan_id: string;
   paket_id : string;
   total_bayar: number;
+  harga:number;
   metode_bayar: 'Tunai' | 'Qris' | 'Debit';
   status: 'Berhasil' | 'Gagal';
 };

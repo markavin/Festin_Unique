@@ -79,7 +79,7 @@ export default function Form({ pakets }: { pakets: PaketField[] }) {
               name="image"
               type="file"
               accept="image/*"
-              className="peer block w-full font-small  "
+              className="peer block w-full font-small text-white "
               // required // Added required attribute
             />
           </div>

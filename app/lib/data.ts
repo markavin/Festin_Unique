@@ -47,8 +47,10 @@ export async function fetchLatestTransaksi() {
     const data = await sql<LatestTransaksiRaw>`
       SELECT 
         transaksi.total_bayar, 
+        transaksi.status,
         pelanggan.name, 
         paket.nama_paket, 
+        paket.harga,
         paket.gambar_paket, 
         transaksi.id
       FROM transaksi
@@ -59,7 +61,7 @@ export async function fetchLatestTransaksi() {
     `;
     const LatestTransaksi = data.rows.map((transaksi) => ({
       ...transaksi,
-      total_bayar: formatCurrency(transaksi.total_bayar),
+      total_bayar: formatCurrency(transaksi.harga),
     }));
     return LatestTransaksi;
   } catch (error) {
@@ -71,7 +73,6 @@ export async function fetchLatestTransaksi() {
 
 export async function fetchCardData() {
   unstable_noStore()
-
   try {
     // You can probably combine these into a single SQL query
     // However, we are intentionally splitting them to demonstrate
@@ -113,10 +114,10 @@ export async function fetchCardData() {
 const ITEMS_PER_PAGE = 10;
 export async function fetchFilteredTransaksi(
   query: string,
-  // currentPage: number,
+  currentPage: number,
 ){
   unstable_noStore()
-  // const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
     const transaksi = await sql<TransaksiTableType>`
@@ -127,13 +128,15 @@ export async function fetchFilteredTransaksi(
         transaksi.metode_bayar,
         transaksi.status,
         pelanggan.name,
-        paket.nama_paket
+        paket.nama_paket,
+        paket.harga
       FROM transaksi
       LEFT JOIN pelanggan ON transaksi.pelanggan_id = pelanggan.id
       LEFT JOIN paket ON transaksi.paket_id = paket.id
       WHERE
         pelanggan.name ILIKE ${`%${query}%`} OR
         paket.nama_paket ILIKE ${`%${query}%`} OR
+        paket.harga::text ILIKE ${`%${query}%`} OR
         transaksi.total_bayar::text ILIKE ${`%${query}%`} OR
         transaksi.tanggal_transaksi::text ILIKE ${`%${query}%`} OR
         transaksi.metode_bayar ILIKE ${`%${query}%`} OR
@@ -158,6 +161,7 @@ export async function fetchTransaksiPages(query: string) {
     WHERE
       pelanggan.name ILIKE ${`%${query}%`} OR
       paket.nama_paket ILIKE ${`%${query}%`} OR
+      paket.harga::text ILIKE ${`%${query}%`} OR
       transaksi.total_bayar::text ILIKE ${`%${query}%`} OR
       transaksi.tanggal_transaksi::text ILIKE ${`%${query}%`} OR
       transaksi.metode_bayar ILIKE ${`%${query}%`} OR
@@ -190,7 +194,7 @@ export async function fetchTransaksiById(id: string) {
     const transaksi = data.rows.map((transaksi) => ({
       ...transaksi,
       // Convert amount from cents to dollars
-      total_bayar: transaksi.total_bayar / 100,
+      total_bayar: formatCurrency(transaksi.total_bayar),
     }));
 
     return transaksi[0];
@@ -323,7 +327,7 @@ export async function fetchLatestPaket() {
     const data = await sql<LatestPaketRaw>`
       SELECT paket.harga, paket.nama_paket, paket.durasi, paket.gambar_paket, paket.id
       FROM paket
-      ORDER BY paket.nama_paket ASC
+      ORDER BY paket.harga ASC
       LIMIT 5`;
 
     const LatestPaket = data.rows.map((paket) => ({

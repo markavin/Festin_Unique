@@ -7,12 +7,12 @@ import { fetchFilteredTransaksi } from '@/app/lib/data';
 
 export default async function TransaksiTable({
   query,
-  // currentPage,
+  currentPage,
 }: {
   query: string;
-  // currentPage: number;
+  currentPage: number;
 }) {
-  const transaksi = await fetchFilteredTransaksi(query);
+  const transaksi = await fetchFilteredTransaksi(query, currentPage);
 
   console.log(transaksi); // Add this line to check the structure of transaksi
 
@@ -41,7 +41,7 @@ export default async function TransaksiTable({
                 <div className="flex items-center justify-between pt-4">
                   <div>
                     <p className="text-xl font-medium">
-                      {formatCurrency(transaksiItem.total_bayar)}
+                      {formatCurrency(transaksiItem.harga)}
                     </p>
                     <p className="text-sm text-gray-500">{formatDateToLocal(transaksiItem.tanggal_transaksi)}</p>
                   </div>
@@ -89,7 +89,7 @@ export default async function TransaksiTable({
                     <p className="text-sm text-gray-900 font-semibold">{transaksiItem.name}</p>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">
-                    <p className="text-sm text-gray-900">{formatCurrency(transaksiItem.total_bayar)}</p>
+                    <p className="text-sm text-gray-900">{formatCurrency(transaksiItem.harga)}</p>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">
                     <p className="text-sm text-gray-900">{formatDateToLocal(transaksiItem.tanggal_transaksi)}</p>
@@ -115,4 +115,3 @@ export default async function TransaksiTable({
     </div>
   );
 }
-

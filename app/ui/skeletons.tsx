@@ -253,6 +253,8 @@ export function TransaksiTableSkeleton() {
             <TransaksiMobileSkeleton />
             <TransaksiMobileSkeleton />
             <TransaksiMobileSkeleton />
+            <TransaksiMobileSkeleton />
+            <TransaksiMobileSkeleton />
           </div>
           <table className="hidden min-w-full text-gray-900 md:table">
             <thead className="rounded-lg text-left text-sm font-normal">
@@ -289,6 +291,8 @@ export function TransaksiTableSkeleton() {
               </tr>
             </thead>
             <tbody className="bg-white">
+              <TableRowSkeleton />
+              <TableRowSkeleton />
               <TableRowSkeleton />
               <TableRowSkeleton />
               <TableRowSkeleton />

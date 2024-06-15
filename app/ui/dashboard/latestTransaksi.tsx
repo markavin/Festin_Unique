@@ -13,7 +13,7 @@ export default async function LatestTransaksis(){
       <h2 className={`${bebas_Neue.className} mb-4 text-xl md:text-2xl `}>
         Transaksi Terbaru
       </h2>
-      <div className="flex flex-col justify-between rounded-xl bg-gradient-to-b from-red-900 to-gray-950 p-4 max-w-full max-h-full md:max-w-xl md:max-h-96">
+      <div className="flex grow flex-col justify-between rounded-xl bg-gradient-to-b from-red-900 to-gray-950 p-4">
         <div className="bg-white px-6 py-4 overflow-y-auto rounded-lg">
           {latestTransaksis.map((transaksi, i) => {
             return (
@@ -26,28 +26,36 @@ export default async function LatestTransaksis(){
                   },
                 )}
               >
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold md:text-base">
-                    {transaksi.name}
-                  </p>
-                  <p className="hidden text-sm text-gray-500 sm:block">
-                    {transaksi.email}
-                  </p>
+               <div className="flex items-center">
+                                {/* <div className="relative w-14 h-14 overflow-hidden rounded-full"> */}
+                                    {/* <Image
+                                      src={paket.gambar_paket}
+                                      layout="fill"
+                                      objectFit="cover"
+                                      alt={`${paket.nama_paket}'s profile picture`}
+                                    /> */}
+                                    {/* </div> */}
+                                    <div className="min-w-0 ml-4">
+                                        <p className="truncate text-sm font-semibold md:text-base">
+                                            {transaksi.name}
+                                        </p>
+                                            {transaksi.status}
+                                    </div>
+                                </div>
+                                <p
+                                    className={`${kanit.className} truncate text-sm font-medium md:text-base`}
+                                >
+                                    {transaksi.total_bayar}
+                                </p>
+                            </div>
+                        );
+                    })}
                 </div>
-                <p
-                  className={`${kanit.className} truncate text-sm font-medium md:text-base`}
-                >
-                  {transaksi.total_bayar}
-                </p>
-              </div>
-            );
-          })}
+                <div className="flex items-center pb-2 pt-6">
+                    <ArrowPathIcon className="h-5 w-5 text-gray-500" />
+                    <h3 className="ml-2 text-sm text-gray-500 ">Updated just now</h3>
+                </div>
+            </div>
         </div>
-        <div className="flex items-center pb-2 pt-6">
-          <ArrowPathIcon className="h-5 w-5 text-gray-500" />
-          <h3 className="ml-2 text-sm text-gray-500 ">Updated just now</h3>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }

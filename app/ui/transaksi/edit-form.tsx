@@ -77,29 +77,29 @@ export default function EditTransaksiForm({
           </div>
         </div>
 
-        <div className="mb-4">
-          <label htmlFor="total_bayar" className="mb-2 block text-sm font-medium text-white">
+        {/* <div className="mb-4">
+          <label htmlFor="harga" className="mb-2 block text-sm font-medium text-white">
             Total Bayar
           </label>
           <div className="relative">
             <select
-              id="total_bayar"
-              name="total_bayar"
+              id="harga"
+              name="harga"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               defaultValue={transaksi.paket_id}
             >
-              <option value="" disabled>
+              <select value="" disabled>
                 Pilih harga paket
-              </option>
+              </select>
               {pakets.map((paket) => (
-                <option key={paket.id} value={paket.harga}>
+                <select key={paket.id} value={paket.harga}>
                   {paket.harga}
-                </option>
+                </select>
               ))}
             </select>
             <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
           </div>
-        </div>
+        </div> */}
 
         {/* Invoice Status */}
         <fieldset>

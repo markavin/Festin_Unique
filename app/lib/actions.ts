@@ -20,6 +20,7 @@ const FormSchemaz = z.object({
   id: z.string(),
   pelangganId: z.string(),
   paketId: z.string(),
+  harga: z.coerce.number(),
   total_bayar: z.coerce.number(),
   tanggal_transaksi: z.string(),
   metode_bayar: z.enum(['Qris', 'Tunai', 'Debit']),
@@ -92,10 +93,11 @@ const UpdateTransaksi = FormSchemaz.omit({ id: true, tanggal_transaksi: true });
 
 // // Function to create a new transaction
 export async function createTransaksi(formData: FormData) {
-  const { pelangganId, paketId, total_bayar, metode_bayar, status } = CreateTransaksi.parse({
+  const { pelangganId, paketId, total_bayar, harga, metode_bayar, status } = CreateTransaksi.parse({
     pelangganId: formData.get('pelangganId'),
     paketId: formData.get('paketId'),
-    total_bayar: Number(formData.get('total_bayar')),  // Convert to number
+    total_bayar: Number(formData.get('total_bayar')), 
+    harga: Number(formData.get('harga')),  // Convert to number
     metode_bayar: formData.get('metode_bayar'),
     status: formData.get('status'),
   });
@@ -104,8 +106,8 @@ export async function createTransaksi(formData: FormData) {
   const tanggal_transaksi = new Date().toISOString().split('T')[0];
 
   await sql`
-    INSERT INTO transaksi (pelanggan_id, paket_id, tanggal_transaksi, total_bayar, metode_bayar, status)
-    VALUES (${pelangganId}, ${paketId}, ${tanggal_transaksi}, ${total_bayarInCents}, ${metode_bayar}, ${status}
+    INSERT INTO transaksi (pelanggan_id, paket_id, tanggal_transaksi, harga, total_bayar, metode_bayar, status)
+    VALUES (${pelangganId}, ${paketId}, ${tanggal_transaksi},${harga}, ${total_bayarInCents}, ${metode_bayar}, ${status}
     )
   `;
 
@@ -116,10 +118,11 @@ export async function createTransaksi(formData: FormData) {
 
 // Function to update a transaction
 export async function updateTransaksi(id: string, formData: FormData) {
-  const { pelangganId, paketId, total_bayar, metode_bayar, status } = UpdateTransaksi.parse({
+  const { pelangganId, paketId, total_bayar, harga, metode_bayar, status } = UpdateTransaksi.parse({
     pelangganId: formData.get('pelangganId'),
     paketId: formData.get('paketId'),
-    total_bayar: Number(formData.get('total_bayar')),  // Convert to number
+    total_bayar: Number(formData.get('total_bayar')),
+    harga: Number(formData.get('harga')),  // Convert to number
     metode_bayar: formData.get('metode_bayar'),
     status: formData.get('status'),
   });

@@ -10,7 +10,7 @@ export default async function PaketsTable({
   query: string;
   currentPage: number;
 }) {
-  const paket = await fetchfilteredPaket(query);
+  const paket = await fetchfilteredPaket(query, currentPage);
 
   return (
     <div className="w-full">
