@@ -4,6 +4,7 @@ import LatestTransaksis from '@/app/ui/dashboard/latestTransaksi';
 import { kanit } from '@/app/ui/fonts';
 import { fetchCardData, fetchLatestTransaksi } from '../../lib/data';
 import LatestPakets from '../../ui/dashboard/latestPaket';
+import LatestPelanggan from '../../ui/dashboard/LatestPelanggan';
 import { Metadata } from 'next';
 import CardWrapper from '@/app/ui/dashboard/cards';
 import { Suspense } from 'react';
@@ -12,7 +13,9 @@ import {
   LatestTransaksiSkeleton,
   LatestPaketSkeleton,
   CardsSkeleton,
+  LatestPelangganSkeleton,
 } from '@/app/ui/skeletons';
+
 
 export const metadata: Metadata = {
   title: 'Homepage | Festin unique Dashboard',
@@ -26,12 +29,12 @@ export default async function Page() {
     totalBerhasilransaksi,
     totalGagalTransaksi,
   } = await fetchCardData();
-  
+ 
   const latestTransaksi = await fetchLatestTransaksi();
   return (
     <main>
       <h1 className={`${kanit.className} mb-4 text-xl md:text-2xl`}>
-        Dashboard
+        {/* Dashboard */}
       </h1>
       <div className="grid gap-6 sm:grid-cols-5  lg:grid-cols-5">
         <Suspense fallback={<CardsSkeleton />}>
@@ -39,15 +42,20 @@ export default async function Page() {
         </Suspense>
       </div>
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols- lg:grid-cols-8">
-        <Suspense fallback={<DetailPendapatanChartSkeleton />}>
-          <DetailPendapatanChart />
-        </Suspense>
         <Suspense fallback={<LatestTransaksiSkeleton />}>
           <LatestTransaksis />
         </Suspense>
         <Suspense fallback={<LatestPaketSkeleton />}>
          <LatestPakets/>
          </Suspense>
+         <Suspense fallback= {<LatestPelangganSkeleton/>}>
+          <LatestPelanggan />
+        </Suspense>
+         <Suspense fallback={<DetailPendapatanChartSkeleton />}>
+          <DetailPendapatanChart />
+        </Suspense>
+
+
       </div>
       {/* <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
         <DetailPendapatanChart   />
@@ -57,3 +65,4 @@ export default async function Page() {
     </main>
   );
 }
+

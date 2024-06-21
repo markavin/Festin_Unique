@@ -1,5 +1,6 @@
 // pages/menu.tsx
 
+
 import React from 'react';
 import Image from 'next/image';
 import { ClockIcon } from '@heroicons/react/20/solid';
@@ -8,6 +9,7 @@ import { bebas_Neue } from '@/app/ui/fontz';
 import { mansalva } from '@/app/ui/fontz';
 import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline';
 import { Metadata } from 'next';
+
 
 export const metadata: Metadata = {
   title: 'Package | Festin unique Package',
@@ -60,7 +62,7 @@ export default function MenuPage() {
                 <p className="text-white">90 menit</p>
               </div>
               <div className="mt-4 text-center">
-                <span className="block text-3xl text-amber-100 font-semibold">Rp 99.000++</span>
+                <span className="block text-3xl text-amber-100 font-semibold">Rp 99.000,00</span>
               </div>
             </div>
           </div>
@@ -80,10 +82,11 @@ export default function MenuPage() {
                 <p className="text-white">95 menit</p>
               </div>
               <div className="mt-4 text-center">
-                <span className="block text-3xl text-amber-100 font-semibold">Rp 149.000++</span>
+                <span className="block text-3xl text-amber-100 font-semibold">Rp 149.000,00</span>
               </div>
             </div>
           </div>
+
 
           <div className="bg-red-900 shadow-md rounded-md overflow-hidden">
             <div className="relative w-full h-60">
@@ -101,10 +104,11 @@ export default function MenuPage() {
                 <p className="text-white">100 menit</p>
               </div>
               <div className="mt-4 text-center">
-                <span className="block text-3xl text-amber-100 font-semibold">Rp 250.000++</span>
+                <span className="block text-3xl text-amber-100 font-semibold">Rp 250.000,00</span>
               </div>
             </div>
           </div>
+
 
           <div className="bg-red-900 shadow-md rounded-md overflow-hidden">
             <div className="relative w-full h-60">
@@ -122,10 +126,11 @@ export default function MenuPage() {
                 <p className="text-white">100 menit</p>
               </div>
               <div className="mt-4 text-center">
-                <span className="block text-3xl text-amber-100 font-semibold">Rp 265.000++</span>
+                <span className="block text-3xl text-amber-100 font-semibold">Rp 265.000,00</span>
               </div>
             </div>
           </div>
+
 
           <div className="bg-red-900 shadow-md rounded-md overflow-hidden">
             <div className="relative w-full h-60">
@@ -143,10 +148,11 @@ export default function MenuPage() {
                 <p className="text-white">120 menit</p>
               </div>
               <div className="mt-4 text-center">
-                <span className="block text-3xl text-amber-100 font-semibold">Rp 400.000++</span>
+                <span className="block text-3xl text-amber-100 font-semibold">Rp 400.000,00</span>
               </div>
             </div>
           </div>
+
 
           <div className="bg-red-900 shadow-md rounded-md overflow-hidden">
             <div className="relative w-full h-60">
@@ -164,7 +170,7 @@ export default function MenuPage() {
                 <p className="text-white">150 menit</p>
               </div>
               <div className="mt-4 text-center">
-                <span className="block text-3xl text-amber-100 font-semibold">Rp 450.000++</span>
+                <span className="block text-3xl text-amber-100 font-semibold">Rp 450.000,00</span>
               </div>
             </div>
           </div>
@@ -181,3 +187,6 @@ export default function MenuPage() {
     </div>
   );
 }
+
+
+

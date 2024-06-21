@@ -2,17 +2,19 @@ import Form from '@/app/ui/transaksi/create-form';
 import Breadcrumbs from '@/app/ui/transaksi/breadcrumbs';
 import { fetchPelanggan, fetchPaket } from '@/app/lib/data';
 
+
 export default async function Page() {
   const pelanggans = await fetchPelanggan();
   const pakets = await fetchPaket();
+
 
   return (
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: 'Transaksi', href: '/dashboard/transaksi' },
+          { label: 'Transaction', href: '/dashboard/transaksi' },
           {
-            label: 'Create Transaksi',
+            label: 'Create Transaction',
             href: '/dashboard/transaksi/create',
             active: true,
           },
@@ -22,3 +24,4 @@ export default async function Page() {
     </main>
   );
 }
+

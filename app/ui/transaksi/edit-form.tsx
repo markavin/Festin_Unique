@@ -1,47 +1,69 @@
+"use client"; // Add this line at the top
+
+
+import { useState } from 'react';
 import { PaketField, PelangganField, TransaksiForm } from '@/app/lib/definitions';
 import Link from 'next/link';
 import {
   CheckIcon,
-  ClockIcon,
-  CurrencyDollarIcon,
   UserCircleIcon,
-  EnvelopeIcon,
-  InboxArrowDownIcon,
   QrCodeIcon,
   BanknotesIcon,
-  CreditCardIcon
+  CreditCardIcon,
+  DocumentIcon,
+  ExclamationCircleIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
 import { updateTransaksi } from '@/app/lib/actions';
 
+
 export default function EditTransaksiForm({
-    transaksi,
-    pelanggans,
-    pakets,
-  }: {
-    transaksi: TransaksiForm;
-    pelanggans: PelangganField[];
-    pakets: PaketField[];
-  }) {
-    const updateTransaksiWithId = updateTransaksi.bind(null, transaksi.id);
-  
+  transaksi,
+  pelanggans,
+  pakets,
+}: {
+  transaksi: TransaksiForm;
+  pelanggans: PelangganField[];
+  pakets: PaketField[];
+}) {
+  const [selectedPaket, setSelectedPaket] = useState<PaketField | null>(pakets.find(p => p.id === transaksi.paket_id) || null);
+  const [selectedCustomer, setSelectedCustomer] = useState<string>(transaksi.pelanggan_id);
+
+
+  const handlePaketChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const paketId = e.target.value;
+    const paket = pakets.find(p => p.id === paketId) || null;
+    setSelectedPaket(paket);
+  };
+
+
+  const handleCustomerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const customerId = e.target.value;
+    setSelectedCustomer(customerId);
+  };
+
+
+  const updateTransaksiWithId = updateTransaksi.bind(null, transaksi.id);
+
+
   return (
     <form action={updateTransaksiWithId}>
       <div className="rounded-md bg-gradient-to-r from-red-950 to-gray-700 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
           <label htmlFor="pelanggan" className="mb-2 block text-sm font-medium text-white">
-            Pilih Pelanggan
+            Choose Customers
           </label>
           <div className="relative">
             <select
               id="pelanggan"
               name="pelangganId"
-              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              className={`peer block w-full cursor-pointer rounded-md border py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 ${selectedCustomer ? 'border-amber-500' : 'border-gray-200'}`}
               defaultValue={transaksi.pelanggan_id}
+              onChange={handleCustomerChange}
             >
               <option value="" disabled>
-                pilih pelanggan
+                Choose Customers
               </option>
               {pelanggans.map((pelanggan) => (
                 <option key={pelanggan.id} value={pelanggan.id}>
@@ -53,19 +75,21 @@ export default function EditTransaksiForm({
           </div>
         </div>
 
+
         <div className="mb-4">
           <label htmlFor="paket" className="mb-2 block text-sm font-medium text-white">
-            Pilih Paket
+            Choose Package
           </label>
           <div className="relative">
             <select
               id="paket"
               name="paketId"
-              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              className={`peer block w-full cursor-pointer rounded-md border py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 ${selectedPaket ? 'border-amber-500' : 'border-gray-200'}`}
               defaultValue={transaksi.paket_id}
+              onChange={handlePaketChange}
             >
               <option value="" disabled>
-                pilih paket
+                Choose Package
               </option>
               {pakets.map((paket) => (
                 <option key={paket.id} value={paket.id}>
@@ -73,41 +97,35 @@ export default function EditTransaksiForm({
                 </option>
               ))}
             </select>
-            <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+            <DocumentIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
           </div>
         </div>
 
+
         <div className="mb-4">
           <label htmlFor="total_bayar" className="mb-2 block text-sm font-medium text-white">
-            Total Bayar
+            Total Pay
           </label>
           <div className="relative">
-            <select
+            <input
               id="total_bayar"
               name="total_bayar"
-              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-              defaultValue={transaksi.paket_id}
-            >
-              <option value="" disabled>
-                Pilih harga paket
-              </option>
-              {pakets.map((paket) => (
-                <option key={paket.id} value={paket.harga}>
-                  {paket.harga}
-                </option>
-              ))}
-            </select>
-            <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+              className={`peer block w-full cursor-pointer rounded-md border py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 ${selectedPaket ? 'border-amber-500' : 'border-gray-200'}`}
+              readOnly
+              value={selectedPaket ? selectedPaket.harga : ''}
+            />
+            <BanknotesIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
           </div>
         </div>
+
 
         {/* Invoice Status */}
         <fieldset>
           <legend className="mb-2 block text-sm font-medium text-white">
-            Pilih metode pembayaran
+            Choose a payment method
           </legend>
           <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
-            <div className="flex gap-4">
+            <div className="flex gap-6">
               <div className="flex items-center">
                 <input
                   id="Qris"
@@ -160,9 +178,10 @@ export default function EditTransaksiForm({
           </div>
         </fieldset>
 
+
         <fieldset>
           <legend className="mb-2 block text-sm font-medium text-white">
-            Pilih status pembayaran
+            Select  payment status
           </legend>
           <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
             <div className="flex gap-4">
@@ -195,7 +214,7 @@ export default function EditTransaksiForm({
                   htmlFor="Gagal"
                   className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-500 px-3 py-1.5 text-xs font-medium text-white"
                 >
-                  Gagal <ClockIcon className="h-4 w-4" />
+                  Gagal <ExclamationCircleIcon className="h-4 w-4" />
                 </label>
               </div>
             </div>
@@ -209,9 +228,14 @@ export default function EditTransaksiForm({
         >
           Cancel
         </Link>
-        <Button type="submit"  className="bg-gradient-to-t from-gray-800 to-red-900 text-white hover:bg-amber-600">
-        Edit Transaksi</Button>
+        <Button type="submit" className="bg-gradient-to-t from-gray-800 to-red-900 px-4 text-sm font-medium text-white transition-colors hover:from-red-700 hover:to-amber-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+          Save Changes</Button>
       </div>
     </form>
   );
 }
+
+
+
+
+

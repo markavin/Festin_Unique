@@ -1,5 +1,6 @@
 'use client'
 
+
 import { PelangganField } from '@/app/lib/definitions';
 import Link from 'next/link';
 import {
@@ -12,6 +13,7 @@ import {
 import { Button } from '@/app/ui/button';
 import { createPelanggan } from '@/app/lib/actions';
 import { useState } from 'react';
+
 
 export default function Form({ pelanggan }: { pelanggan: PelangganField[] }) {
   return (
@@ -37,6 +39,7 @@ export default function Form({ pelanggan }: { pelanggan: PelangganField[] }) {
           </div>
         </div>
 
+
         {/* Pelanggan Email */}
         <div className="mb-4">
           <label htmlFor="email" className="mb-2 block text-sm font-medium text-white">
@@ -57,10 +60,11 @@ export default function Form({ pelanggan }: { pelanggan: PelangganField[] }) {
           </div>
         </div>
 
+
         {/* pelanggan No hp */}
         <div className="mb-4">
           <label htmlFor="nohp" className="mb-2 block text-sm font-medium text-white">
-            No Hp
+            Phone Number
           </label>
           <div className="relative mt-2 rounded-md">
             <div className="relative">
@@ -75,6 +79,7 @@ export default function Form({ pelanggan }: { pelanggan: PelangganField[] }) {
             </div>
           </div>
         </div>
+
 
         {/* Customers Image_url */}
         {/* <div className="mb-4">
@@ -101,9 +106,12 @@ export default function Form({ pelanggan }: { pelanggan: PelangganField[] }) {
         >
           Cancel
         </Link>
-        <Button type="submit" className="bg-gradient-to-b from-gray-800 to-red-900 text-white hover:bg-amber-600">
-        Create Pelanggan</Button>
+        <Button type="submit" className="bg-gradient-to-b from-gray-800 to-red-900 transition-colors hover:from-red-700 hover:to-amber-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+          Create Customer</Button>
       </div>
     </form>
   );
 }
+
+
+

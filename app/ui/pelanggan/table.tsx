@@ -4,6 +4,7 @@ import { fetchFilteredPelanggan } from '@/app/lib/data';
 import { formatCurrency } from '@/app/lib/utils';
 import { UpdatePelanggan, DeletePelanggan } from './buttons';
 
+
 export default async function PelangganTable({
   query,
   currentPage,
@@ -11,7 +12,8 @@ export default async function PelangganTable({
   query: string;
   currentPage: number;
 }) {
-  const pelanggans = await fetchFilteredPelanggan(query);
+  const pelanggans = await fetchFilteredPelanggan(query, currentPage);
+
 
   return (
     <div className="w-full">
@@ -48,19 +50,19 @@ export default async function PelangganTable({
                 <thead className="bg-gradient-to-b from-red-800 to-amber-950 text-white">
                   <tr>
                     <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
-                      Nama
+                      Name
                     </th>
                     <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
                       Email
                     </th>
                     <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
-                      Nomor HP
+                      Phone Number
                     </th>
                     <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
-                      Total Transaksi
+                      Total Transaction
                     </th>
                     <th scope="col" className="border border-red-950 px-4 py-3 font-medium text-center">
-                      Aksi
+                      Action
                     </th>
                   </tr>
                 </thead>
@@ -96,3 +98,8 @@ export default async function PelangganTable({
     </div>
   );
 }
+
+
+
+
+
