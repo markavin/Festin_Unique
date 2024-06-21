@@ -3,17 +3,20 @@ import Link from 'next/link';
 import { deletePelanggan } from '@/app/lib/actions';
 
 
+
+
 export function CreatePelanggan() {
   return (
     <Link
       href="/dashboard/pelanggan/create"
       className="flex h-10 items-center rounded-lg bg-gradient-to-b from-gray-800 to-red-800 px-4 text-sm font-medium text-white transition-colors hover:from-red-700 hover:to-amber-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
     >
-      <span className="hidden md:block">Create Pelanggan</span>{' '}
+      <span className="hidden md:block">Create Customer</span>{' '}
       <PlusIcon className="h-5 md:ml-4" />
     </Link>
   );
 }
+
 
 export function UpdatePelanggan({ id }: { id: string }) {
   return (
@@ -26,6 +29,7 @@ export function UpdatePelanggan({ id }: { id: string }) {
   );
 }
 
+
 export function DeletePelanggan({ id }: { id: string }) {
   const deletePelangganWithId = deletePelanggan.bind(null, id);
   return (
@@ -37,3 +41,4 @@ export function DeletePelanggan({ id }: { id: string }) {
     </form>
   );
 }
+

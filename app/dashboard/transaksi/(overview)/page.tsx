@@ -9,9 +9,11 @@ import { fetchTransaksiPages } from '@/app/lib/data';
 import { Metadata } from 'next';
 import { CreateTransaksi } from '@/app/ui/transaksi/buttons';
 
+
 export const metadata: Metadata = {
   title: 'Transaksi | Festin Unique Dashboard',
 };
+
 
 export default async function Page({
   searchParams,
@@ -26,23 +28,24 @@ export default async function Page({
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
 
+
   const totalPages = await fetchTransaksiPages(query);
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
-        <h1 className={`${kanit.className} text-2xl`}>Transaksi
+        <h1 className={`${kanit.className} text-2xl`}>List of Transaction
         </h1>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8 hover:from-red-700 hover:to-amber-600">
         <Suspense fallback={<SearchTransaksiSkeleton />}>
-          <Search placeholder="Search transaksi..." />
+          <Search placeholder="Search transactions..." />
         </Suspense>
         <Suspense fallback={<CreateTransaksiSkeleton />}>
           <CreateTransaksi />
         </Suspense>
       </div>
       <Suspense key={query + currentPage} fallback={<TransaksiTableSkeleton />}>
-        <Table query={query} />
+        <Table query={query} currentPage={currentPage} />
       </Suspense>
       <div className="mt-5 flex w-full justify-center">
         <Pagination totalPages={totalPages} />
@@ -50,3 +53,4 @@ export default async function Page({
     </div>
   );
 }
+

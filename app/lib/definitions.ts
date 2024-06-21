@@ -9,12 +9,14 @@ export type User = {
   password: string;
 };
 
+
 export type pelanggan = {
   id: string;
   name: string;
   email: string;
   nohp: string;
 };
+
 
 export type paket = {
   id: string;
@@ -23,6 +25,7 @@ export type paket = {
   harga : number;
   gambar_paket : string;
 };
+
 
 export type transaksi = {
   id: string;
@@ -34,6 +37,7 @@ export type transaksi = {
   status: 'Berhasil' | 'Gagal';
 };
 
+
 // export type reservasi = {
 //   id: string;
 //   pelanggan_id: string;
@@ -44,10 +48,15 @@ export type transaksi = {
 
 
 
+
+
+
 export type detailPendapatan = {
   month: string;
   revenue: number;
 };
+
+
 
 
 // export type detailTransaksi = {
@@ -56,6 +65,7 @@ export type detailPendapatan = {
 //   menu_id : string;
 //   jumlah : number;
 // };
+
 
 export type LatestTransaksi = {
   id: string;
@@ -68,6 +78,7 @@ export type LatestTransaksi = {
   status: 'Berhasil' | 'Gagal';
 };
 
+
 export type LatestPaket= {
   id: string;
   nama_paket: string;
@@ -75,14 +86,34 @@ export type LatestPaket= {
   harga : number;
   gambar_paket : string;
 };
+
+
+export type LatestPelanggans= {
+  id: string;
+  name: string;
+  email: string;
+  nohp: string;
+  total_transaksi: number;
+};
+
+
+
+
 // // The database returns a number for amount, but we later format it to a string with the formatCurrency function
 export type LatestTransaksiRaw = Omit<LatestTransaksi, 'total_bayar'> & {
   total_bayar: number;
 };
 
+
 export type LatestPaketRaw = Omit<LatestPaket, 'harga'> & {
   harga: number;
 };
+
+
+export type LatestPelangganRaw = Omit<LatestPelanggans, 'total_transaksi'> & {
+  total_transaksi: number;
+};
+
 
 export type TransaksiTable = {
   id: string;
@@ -111,6 +142,7 @@ export type PelangganTable = {
   nohp: string;
 };
 
+
 export type PelangganTableType = {
   id: string;
   name: string;
@@ -128,6 +160,7 @@ export type PaketTable = {
   gambar_paket : string;
 };
 
+
 export type PaketTableType = {
   id: string;
   nama_paket: string;
@@ -135,6 +168,7 @@ export type PaketTableType = {
   harga : number;
   gambar_paket : string;
 };
+
 
 export type FormattedPelangganTable = {
   id: string;
@@ -146,12 +180,14 @@ export type FormattedPelangganTable = {
   total_Gagal :number;
 };
 
+
 export type PelangganField = {
   id: string;
   name: string;
   email: string;
   nohp: string;
 };
+
 
 export type PaketField = {
   id: string;
@@ -161,15 +197,27 @@ export type PaketField = {
   gambar_paket: string;
 };
 
+
+export type TransaksiField = {
+  id: string;
+  pelanggan_id: string;
+  paket_id : string;
+  tanggal_transaksi: string;
+  total_bayar: number;
+  metode_bayar: 'Tunai' | 'Qris' | 'Debit';
+  status: 'Berhasil' | 'Gagal';
+};
+
+
 export type TransaksiForm = {
   id: string;
   pelanggan_id: string;
   paket_id : string;
   total_bayar: number;
-  harga:number;
   metode_bayar: 'Tunai' | 'Qris' | 'Debit';
   status: 'Berhasil' | 'Gagal';
 };
+
 
 export type PelangganForm = {
   id: string;
@@ -177,6 +225,7 @@ export type PelangganForm = {
   email: string;
   nohp: string;
 };
+
 
 export type PaketForm = {
   id: string;
@@ -186,6 +235,7 @@ export type PaketForm = {
   gambar_paket : string;
 };
 
+
 export type Transaksi = {
   id: string; // Will be created on the database
   pelanggan_id: string;
@@ -193,3 +243,4 @@ export type Transaksi = {
   status: 'Gagal' | 'Berhasil';
   date: string;
 };
+

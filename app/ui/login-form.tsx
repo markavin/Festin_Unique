@@ -1,5 +1,6 @@
 'use client';
 
+
 import { kanit, prosto_One } from '@/app/ui/fonts';
 import {
   AtSymbolIcon,
@@ -10,6 +11,7 @@ import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
+
 
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
@@ -48,7 +50,7 @@ export default function LoginForm() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 text-black" // added text-black class
+                className="peer block w-full bg-gray-200 rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 text-black" // added text-black class
                 id="password"
                 type="password"
                 name="password"
@@ -78,6 +80,7 @@ export default function LoginForm() {
   );
 }
 
+
 function LoginButton() {
   const { pending } = useFormStatus();
   return (
@@ -86,3 +89,6 @@ function LoginButton() {
     </Button>
   );
 }
+
+
+

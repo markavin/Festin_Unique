@@ -1,12 +1,12 @@
+'use client';
+
+
+import { useState } from 'react';
 import { PaketField, PelangganField } from '@/app/lib/definitions';
 import Link from 'next/link';
 import {
   CheckIcon,
-  ClockIcon,
-  CurrencyDollarIcon,
   UserCircleIcon,
-  EnvelopeIcon,
-  InboxArrowDownIcon,
   QrCodeIcon,
   BanknotesIcon,
   CreditCardIcon,
@@ -14,26 +14,48 @@ import {
 import { Button } from '@/app/ui/button';
 import { createTransaksi } from '@/app/lib/actions';
 import { DocumentIcon, ExclamationCircleIcon } from '@heroicons/react/20/solid';
-import { transaksi } from '@/app/lib/placeholder-data';
+
 
 export default function Form({ pelanggans, pakets }: { pelanggans: PelangganField[], pakets: PaketField[] }) {
+  const [selectedPaket, setSelectedPaket] = useState<PaketField | null>(null);
+  const [selectedCustomer, setSelectedCustomer] = useState<string>("");
+  const [isPaketSelected, setIsPaketSelected] = useState<boolean>(false);
+  const [isTotalBayarSet, setIsTotalBayarSet] = useState<boolean>(false);
+
+
+  const handlePaketChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const paketId = e.target.value;
+    const paket = pakets.find(p => p.id === paketId) || null;
+    setSelectedPaket(paket);
+    setIsPaketSelected(!!paketId);
+    setIsTotalBayarSet(!!paket?.harga);
+  };
+
+
+  const handleCustomerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const customer = e.target.value;
+    setSelectedCustomer(customer);
+  };
+
+
   return (
     <form action={createTransaksi}>
       <div className="rounded-md bg-gradient-to-b from-gray-700 to-red-950 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
           <label htmlFor="pelanggan" className="mb-2 block text-sm font-medium text-white">
-            Pilih Pelanggan
+            Choose Customers
           </label>
           <div className="relative">
             <select
               id="pelanggan"
               name="pelangganId"
-              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              className={`peer block w-full rounded-md border py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 ${selectedCustomer ? 'border-amber-500' : 'border-gray-200'}`}
               defaultValue=""
+              onChange={handleCustomerChange}
             >
               <option value="" disabled>
-                pilih pelanggan
+                Choose Customers
               </option>
               {pelanggans.map((pelanggan) => (
                 <option key={pelanggan.id} value={pelanggan.id}>
@@ -45,19 +67,22 @@ export default function Form({ pelanggans, pakets }: { pelanggans: PelangganFiel
           </div>
         </div>
 
+
+        {/* Select Package */}
         <div className="mb-4">
           <label htmlFor="paket" className="mb-2 block text-sm font-medium text-white">
-            Pilih Paket
+            Choose Package
           </label>
           <div className="relative">
             <select
               id="paket"
               name="paketId"
-              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              className={`peer block w-full cursor-pointer rounded-md border py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 ${isPaketSelected ? 'border-amber-500' : 'border-gray-200'}`}
               defaultValue=""
+              onChange={handlePaketChange}
             >
               <option value="" disabled>
-                pilih paket
+                Choose Package
               </option>
               {pakets.map((paket) => (
                 <option key={paket.id} value={paket.id}>
@@ -69,34 +94,29 @@ export default function Form({ pelanggans, pakets }: { pelanggans: PelangganFiel
           </div>
         </div>
 
-        {/* <div className="mb-4">
+
+        {/* Total Payment */}
+        <div className="mb-4">
           <label htmlFor="total_bayar" className="mb-2 block text-sm font-medium text-white">
-            Total Bayar
+            Total Pay
           </label>
           <div className="relative">
-            <select
+            <input
               id="total_bayar"
               name="total_bayar"
-              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-              // defaultValue={paket.harga}
-            >
-              <select value="" disabled>
-                Pilih harga paket
-              </select>
-              {pakets.map((paket) => (
-                <select key={paket.id} defaultValue={paket.harga}>
-                  {paket.harga}
-                </select>
-              ))}
-            </select>
+              className={`peer block w-full cursor-pointer rounded-md border py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 ${isTotalBayarSet ? 'border-amber-500' : 'border-gray-200'}`}
+              readOnly
+              value={selectedPaket ? selectedPaket.harga : ''}
+            />
             <BanknotesIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
           </div>
-        </div> */}
+        </div>
 
-        {/* Invoice Status */}
+
+        {/* Payment Method */}
         <fieldset>
           <legend className="mb-2 block text-sm font-medium text-white">
-            Pilih metode pembayaran
+            Choose a payment method
           </legend>
           <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
             <div className="flex gap-6">
@@ -149,9 +169,11 @@ export default function Form({ pelanggans, pakets }: { pelanggans: PelangganFiel
           </div>
         </fieldset>
 
+
+        {/* Payment Status */}
         <fieldset>
           <legend className="mb-2 block text-sm font-medium text-white">
-            Pilih status pembayaran
+            Select  payment status
           </legend>
           <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
             <div className="flex gap-4">
@@ -196,10 +218,15 @@ export default function Form({ pelanggans, pakets }: { pelanggans: PelangganFiel
         >
           Cancel
         </Link>
-        <Button type="submit" className="bg-gradient-to-b from-gray-800 to-red-900 text-white hover:bg-amber-600">
-        Create Transaksi
+        <Button type="submit" className="bg-gradient-to-b from-gray-800 to-red-900 transition-colors hover:from-red-700 hover:to-amber-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+          Create Transaction
         </Button>
       </div>
     </form>
   );
 }
+
+
+
+
+

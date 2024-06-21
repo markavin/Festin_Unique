@@ -14,9 +14,11 @@ import { SearchPelangganSkeleton, PelangganTableSkeleton, CreatePelangganSkeleto
 import { fetchPelangganPages } from '@/app/lib/data';
 import { Metadata } from 'next';
 
+
 export const metadata: Metadata = {
   title: 'Pelanggan | Festin Unique Dashboard',
 };
+
 
 export default async function Page({
   searchParams,
@@ -31,16 +33,17 @@ export default async function Page({
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
 
+
   const totalPages = await fetchPelangganPages(query);
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between ">
-        <h1 className={`${kanit.className} text-2xl text-center `}>Pelanggan
+        <h1 className={`${kanit.className} text-2xl text-center `}>List of Customers
         </h1>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8 text white">
         <Suspense fallback={<SearchPelangganSkeleton />}>
-          <Search placeholder="Search pelanggan..." />
+          <Search placeholder="Search customers..." />
         </Suspense>
         <Suspense fallback={<CreatePelangganSkeleton/>}>
           <CreatePelanggan/>
@@ -55,3 +58,4 @@ export default async function Page({
     </div>
   );
 }
+

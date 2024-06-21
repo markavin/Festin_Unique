@@ -3,6 +3,7 @@ import Breadcrumbs from '@/app/ui/paket/breadcrumbs';
 import { fetchPaketById, fetchPaket } from '@/app/lib/data';
 import { notFound } from 'next/navigation';
 
+
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
   const [pakets] = await Promise.all([
@@ -16,9 +17,9 @@ export default async function Page({ params }: { params: { id: string } }) {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: 'Paket', href: '/dashboard/Paket' },
+          { label: 'Package', href: '/dashboard/Paket' },
           {
-            label: 'Edit Paket',
+            label: 'Update Package',
             href: `/dashboard/paket/${id}/edit`,
             active: true,
           },
@@ -28,3 +29,6 @@ export default async function Page({ params }: { params: { id: string } }) {
     </main>
   );
 }
+
+
+

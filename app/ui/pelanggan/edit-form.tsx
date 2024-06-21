@@ -1,5 +1,6 @@
 'use client';
 
+
 import { PelangganField, PelangganForm } from '@/app/lib/definitions';
 import {
   InboxArrowDownIcon,
@@ -11,12 +12,14 @@ import { Button } from '@/app/ui/button';
 import { updatePelanggan } from '@/app/lib/actions';
 import { PhoneIcon } from '@heroicons/react/20/solid';
 
+
 export default function EditPelangganForm({
   pelanggan,
 }: {
   pelanggan: PelangganForm;
 }) {
   const updatePelangganWithId = updatePelanggan.bind(null, pelanggan.id);
+
 
   return (
     <form action={updatePelangganWithId}>
@@ -42,6 +45,7 @@ export default function EditPelangganForm({
           </div>
         </div>
 
+
         <div className="mb-4">
           <label htmlFor="email" className="mb-2 block text-sm font-medium text-white">
             Email
@@ -61,6 +65,7 @@ export default function EditPelangganForm({
             </div>
           </div>
         </div>
+
 
         <div className="mb-4">
           <label htmlFor="email" className="mb-2 block text-sm font-medium text-white">
@@ -82,6 +87,7 @@ export default function EditPelangganForm({
           </div>
         </div>
 
+
       </div>
       <div className="mt-6 flex justify-end gap-4">
         <Link
@@ -90,9 +96,14 @@ export default function EditPelangganForm({
         >
           Cancel
         </Link>
-        <Button type="submit" className="bg-gradient-to-t from-gray-800 to-red-900 text-white hover:bg-amber-600">
-          Edit Pelanggan</Button>
+        <Button type="submit" className="bg-gradient-to-t from-gray-800 to-red-900 px-4 text-sm font-medium text-white transition-colors hover:from-red-700 hover:to-amber-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+          Save Changes</Button>
       </div>
     </form>
   );
 }
+
+
+
+
+
