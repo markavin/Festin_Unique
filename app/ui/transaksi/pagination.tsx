@@ -1,22 +1,18 @@
 'use client';
 
-
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { generatePagination } from '@/app/lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-
 export default function Pagination({ totalPages }: { totalPages: number }) {
   // NOTE: comment in this code when you get to this point in the course
-
 
   // const allPages = generatePagination(currentPage, totalPages);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
-
 
   const createPageURL = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams);
@@ -27,7 +23,6 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   return (
     <>
       {/* NOTE: comment in this code when you get to this point in the course */}
-
 
       <div className="inline-flex">
         <PaginationArrow
@@ -63,7 +58,6 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   );
 }
 
-
 function PaginationNumber({
   page,
   href,
@@ -80,12 +74,11 @@ function PaginationNumber({
     {
       'rounded-l-md': position === 'first' || position === 'single',
       'rounded-r-md': position === 'last' || position === 'single',
-      'z-10 bg-gradient-to-r from-red-800 to-amber-950 transition-colors hover:from-red-700 hover:to-amber-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 text-white': isActive,
-      'hover:bg-amber-800': !isActive && position !== 'middle',
+      'z-10 bg-blue-600 border-blue-600 text-white': isActive,
+      'hover:bg-gray-100': !isActive && position !== 'middle',
       'text-gray-300': position === 'middle',
     },
   );
-
 
   return isActive || position === 'middle' ? (
     <div className={className}>{page}</div>
@@ -95,7 +88,6 @@ function PaginationNumber({
     </Link>
   );
 }
-
 
 function PaginationArrow({
   href,
@@ -116,14 +108,12 @@ function PaginationArrow({
     },
   );
 
-
   const icon =
     direction === 'left' ? (
       <ArrowLeftIcon className="w-4" />
     ) : (
       <ArrowRightIcon className="w-4" />
     );
-
 
   return isDisabled ? (
     <div className={className}>{icon}</div>
@@ -133,6 +123,3 @@ function PaginationArrow({
     </Link>
   );
 }
-
-
-

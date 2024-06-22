@@ -13,10 +13,9 @@ import {
   LatestPaketRaw,
   TransaksiTableType,
   PaketTableType,
-  PaketField,
-  LatestPelangganRaw
+  PaketField
 } from './definitions';
-import { formatCurrency, formatCurrencyy } from './utils';
+import { formatCurrency } from './utils';
 import { unstable_noStore } from 'next/cache';
 import { pelanggan, transaksi } from './placeholder-data';
 
@@ -48,21 +47,19 @@ export async function fetchLatestTransaksi() {
     const data = await sql<LatestTransaksiRaw>`
       SELECT 
         transaksi.total_bayar, 
-        transaksi.status,
         pelanggan.name, 
         paket.nama_paket, 
-        paket.harga,
         paket.gambar_paket, 
         transaksi.id
       FROM transaksi
       LEFT JOIN pelanggan ON transaksi.pelanggan_id = pelanggan.id
       LEFT JOIN paket ON transaksi.paket_id = paket.id
       ORDER BY transaksi.tanggal_transaksi DESC
-      LIMIT 5
+      LIMIT 5;
     `;
     const LatestTransaksi = data.rows.map((transaksi) => ({
       ...transaksi,
-      total_bayar: formatCurrencyy(transaksi.total_bayar),
+      total_bayar: formatCurrency(transaksi.total_bayar),
     }));
     return LatestTransaksi;
   } catch (error) {
@@ -74,12 +71,12 @@ export async function fetchLatestTransaksi() {
 
 export async function fetchCardData() {
   unstable_noStore()
+
   try {
     // You can probably combine these into a single SQL query
     // However, we are intentionally splitting them to demonstrate
     // how to initialize multiple queries in parallel with JS.
     const transaksiCountPromise = sql`SELECT COUNT(*) FROM transaksi`;
-    // const transaksiSumPromise = sql`SELECT SUM(total_bayar) FROM transaksi`;
     const pelangganCountPromise = sql`SELECT COUNT(*) FROM pelanggan`;
     const paketCountPromise = sql`SELECT COUNT(*) FROM paket`;
     const transaksiStatusPromise = sql`SELECT
@@ -92,15 +89,13 @@ export async function fetchCardData() {
       pelangganCountPromise,
       paketCountPromise,
       transaksiStatusPromise,
-      // transaksiSumPromise,
     ]);
 
     const numberOfTransaksi = Number(data[0].rows[0].count ?? '0');
     const numberOfPelanggan = Number(data[1].rows[0].count ?? '0');
     const numberOfPaket = Number(data[2].rows[0].count ?? '0');
-    const totalBerhasilransaksi = formatCurrencyy(data[3].rows[0].Berhasil ?? '0');
-    const totalGagalTransaksi = formatCurrencyy(data[3].rows[0].Gagal ?? '0');
-    // const totalOfTransaksi = formatCurrencyy(data[4].rows[0].total_bayar ?? '0');
+    const totalBerhasilransaksi = formatCurrency(data[3].rows[0].Berhasil ?? '0');
+    const totalGagalTransaksi = formatCurrency(data[3].rows[0].Gagal ?? '0');
 
     return {
       numberOfTransaksi,
@@ -108,7 +103,6 @@ export async function fetchCardData() {
       numberOfPaket,
       totalBerhasilransaksi,
       totalGagalTransaksi,
-      // totalOfTransaksi,
     };
   } catch (error) {
     console.error('Database Error:', error);
@@ -119,10 +113,10 @@ export async function fetchCardData() {
 const ITEMS_PER_PAGE = 10;
 export async function fetchFilteredTransaksi(
   query: string,
-  currentPage: number,
-) {
+  // currentPage: number,
+){
   unstable_noStore()
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  // const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
     const transaksi = await sql<TransaksiTableType>`
@@ -133,21 +127,19 @@ export async function fetchFilteredTransaksi(
         transaksi.metode_bayar,
         transaksi.status,
         pelanggan.name,
-        paket.nama_paket,
-        paket.harga
+        paket.nama_paket
       FROM transaksi
       LEFT JOIN pelanggan ON transaksi.pelanggan_id = pelanggan.id
       LEFT JOIN paket ON transaksi.paket_id = paket.id
       WHERE
         pelanggan.name ILIKE ${`%${query}%`} OR
         paket.nama_paket ILIKE ${`%${query}%`} OR
-        paket.harga::text ILIKE ${`%${query}%`} OR
         transaksi.total_bayar::text ILIKE ${`%${query}%`} OR
         transaksi.tanggal_transaksi::text ILIKE ${`%${query}%`} OR
         transaksi.metode_bayar ILIKE ${`%${query}%`} OR
         transaksi.status ILIKE ${`%${query}%`}
       ORDER BY transaksi.tanggal_transaksi DESC
-      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+      LIMIT 10
     `;
     return transaksi.rows;
   } catch (error) {
@@ -166,7 +158,6 @@ export async function fetchTransaksiPages(query: string) {
     WHERE
       pelanggan.name ILIKE ${`%${query}%`} OR
       paket.nama_paket ILIKE ${`%${query}%`} OR
-      paket.harga::text ILIKE ${`%${query}%`} OR
       transaksi.total_bayar::text ILIKE ${`%${query}%`} OR
       transaksi.tanggal_transaksi::text ILIKE ${`%${query}%`} OR
       transaksi.metode_bayar ILIKE ${`%${query}%`} OR
@@ -199,7 +190,7 @@ export async function fetchTransaksiById(id: string) {
     const transaksi = data.rows.map((transaksi) => ({
       ...transaksi,
       // Convert amount from cents to dollars
-      total_bayar: formatCurrency(transaksi.total_bayar),
+      total_bayar: transaksi.total_bayar / 100,
     }));
 
     return transaksi[0];
@@ -279,13 +270,9 @@ export async function fetchPaket() {
     throw new Error('Failed to fetch all paket.');
   }
 }
-// const ITEMS_PER_PAGE = 10;
-export async function fetchFilteredPelanggan(
-  query: string,
-  currentPage: number) {
-  unstable_noStore()
 
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+export async function fetchFilteredPelanggan(query: string) {
+  unstable_noStore()
   try {
     const data = await sql<PelangganTableType>`
       SELECT
@@ -303,8 +290,7 @@ export async function fetchFilteredPelanggan(
         pelanggan.email ILIKE ${`%${query}%`} OR
         pelanggan.nohp ILIKE ${`%${query}%`}
       GROUP BY pelanggan.id, pelanggan.name, pelanggan.email, pelanggan.nohp
-      ORDER BY pelanggan.name ASC
-      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+      ORDER BY MAX(transaksi.tanggal_transaksi) DESC
     `;
 
     const pelanggan = data.rows.map((pelanggan) => ({
@@ -338,8 +324,7 @@ export async function fetchLatestPaket() {
       SELECT paket.harga, paket.nama_paket, paket.durasi, paket.gambar_paket, paket.id
       FROM paket
       ORDER BY paket.nama_paket ASC
-      LIMIT 5
-      `;
+      LIMIT 5`;
 
     const LatestPaket = data.rows.map((paket) => ({
       ...paket,
@@ -352,34 +337,9 @@ export async function fetchLatestPaket() {
   }
 }
 
-export async function fetchLatestPelanggan() {
-  unstable_noStore();
-  try {
-    const data = await sql<LatestPelangganRaw>`
-    SELECT pelanggan.name, pelanggan.email, pelanggan.nohp, pelanggan.id
-    FROM pelanggan
-    ORDER BY pelanggan.name ASC
-    LIMIT 5
-      `;
 
-    const LatestPelanggan = data.rows.map((pelanggan) => ({
-      ...pelanggan,
-      total_transaksi: (pelanggan.total_transaksi),
-    }));
-    return LatestPelanggan;
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch the latest pelanggan.');
-  }
-}
-
-
-export async function fetchfilteredPaket(
-  query: string,
-  currentPage: number,
-) {
+export async function fetchfilteredPaket(query: string) {
   unstable_noStore()
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE
   try {
     const paket = await sql<PaketTableType>`
       SELECT
@@ -393,16 +353,14 @@ export async function fetchfilteredPaket(
         paket.harga::text ILIKE ${`%${query}%`} OR
         paket.durasi::text ILIKE ${`%${query}%`} OR
         paket.nama_paket ILIKE ${`%${query}%`}
-      ORDER BY paket.nama_paket ASC
-      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
-
+      ORDER BY paket.harga DESC
     `;
 
     // const paket = data.rows.map((paket) => ({
     //   ...paket,
     //   harga: formatCurrency(paket.harga),
     // }));
-
+    
     return paket.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -447,27 +405,26 @@ export async function fetchPelangganPages(query: string) {
 
 export async function fetchPelangganById(id: string) {
   unstable_noStore()
-  try {
-    const data = await sql<PelangganForm>`
+  // try {
+  const data = await sql<PelangganForm>`
     SELECT
       pelanggan.id,
       pelanggan.name,
       pelanggan.email,
       pelanggan.nohp
     FROM pelanggan
-    WHERE pelanggan.id = ${id};
+    WHERE pelanggan.id = ${ id };
   `;
-    const pelanggan = data.rows.map((pelanggan) => ({
-      ...pelanggan,
-      // Convert amount from cents to dollars
-      // amount: customers.amount / 100,
-    }));
+  const pelanggan = data.rows.map((pelanggan) => ({
+    ...pelanggan,
+    // Convert amount from cents to dollars
+    // amount: customers.amount / 100,
+  }));
 
-    console.log(pelanggan); // customers is an empty array []
-    return pelanggan[0];
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch customers.');
-  }
+  console.log(pelanggan); // customers is an empty array []
+  return pelanggan[0];
+  // } catch (error) {
+  //   console.error('Database Error:', error);
+  //   throw new Error('Failed to fetch customers.');
+  // }
 }
-

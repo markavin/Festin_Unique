@@ -2,8 +2,6 @@ import Form from '@/app/ui/pelanggan/edit-form';
 import Breadcrumbs from '@/app/ui/pelanggan/breadcrumbs';
 import { fetchPelanggan} from '@/app/lib/data';
 import { fetchPelangganById } from '@/app/lib/data';
-import { notFound } from 'next/navigation';
-
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
@@ -11,16 +9,13 @@ export default async function Page({ params }: { params: { id: string } }) {
     fetchPelangganById(id),
     fetchPelanggan(),
   ]);
-  if (!pelanggan) {
-    notFound();
-  }
-  return(
+  return (
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: 'Customer', href: '/dashboard/pelanggan' },
+          { label: 'Pelanggan', href: '/dashboard/pelanggan' },
           {
-            label: 'Update Customer',
+            label: 'Edit Pelanggan',
             href: `/dashboard/pelanggan/${id}/edit`,
             active: true,
           },
@@ -30,4 +25,3 @@ export default async function Page({ params }: { params: { id: string } }) {
     </main>
   );
 }
-

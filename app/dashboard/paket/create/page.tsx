@@ -1,6 +1,5 @@
 'use client'
 
-
 import Form from '@/app/ui/paket/create-form';
 import Breadcrumbs from '@/app/ui/paket/breadcrumbs';
 import { fetchPaket } from '@/app/lib/data';
@@ -12,9 +11,9 @@ export default async function Page() {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: 'Package', href: '/dashboard/paket' },
+          { label: 'Paket', href: '/dashboard/paket' },
           {
-            label: 'Create Package',
+            label: 'Create Paket',
             href: '/dashboard/paket/create',
             active: true,
           },
@@ -24,4 +23,3 @@ export default async function Page() {
     </main>
   );
 }
-

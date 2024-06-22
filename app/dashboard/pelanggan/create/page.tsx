@@ -9,9 +9,9 @@ export default async function Page() {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: 'Customer', href: '/dashboard/pelanggan' },
+          { label: 'Pelanggan', href: '/dashboard/pelanggan' },
           {
-            label: 'Create Customer',
+            label: 'Create Pelanggan',
             href: '/dashboard/pelanggan/create',
             active: true,
           },
@@ -21,4 +21,3 @@ export default async function Page() {
     </main>
   );
 }
-

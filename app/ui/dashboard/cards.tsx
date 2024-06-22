@@ -1,24 +1,20 @@
 import {
-  CheckIcon,
-  ExclamationCircleIcon,
+  BanknotesIcon,
+  ClockIcon,
   UserGroupIcon,
   InboxIcon,
-  DocumentIcon,
-  CurrencyDollarIcon
+  DocumentIcon
 } from '@heroicons/react/24/outline';
 import { kanit } from '@/app/ui/fonts';
 import { fetchCardData } from '@/app/lib/data';
 
-
 const iconMap = {
-  Berhasil: CheckIcon,
+  Berhasil: BanknotesIcon,
   pelanggan: UserGroupIcon,
   paket: DocumentIcon,
-  Gagal: ExclamationCircleIcon,
-  transaksi: CurrencyDollarIcon,
-  total_bayar: InboxIcon,
+  Gagal: ClockIcon,
+  transaksi: InboxIcon,
 };
-
 
 export default async function CardWrapper() {
   const {
@@ -27,31 +23,27 @@ export default async function CardWrapper() {
     numberOfPaket,
     totalBerhasilransaksi,
     totalGagalTransaksi,
-    // totalOfTransaksi,
   } = await fetchCardData();
   return (
     <>
       {/* NOTE: comment in this code when you get to this point in the course */}
 
-
-      <Card title="total successful status" value={totalBerhasilransaksi} type="Berhasil" />
-      <Card title="total failed status" value={totalGagalTransaksi} type="Gagal" />
-      {/* <Card title="total_bayar" value={totalOfTransaksi} type="total_bayar" /> */}
-      <Card title="Total of Transactions" value={numberOfTransaksi} type="transaksi" />
+      <Card title="Berhasil" value={totalBerhasilransaksi} type="Berhasil" />
+      <Card title="Gagal" value={totalGagalTransaksi} type="Gagal" />
+      <Card title="Total Transaksi" value={numberOfTransaksi} type="transaksi" />
       <Card
-        title="Total of Customers"
+        title="Total Pelanggan"
         value={numberOfPelanggan}
         type="pelanggan"
       />
       <Card
-        title="Total of Package"
+        title="Total Paket"
         value={numberOfPaket}
         type="paket"
       />
     </>
   );
 }
-
 
 export function Card({
   title,
@@ -60,10 +52,9 @@ export function Card({
 }: {
   title: string;
   value: number | string;
-  type: 'transaksi' | 'pelanggan' | 'Gagal' | 'Berhasil' | 'paket' ;
+  type: 'transaksi' | 'pelanggan' | 'Gagal' | 'Berhasil' | 'paket';
 }) {
   const Icon = iconMap[type];
-
 
   return (
     <div className="rounded-xl bg-gradient-to-b from-red-900 to-gray-950 p-2">
@@ -80,4 +71,3 @@ export function Card({
     </div>
   );
 }
-

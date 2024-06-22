@@ -5,15 +5,13 @@ import { fetchLatestPaket } from '@/app/lib/data';
 import { LatestPaket } from '@/app/lib/definitions';
 import { kanit } from '@/app/ui/fonts';
 import imagePath from '/mnt/data/image.png';
-import { bebas_Neue } from '../fontz';
-
 
 export default async function LatestPakets(){
     const latestPakets = await fetchLatestPaket();
     return (
         <div className="flex w-full flex-col md:col-span-4">
-            <h2 className={`${bebas_Neue.className} mb-4 text-xl md:text-2xl`}>
-                Latest Packages
+            <h2 className={`${kanit.className} mb-4 text-xl md:text-2xl`}>
+                Latest Paket
             </h2>
             <div className="flex grow flex-col justify-between rounded-xl bg-gradient-to-b from-red-900 to-gray-950 p-4">
                 <div className="bg-white px-6 py-4 overflow-y-auto rounded-lg">
@@ -39,9 +37,8 @@ export default async function LatestPakets(){
                                     </div>
                                     <div className="min-w-0 ml-4">
                                         <p className="truncate text-sm font-semibold md:text-base">
-                                            {paket.nama_paket}
-                                        </p>
                                             {paket.durasi}
+                                        </p>
                                     </div>
                                 </div>
                                 <p
@@ -61,6 +58,3 @@ export default async function LatestPakets(){
         </div>
     );
 }
-
-
-
