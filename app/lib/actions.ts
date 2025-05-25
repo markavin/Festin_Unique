@@ -269,11 +269,7 @@ export async function deletePaket(id: string) {
   return { message: 'Deleted paket.' };
 }
 
-
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData,
-) {
+export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
     const credentials = {
       email: formData.get('email') as string,
@@ -285,6 +281,11 @@ export async function authenticate(
 
     if (result?.error) {
       return 'Invalid credentials.';
+    }
+
+    // ✅ Redirect manual karena redirect: false
+    if (result?.ok) {
+      redirect('/dashboard');
     }
 
     return undefined;
@@ -301,6 +302,3 @@ export async function authenticate(
     throw error;
   }
 }
-
-
-
