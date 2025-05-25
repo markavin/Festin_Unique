@@ -112,7 +112,7 @@ export default function EditTransaksiForm({
               name="total_bayar"
               className={`peer block w-full cursor-pointer rounded-md border py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 ${selectedPaket ? 'border-amber-500' : 'border-gray-200'}`}
               readOnly
-              value={selectedPaket ? selectedPaket.harga : ''}
+              value={selectedPaket ? String(selectedPaket.harga) : ''}
             />
             <BanknotesIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
           </div>
