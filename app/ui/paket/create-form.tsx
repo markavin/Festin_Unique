@@ -1,6 +1,4 @@
 'use client';
-
-
 import { PaketField } from '@/app/lib/definitions';
 import Link from 'next/link';
 import {
@@ -12,9 +10,6 @@ import {
 import { Button } from '@/app/ui/button';
 // import { CreatePaket } from './buttons';
 import { createPaket } from '@/app/lib/actions';
-
-
-
 
 export default function Form({ pakets }: { pakets: PaketField[] }) {
   return (
@@ -55,7 +50,6 @@ export default function Form({ pakets }: { pakets: PaketField[] }) {
           </div>
         </div>
 
-
         <div className="mb-4">
           <label htmlFor="harga" className="mb-2 block text-sm font-medium text-white">
             Package price
@@ -72,7 +66,6 @@ export default function Form({ pakets }: { pakets: PaketField[] }) {
             <BanknotesIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
           </div>
         </div>
-
 
         <div className="mb-4">
           <label htmlFor="image" className="mb-2 block text-sm font-medium text-white">

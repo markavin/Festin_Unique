@@ -253,14 +253,6 @@ export function TableRowSkeletontransaksi() {
 }
 
 
-
-
-
-
-
-
-
-
 export function TransaksiMobileSkeleton() {
   return (
     <div className="mb-2 w-full rounded-md bg-white p-4">
@@ -400,7 +392,6 @@ export function TransaksiTableSkeleton() {
   );
 }
 
-
 export function PelangganTableSkeleton() {
   return (
     <div className="mt-6 flow-root">
@@ -454,7 +445,6 @@ export function PelangganTableSkeleton() {
     </div>
   );
 }
-
 
 export function PaketTableSkeleton() {
   return (
@@ -514,7 +504,7 @@ export function PaketTableSkeleton() {
 export function SearchTransaksiSkeleton() {
   return (
     <div className="relative flex flex-1 flex-shrink-0">
-      <div className="peer block w-[1300px] h-[30px] rounded-sm  bg-gray-100 py-[9px] pl-10 outline-2">
+      <div className="peer block w-[1180px] h-[30px] rounded-sm  bg-gray-100 py-[9px] pl-10 outline-2">
       </div>
     </div>
   );
@@ -584,7 +574,7 @@ export function PagePelangganSkeleton() {
 export function SearchPaketSkeleton() {
   return (
     <div className="relative flex flex-1 flex-shrink-0">
-      <div className="peer block w-[1300px] h-[30px] rounded-sm  bg-gray-100 py-[9px] pl-10 outline-2">
+      <div className="peer block w-[1180px] h-[30px] rounded-sm  bg-gray-100 py-[9px] pl-10 outline-2">
       </div>
     </div>
   );
