@@ -1,6 +1,5 @@
 'use client';
 
-
 import { useState } from 'react';
 import { PaketField, PelangganField } from '@/app/lib/definitions';
 import Link from 'next/link';
@@ -14,7 +13,6 @@ import {
 import { Button } from '@/app/ui/button';
 import { createTransaksi } from '@/app/lib/actions';
 import { DocumentIcon, ExclamationCircleIcon } from '@heroicons/react/20/solid';
-
 
 export default function Form({ pelanggans, pakets }: { pelanggans: PelangganField[], pakets: PaketField[] }) {
   const [selectedPaket, setSelectedPaket] = useState<PaketField | null>(null);
@@ -36,7 +34,6 @@ export default function Form({ pelanggans, pakets }: { pelanggans: PelangganFiel
     const customer = e.target.value;
     setSelectedCustomer(customer);
   };
-
 
   return (
     <form action={createTransaksi}>

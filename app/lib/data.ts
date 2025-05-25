@@ -14,7 +14,7 @@ import {
   TransaksiTableType,
   PaketTableType,
   PaketField,
-  LatestPelangganRaw
+  LatestPelangganRaw,
 } from './definitions';
 import { formatCurrency, formatCurrencyy } from './utils';
 import { unstable_noStore } from 'next/cache';

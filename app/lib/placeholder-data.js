@@ -4,8 +4,8 @@ const users = [
   {
     id: '410544b2-4001-4271-9855-fec4b6a6442a',
     name: 'User',
-    email: 'kelompok4@gmail.com',
-    password: 'kel4jaya',
+    email: 'admin@gmail.com',
+    password: 'adminn',
   },
 ];
 // ksbdvjb
