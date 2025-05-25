@@ -3,7 +3,6 @@ import Breadcrumbs from '@/app/ui/transaksi/breadcrumbs';
 import { fetchPelanggan, fetchTransaksiById, fetchPaket } from '@/app/lib/data';
 import { notFound } from 'next/navigation';
 
-
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
   const [transaksi, pelanggans, pakets] = await Promise.all([
@@ -11,9 +10,11 @@ export default async function Page({ params }: { params: { id: string } }) {
     fetchPelanggan(),
     fetchPaket()
   ]);
+
   if (!transaksi) {
     notFound();
   }
+
   return (
     <main>
       <Breadcrumbs
@@ -26,8 +27,15 @@ export default async function Page({ params }: { params: { id: string } }) {
           },
         ]}
       />
-      <Form transaksi={transaksi} pelanggans={pelanggans} pakets={pakets} />
+      <Form
+        transaksi={{
+          ...transaksi,
+          total_bayar: Number(transaksi.total_bayar),
+        }}
+        pelanggans={pelanggans}
+        pakets={pakets}
+      />
+
     </main>
   );
 }
-
