@@ -4,7 +4,7 @@
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { signIn } from '@/auth';
+import { signIn } from '@/auth'; // karena kamu expose signIn di /auth.ts
 import { AuthError } from 'next-auth';
 import { z } from 'zod';
 import email from 'next-auth/providers/email';
@@ -270,13 +270,25 @@ export async function deletePaket(id: string) {
 }
 
 
-// Function to handle authentication
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
 ) {
   try {
-    await signIn('credentials', formData);
+    const credentials = {
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
+      redirect: false,
+    };
+
+    const result = await signIn('credentials', credentials);
+
+    if (result?.error) {
+      return 'Invalid credentials.';
+    }
+
+    return undefined;
+
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
