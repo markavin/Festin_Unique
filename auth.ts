@@ -3,7 +3,8 @@ import Credentials from 'next-auth/providers/credentials';
 import { sql } from '@vercel/postgres';
 import bcrypt from 'bcrypt';
 import { z } from 'zod';
-import type { User } from '@/app/lib/definitions'; // pastikan definisi User benar
+import type { User } from '@/app/lib/definitions';
+import type { NextAuthConfig } from 'next-auth';
 
 async function getUser(email: string): Promise<User | undefined> {
   try {
@@ -15,7 +16,24 @@ async function getUser(email: string): Promise<User | undefined> {
   }
 }
 
-export const authOptions = {
+export const authConfig: NextAuthConfig = {
+  pages: {
+    signIn: '/login',
+  },
+  callbacks: {
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
+      
+      if (isOnDashboard) {
+        if (isLoggedIn) return true;
+        return false;
+      } else if (isLoggedIn) {
+        return Response.redirect(new URL('/dashboard', nextUrl));
+      }
+      return true;
+    },
+  },
   providers: [
     Credentials({
       name: 'Credentials',
@@ -40,12 +58,16 @@ export const authOptions = {
         const match = await bcrypt.compare(password, user.password);
         if (!match) return null;
 
-        return user;
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+        };
       },
     }),
   ],
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
-const handler = NextAuth(authOptions);
-export const { auth, signIn, signOut, handlers: { GET, POST } } = handler;
+export default NextAuth(authConfig);
+export const { auth, signIn, signOut, handlers } = NextAuth(authConfig);

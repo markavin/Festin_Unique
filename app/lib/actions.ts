@@ -271,25 +271,11 @@ export async function deletePaket(id: string) {
 
 export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
-    const credentials = {
+    await signIn('credentials', {
       email: formData.get('email') as string,
       password: formData.get('password') as string,
-      redirect: false,
-    };
-
-    const result = await signIn('credentials', credentials);
-
-    if (result?.error) {
-      return 'Invalid credentials.';
-    }
-
-    // ✅ Redirect manual karena redirect: false
-    if (result?.ok) {
-      redirect('/dashboard');
-    }
-
-    return undefined;
-
+      redirectTo: '/dashboard',
+    });
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
