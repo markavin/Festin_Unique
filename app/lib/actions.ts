@@ -4,10 +4,11 @@
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { signIn } from '@/auth'; // karena kamu expose signIn di /auth.ts
-import { AuthError } from 'next-auth';
+// import { signIn } from 'next-auth/react';// karena kamu expose signIn di /auth.ts
+// import { AuthError } from 'next-auth';
+import bcryptjs from 'bcryptjs';
 import { z } from 'zod';
-import email from 'next-auth/providers/email';
+// import email from 'next-auth/providers/email';
 
 
 // Use Zod to update the expected types
@@ -268,23 +269,59 @@ export async function deletePaket(id: string) {
   revalidatePath('/dashboard/paket');
   return { message: 'Deleted paket.' };
 }
+async function getUser(email: string) {
+  try {
+    const user = await sql`SELECT * FROM users WHERE email=${email}`;
+    return user.rows[0];
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    return undefined;
+  }
+}
 
 export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
-    await signIn('credentials', {
-      email: formData.get('email') as string,
-      password: formData.get('password') as string,
-      redirectTo: '/dashboard',
-    });
-  } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return 'Invalid credentials.';
-        default:
-          return 'Something went wrong.';
-      }
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+    
+    console.log('Login attempt:', { email });
+    
+    const parsed = z
+      .object({
+        email: z.string().email(),
+        password: z.string().min(1),
+      })
+      .safeParse({ email, password });
+
+    if (!parsed.success) {
+      console.log('Validation failed');
+      return 'Invalid input format.';
     }
-    throw error;
+
+    const user = await getUser(email);
+    if (!user) {
+      console.log('User not found:', email);
+      return 'Invalid credentials.';
+    }
+
+    const match = await bcryptjs.compare(password, user.password);
+    if (!match) {
+      console.log('Password mismatch for user:', email);
+      return 'Invalid credentials.';
+    }
+
+    console.log('Login success for user:', email);
+    redirect('/dashboard');
+    
+  } catch (error) {
+    console.log('Login error:', error);
+    if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
+      throw error;
+    }
+    return 'Something went wrong.';
   }
+}
+
+export async function signOutAction() {
+  redirect('/login');
 }
