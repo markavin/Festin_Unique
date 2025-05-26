@@ -66,7 +66,7 @@ export default function Page() {
             </h1>
           </div>
         </div>
-        <Link href="/dashboard">
+        <Link href="/login">
           <h1 className={`${kanit.className} rounded-full bg-white px-3.5 py-2.5 text-sm font-semibold text-red-950 shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-indigo-600 flex items-center relative z-10`}>
             ORDER NOW <ShoppingCartIcon className='w-4 ml-2' />
           </h1>
